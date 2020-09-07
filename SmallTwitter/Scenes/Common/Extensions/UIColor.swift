@@ -10,7 +10,7 @@ import UIKit
 
 extension UIColor {
     static var mainBlack = from(hex: 0x202126)
-    static var mainBlue = from(hex: 0x088bbb)
+    static var mainBlue = from(hex: 0x278ee3)
 }
 
 private extension UIColor {
