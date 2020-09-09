@@ -6,7 +6,7 @@
 //  Copyright © 2020 Wizeline. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum Apperance {
     case profileBold
@@ -15,30 +15,20 @@ enum Apperance {
 }
 
 final class FactoryApperance {
-    func getApperance(for type: Apperance) -> LabelAppearance {
-        switch type {
-        case .profile:
-            return getProfile()
-        case .title:
-            return getTitle()
-        case .profileBold:
-            return getProfileBold()
-        }
+    let fontName = UIFont.SupportedFonts.openSans
+    
+    func makeApperance(weight: UIFont.FontWeight = .regular, size: CGFloat = 14, color: UIColor = .black) -> LabelAppearance {
+        createApperace(weight: weight, size: size, color: color)
     }
 }
 
-//FIXME: Find a way to have a method where you only pass what you need and it makes it
-// Proper way of factory
 private extension FactoryApperance {
-    func getProfile() -> LabelAppearance {
-        LabelAppearance(fuente: .openSansRegular(size: 14), colorTexto: .white)
+    func makeFont(weight: UIFont.FontWeight = .regular, size: CGFloat = 14) -> UIFont {
+        return UIFont.font(name: fontName, weight: weight, size: size)
     }
     
-    func getProfileBold() -> LabelAppearance {
-        LabelAppearance(fuente: .openSansBold(size: 16), colorTexto: .white)
-    }
-    
-    func getTitle() -> LabelAppearance {
-        LabelAppearance(fuente: .openSansBold(size: 40), colorTexto: .white)
+    func createApperace(weight: UIFont.FontWeight = .regular, size: CGFloat = 14, color: UIColor = .mainBlue) -> LabelAppearance {
+        let font = makeFont(weight: weight, size: size)
+        return LabelAppearance(font: font, textColor: color)
     }
 }

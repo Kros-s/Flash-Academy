@@ -8,6 +8,17 @@
 
 import UIKit
 
+struct NavigationBarViewModel {
+    var isVisible: Bool = true
+    var headerText: LabelViewModel
+    var showBackButton: Bool
+}
+
+extension NavigationBarViewModel {
+    static let TweetView = NavigationBarViewModel(headerText: .init(text: "Tweet", appearance: FactoryApperance().makeApperance()), showBackButton: true)
+    static let GeneralView = NavigationBarViewModel(headerText: .init(text: "", appearance: FactoryApperance().makeApperance()), showBackButton: false)
+}
+
 protocol DelegateCustomNavigationBar: class {
     func leftButtonSelected()
 }
@@ -18,7 +29,7 @@ protocol CustomNavigationBarProtocol {
     var isVisible: Bool { get set }
     func addCustomNavBar(container: UIView, height: CGFloat)
     func showLeftButton(_ show: Bool)
-    func configureNavBar()
+    func configureNavBar(viewModel: NavigationBarViewModel)
 }
 
 final class CustomNavigationBar: UIView {
@@ -26,6 +37,8 @@ final class CustomNavigationBar: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.black, for: .normal)
+        button.setImage(UIImage(named: "back-arrow"), for: .normal)
+        button.isHidden = true
         button.addTarget(self, action: #selector(leftButtonActivated), for: .touchUpInside)
         return button
     }()
@@ -100,8 +113,9 @@ extension CustomNavigationBar: CustomNavigationBarProtocol {
         showLeftButton = show
     }
     
-    func configureNavBar() {
-        leftButton.setImage(UIImage(named: "back-arrow"), for: .normal)
-    }
+    func configureNavBar(viewModel: NavigationBarViewModel) {
+           showLeftButton(viewModel.showBackButton)
+           title.configure(model: viewModel.headerText)
+       }
     
 }

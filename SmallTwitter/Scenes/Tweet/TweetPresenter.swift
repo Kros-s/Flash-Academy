@@ -24,9 +24,12 @@ final class TweetPresenter: MVPPresenter {
     weak var view: TweetView?
     var userFacade: UserFacadeProtocol
     var identifier: String?
+    var apperance: FactoryApperance
     
-    init(userFacade: UserFacadeProtocol = inyect()) {
+    init(userFacade: UserFacadeProtocol = inyect(),
+         apperance: FactoryApperance = .init()) {
         self.userFacade = userFacade
+        self.apperance = apperance
     }
 }
 
@@ -40,17 +43,23 @@ extension TweetPresenter: TweetPresenterProtocol {
 
 private extension TweetPresenter {
     func loadTweetData() -> TweetViewModel {
+        let regularApperance = apperance.makeApperance(size: 14)
+        
         guard let id = identifier,
             let info = userFacade.retrieveTweet(id: id)
             else {
-                //assertionFailure("Should not enter this")
-                return TweetViewModel(name: .init(text: "ERROR", appearance: .init(fuente: .boldSystemFont(ofSize: 10), colorTexto: .red)), text: .init(text: "ERROR", appearance: .init(fuente: .systemFont(ofSize: 18), colorTexto: .black)))
+                assertionFailure("Should not reach this point, something wrong came by")
+                
+                return TweetViewModel(name: .init(text: "", appearance: regularApperance),
+                                      text: .init(text: "", appearance: regularApperance))
         }
-        let font: LabelAppearance = .init(fuente: .systemFont(ofSize: 14), colorTexto: .black)
         
-        return TweetViewModel(name:
-            .init(text: info.user.name, appearance: font),
-                              text: .init(text: info.text, appearance: font), profileURL: URL(string: info.user.profile_image_url_https))
+        let nameText = LabelViewModel(text: info.user.name, appearance: regularApperance)
+        let text = LabelViewModel(text: info.text, appearance: regularApperance)
+        
+        return TweetViewModel(name: nameText,
+                              text: text,
+                              profileURL: URL(string: info.user.profile_image_url_https))
     }
 }
 

@@ -10,6 +10,7 @@ import UIKit
 
 protocol ProfileView: class {
     func configure(with model: ProfileViewModel)
+    func update(model: ProfileViewModel)
 }
 
 final class ProfileViewController: BaseViewController, MVPView {
@@ -26,6 +27,7 @@ final class ProfileViewController: BaseViewController, MVPView {
     
     lazy var profileTable: UITableView = {
         let table = UITableView()
+        table.backgroundColor = .softBlue
         table.translatesAutoresizingMaskIntoConstraints = false
         table.layoutMargins = .zero
         table.separatorInset = .zero
@@ -39,8 +41,12 @@ final class ProfileViewController: BaseViewController, MVPView {
 }
 
 extension ProfileViewController: ProfileView {
+    func update(model: ProfileViewModel) {
+        elements = model.element
+    }
+    
     func configure(with model: ProfileViewModel) {
-
+        view.backgroundColor = .softBlue
         profileTable.delegate = self
         profileTable.dataSource = self
         elements = model.element
@@ -63,13 +69,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let factory = ProfileFactoryCells(tableView: tableView, indexPath: indexPath)
+        let factory = ProfileVisitor(tableView: tableView, indexPath: indexPath)
         let cell = factory.createCell(element: elements[indexPath.row])
         cell.selectionStyle = .none
-        UIView.performWithoutAnimation {
-            // This explicit call to layout the cell without animation is to prevent the cell's content to be updated with animation, for cells that are being dequeued as a result of animating the content offset (as we do when reacting to keyboard changes).
-            cell.layoutIfNeeded()
-        }
         return cell
     }
     
@@ -79,7 +81,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension ProfileViewController: ProfileElementVisitor {
-    func visit(viewModel: ProfileTimeLineViewModel) {
+    func visit(viewModel: ProfileTweetViewModel) {
         router.tapOnTweet(id: viewModel.id)
     }
 }

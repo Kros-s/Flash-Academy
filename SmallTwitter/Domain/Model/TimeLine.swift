@@ -13,4 +13,14 @@ struct TimeLine: Codable {
     var text: String
     var user: User
     var created_at: String
+    var entities: Entities
+}
+
+struct Entities: Codable {
+    var urls: [SharedURL]?
+}
+
+struct SharedURL: Codable {
+    var url: String
+    var display_url: String
 }

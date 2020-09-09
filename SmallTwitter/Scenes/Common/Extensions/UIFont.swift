@@ -22,7 +22,7 @@ extension UIFont {
     }
 }
 
-private extension UIFont {
+internal extension UIFont {
     enum FontWeight: String {
         case light = "-Light"
         case bold = "-Bold"

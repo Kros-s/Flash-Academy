@@ -44,7 +44,7 @@
 		38475C1B24E6F6A70003E536 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C1A24E6F6A70003E536 /* ProfileTableViewCell.swift */; };
 		38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */; };
 		38475C2124E6F9300003E536 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2024E6F9300003E536 /* LabelViewModel.swift */; };
-		38475C2324E6F99B0003E536 /* ProfileFactoryCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2224E6F99B0003E536 /* ProfileFactoryCells.swift */; };
+		38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2224E6F99B0003E536 /* ProfileVisitor.swift */; };
 		38475C2524E6FE5E0003E536 /* UserTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2424E6FE5E0003E536 /* UserTimeline.swift */; };
 		38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2624E6FEB00003E536 /* TimeLine.swift */; };
 		38475C2924E6FFAD0003E536 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2824E6FFAD0003E536 /* TimeLineTableViewCell.swift */; };
@@ -106,7 +106,7 @@
 		38475C1A24E6F6A70003E536 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		38475C2024E6F9300003E536 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
-		38475C2224E6F99B0003E536 /* ProfileFactoryCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFactoryCells.swift; sourceTree = "<group>"; };
+		38475C2224E6F99B0003E536 /* ProfileVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVisitor.swift; sourceTree = "<group>"; };
 		38475C2424E6FE5E0003E536 /* UserTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTimeline.swift; sourceTree = "<group>"; };
 		38475C2624E6FEB00003E536 /* TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLine.swift; sourceTree = "<group>"; };
 		38475C2824E6FFAD0003E536 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 				38475C1424E6F2F60003E536 /* ProfileViewController.swift */,
 				38475C1724E6F3320003E536 /* ProfilePresenter.swift */,
 				38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */,
-				38475C2224E6F99B0003E536 /* ProfileFactoryCells.swift */,
+				38475C2224E6F99B0003E536 /* ProfileVisitor.swift */,
 			);
 			path = "Profile ";
 			sourceTree = "<group>";
@@ -478,7 +478,7 @@
 				38475BFC24E6EBBE0003E536 /* PresenterCoordinator.swift in Sources */,
 				38475C1324E6F03D0003E536 /* User.swift in Sources */,
 				38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */,
-				38475C2324E6F99B0003E536 /* ProfileFactoryCells.swift in Sources */,
+				38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */,
 				38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */,
 				38475BFA24E6EBA70003E536 /* ViewCoordinator.swift in Sources */,
 				38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */,

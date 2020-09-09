@@ -13,4 +13,6 @@ struct User: Codable {
     var screen_name: String
     var description: String
     var profile_image_url_https: String
+    var followers_count: Int
+    var friends_count: Int
 }

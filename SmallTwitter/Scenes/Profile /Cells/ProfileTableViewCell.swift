@@ -8,7 +8,7 @@
 
 import UIKit
 
-//TODO: almost sure this will be moved into a single view in order
+//TODO: almost sure this will be moved into a single view in order to add an efect about strechy header.
 
 final class ProfileTableViewCell: UITableViewCell {
     
@@ -18,6 +18,7 @@ final class ProfileTableViewCell: UITableViewCell {
         view.addSubview(nickName)
         view.addSubview(stackView)
         view.addSubview(stackStats)
+        view.addSubview(separatorLine)
         view.layer.cornerRadius = 15
         view.backgroundColor = .mainBlue
         return view
@@ -29,6 +30,8 @@ final class ProfileTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 35
+        imageView.layer.borderWidth = 2
+        imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.masksToBounds = false
         imageView.clipsToBounds = true
         return imageView
@@ -44,7 +47,6 @@ final class ProfileTableViewCell: UITableViewCell {
     lazy var userName: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "USER DE PRUEBA"
         label.numberOfLines = 0
         return label
     }()
@@ -78,9 +80,18 @@ final class ProfileTableViewCell: UITableViewCell {
         return stack
     }()
     
+    lazy var separatorLine: UIView = {
+        let separatorLine = UIView()
+        separatorLine.translatesAutoresizingMaskIntoConstraints = false
+        separatorLine.autoresizingMask = .flexibleWidth
+        separatorLine.backgroundColor = .white
+        return separatorLine
+    }()
     lazy var stackStats: UIStackView = {
         let stack = UIStackView()
         stack.axis = .horizontal
+        stack.alignment = .center
+        stack.distribution = .fillEqually
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.addArrangedSubview(followers)
         stack.addArrangedSubview(following)
@@ -89,12 +100,14 @@ final class ProfileTableViewCell: UITableViewCell {
     
     lazy var followers: TitleSubtitleStack = {
         let stack = TitleSubtitleStack()
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
     lazy var following: TitleSubtitleStack = {
         let stack = TitleSubtitleStack()
+        stack.alignment = .center
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -114,45 +127,58 @@ final class ProfileTableViewCell: UITableViewCell {
         userName.configure(model: viewModel.profileUser)
         aboutMe.configure(model: viewModel.aboutMe)
         
+        followers.configure(title: viewModel.followersTitle, subtitle: viewModel.followers)
+        following.configure(title: viewModel.followingTitle, subtitle: viewModel.following)
         if let url = viewModel.profilePic {
             profileImage.downloadImage(from: url)
         }
-        
     }
     
 }
 
 private extension ProfileTableViewCell {
-    func commonInit() {
-        addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: topAnchor),
-            containerView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: 220)
-        ])
-        enableViewConstraints()
+    struct Metrics {
+        static let containerBotton: CGFloat = 8
+        static let lateralPadding: CGFloat = 16
+        static let topSeparatorPading: CGFloat = 8
+        static let imageHeight: CGFloat = 70
     }
     
-    func enableViewConstraints() {
+    func commonInit() {
+        addSubview(containerView)
+        backgroundColor = .clear
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
+            containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: trailingAnchor),
+        ])
+        enableContainerConstraints()
+    }
+    
+    func enableContainerConstraints() {
         
         NSLayoutConstraint.activate([
             nickName.topAnchor.constraint(equalTo: containerView.topAnchor),
-            nickName.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            nickName.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 16),
+            nickName.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Metrics.lateralPadding),
+            nickName.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Metrics.lateralPadding),
             
-            stackView.topAnchor.constraint(equalTo: nickName.bottomAnchor, constant: 16),
-            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            stackView.topAnchor.constraint(equalTo: nickName.bottomAnchor, constant: Metrics.lateralPadding),
+            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Metrics.lateralPadding),
+            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Metrics.lateralPadding),
             
-            stackStats.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
-            stackStats.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-            stackStats.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            stackStats.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: Metrics.lateralPadding),
+            stackStats.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Metrics.lateralPadding),
+            stackStats.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Metrics.lateralPadding),
+            stackStats.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -Metrics.lateralPadding),
             
-            profileImage.heightAnchor.constraint(equalToConstant: 70),
-            profileImage.widthAnchor.constraint(equalTo: profileImage.heightAnchor, multiplier: 1)
+            profileImage.heightAnchor.constraint(equalToConstant: Metrics.imageHeight),
+            profileImage.widthAnchor.constraint(equalTo: profileImage.heightAnchor, multiplier: 1),
+            
+            separatorLine.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.7),
+            separatorLine.heightAnchor.constraint(equalToConstant: 1),
+            separatorLine.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            separatorLine.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: Metrics.topSeparatorPading)
         ])
     }
 }

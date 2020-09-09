@@ -19,14 +19,14 @@ struct LabelAppearance {
     var underline: Bool
     var backgroundColor: UIColor?
     
-    init(fuente: UIFont,
-         colorTexto: UIColor,
-         subrayado: Bool = false,
-         colorFondo: UIColor? = nil) {
-        self.font = fuente
-        self.textColor = colorTexto
-        self.underline = subrayado
-        self.backgroundColor = colorFondo
+    init(font: UIFont,
+         textColor: UIColor,
+         underline: Bool = false,
+         backgroundColor: UIColor? = nil) {
+        self.font = font
+        self.textColor = textColor
+        self.underline = underline
+        self.backgroundColor = backgroundColor
     }
 }
 

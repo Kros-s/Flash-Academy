@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ProfileFactoryCells {
+final class ProfileVisitor {
     let tableView: UITableView
     let indexPath: IndexPath
     
@@ -22,19 +22,12 @@ final class ProfileFactoryCells {
     }
 }
 
-extension ProfileFactoryCells: ProfileElementVisitor {
-    func visit(viewModel: ProfileTimeLineViewModel) -> UITableViewCell {
+extension ProfileVisitor: ProfileElementVisitor {
+    func visit(viewModel: ProfileTweetViewModel) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TimeLineTableViewCell") as? TimeLineTableViewCell else {
             return .init()
         }
-        
-        cell.name.configure(model: viewModel.name)
-        cell.tweetText.configure(model: viewModel.tweet)
-        if let url = viewModel.profilePic {
-            cell.profileImage.downloadImage(from: url)
-        } else {
-            cell.profileImage.backgroundColor = .black
-        }
+        cell.configure(viewModel: viewModel)
         return cell
     }
     

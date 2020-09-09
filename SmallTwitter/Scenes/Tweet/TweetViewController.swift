@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LinkPresentation
 
 protocol TweetView: class {
     func configure(model: TweetViewModel)
@@ -17,31 +18,50 @@ final class TweetViewController: BaseViewController, MVPView {
     
     lazy var router: Router = inyect()
     
+    lazy var mainStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.addArrangedSubview(profileItemsStack)
+        stack.addArrangedSubview(tweet)
+        return stack
+    }()
+    
+    lazy var profileItemsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .horizontal
+        
+        stack.addArrangedSubview(profileImage)
+        stack.addArrangedSubview(profileDataStack)
+        return stack
+    }()
+    
+    lazy var profileDataStack: TitleSubtitleStack = {
+        let stack = TitleSubtitleStack()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    lazy var linkView: LPLinkView = {
+        let viewer = LPLinkView()
+        viewer.translatesAutoresizingMaskIntoConstraints = false
+        return viewer
+    }()
+    
     lazy var profileImage: UIImageView = {
         let image = UIImage()
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.backgroundColor = .blue
         imageView.contentMode = .scaleAspectFit
-        
         return imageView
-    }()
-    
-    lazy var name: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "??????????"
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        return label
     }()
     
     lazy var tweet: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "??????????"
         label.numberOfLines = 0
-        label.textAlignment = .center
         return label
     }()
     
@@ -49,12 +69,9 @@ final class TweetViewController: BaseViewController, MVPView {
 
 extension TweetViewController: TweetView {
     func configure(model: TweetViewModel) {
-        view.addSubview(profileImage)
-        view.addSubview(name)
-        view.addSubview(tweet)
+        view.addSubview(mainStackView)
         navigationBar.delegate = self
-        navigationBar.configureNavBar()
-        name.configure(model: model.name)
+        navigationBar.configureNavBar(viewModel: .TweetView)
         tweet.configure(model: model.text)
         
         if let url = model.profileURL {
@@ -67,18 +84,9 @@ extension TweetViewController: TweetView {
         navigationBar.showLeftButton(true)
         
         NSLayoutConstraint.activate([
-            profileImage.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
-            profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: 1.0),
-            profileImage.widthAnchor.constraint(equalToConstant: 100.0),
-            
-            name.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 16.0),
-            name.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            name.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            
-            tweet.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 16.0),
-            tweet.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tweet.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            mainStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
         ])
     }
     
