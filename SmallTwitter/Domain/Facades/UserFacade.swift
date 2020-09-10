@@ -17,7 +17,6 @@ extension MVPPresenter {
 protocol UserFacadeProtocol {
     func retrieveUserInfo(completion: @escaping (User?) -> Void)
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void)
-    
     func retrieveTweet(id: String) -> TimeLine?
 }
 

@@ -37,8 +37,9 @@ final class CustomNavigationBar: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.black, for: .normal)
-        button.setImage(UIImage(named: "back-arrow"), for: .normal)
+        button.setImage(UIImage(named: "chevron.left"), for: .normal)
         button.isHidden = true
+        button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(leftButtonActivated), for: .touchUpInside)
         return button
     }()

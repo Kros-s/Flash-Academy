@@ -26,26 +26,23 @@ final class ProfilePresenter: MVPPresenter {
     weak var view: ProfileView?
     var userFacade: UserFacadeProtocol
     var apperance = FactoryApperance()
+    var metadata: MetaDataStorage
     
     private var metadataURL: [URL: LPLinkMetadata?] = [:]
     
-    private lazy var inputFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE MMM dd HH:mm:ss Z yyyy"
-        return formatter
-    }()
-    
-    private lazy var relativeFormatter: RelativeDateTimeFormatter = {
-        let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .full
-        return formatter
-    }()
+    //TODO: Wrap this two into a single class and inyect as dependancy
+    private var inputFormatter = DateFormatter.inputFormatter
+    private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
     private var userInfo: User?
+    
+    //TODO: Move into a DataStorage in order to retrieve data from it
     private var timeLineInfo: [TimeLine] = []
     
-    init(userFacade: UserFacadeProtocol = inyect()) {
+    init(userFacade: UserFacadeProtocol = inyect(),
+         metadata: MetaDataStorage = inyect()) {
         self.userFacade = userFacade
+        self.metadata = metadata
     }
 }
 
@@ -68,8 +65,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
-            let model = self.createViewModel()
-            self.view?.configure(with: model)
+            self.loadView()
         }
     }
 }
@@ -81,37 +77,9 @@ private extension ProfilePresenter {
         static let followingTitle = LabelViewModel(text: "Following", appearance: followersApperance)
     }
     
-    func loadMediaIfNeed() {
-        guard metadataURL.contains(where: { $0.value == nil }) else { return }
-        let group = DispatchGroup()
-        for tweet in metadataURL {
-            guard tweet.value == nil else { continue }
-            let provider = LPMetadataProvider()
-            group.enter()
-            provider.startFetchingMetadata(for: tweet.key) { [weak self] (data, error) in
-                guard let self = self,
-                    let data = data,
-                    error == nil else { return }
-                
-                self.metadataURL[tweet.key] = data
-                group.leave()
-            }
-        }
-        group.notify(queue: .main) { [weak self] in
-            guard let self = self else { return }
-            let model = self.createViewModel()
-            self.view?.update(model: model)
-        }
-    }
-    
-    func validateIfMediaNeed(for url: String) -> LPLinkMetadata? {
-        guard let url = URL(string: url) else { return nil }
-        guard let data = metadataURL[url] as? LPLinkMetadata else {
-            // FIXME: tricky way to define a element that needs to be pulled
-            metadataURL[url] = nil as LPLinkMetadata?
-            return nil
-        }
-        return data
+    func loadView() {
+        let model = createViewModel()
+        view?.configure(with: model)
     }
     
     func createTimeLineViewModel() -> [ProfileTweetViewModel] {
@@ -129,17 +97,17 @@ private extension ProfilePresenter {
             let tweetInfo = LabelViewModel(text: humanDate, appearance: timeApperance)
             
             let url = $0.entities.urls?.first?.url ?? ""
-            let metadata: LPLinkMetadata? = validateIfMediaNeed(for: url)
+            let metadataInfo: LPLinkMetadata? = metadata.retrieveMediaIfNeed(for: url)
             
             return ProfileTweetViewModel(id: $0.id_str,
                                             name: name,
                                             tweet: tweet,
                                             tweetInfo: tweetInfo,
-                                            linkData: metadata,
+                                            linkData: metadataInfo,
                                             profilePic: URL(string: $0.user.profile_image_url_https))
             
         }
-        loadMediaIfNeed()
+        metadata.loadMediaIfNeed(completion: loadView)
         return timeline
     }
     

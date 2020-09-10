@@ -52,6 +52,10 @@
 		38475C2F24E712650003E536 /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2E24E712650003E536 /* TweetViewController.swift */; };
 		38475C3124E7126E0003E536 /* TweetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C3024E7126E0003E536 /* TweetPresenter.swift */; };
 		38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C3324E716A60003E536 /* CustomNavigationBar.swift */; };
+		3886CDA22509552800916876 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA12509552800916876 /* DateFormatter.swift */; };
+		3886CDA425095A0700916876 /* LinkViewDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA325095A0700916876 /* LinkViewDataStorage.swift */; };
+		3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA825098F5A00916876 /* NewTweetViewController.swift */; };
+		3886CDAB25098F6400916876 /* NewTweetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDAA25098F6400916876 /* NewTweetPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +118,10 @@
 		38475C2E24E712650003E536 /* TweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
 		38475C3024E7126E0003E536 /* TweetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetPresenter.swift; sourceTree = "<group>"; };
 		38475C3324E716A60003E536 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
+		3886CDA12509552800916876 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		3886CDA325095A0700916876 /* LinkViewDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewDataStorage.swift; sourceTree = "<group>"; };
+		3886CDA825098F5A00916876 /* NewTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
+		3886CDAA25098F6400916876 /* NewTweetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +258,7 @@
 				38475C0724E6EC310003E536 /* Internal */,
 				38475C0A24E6EC570003E536 /* DomainFacade.swift */,
 				38475C0F24E6EFAF0003E536 /* UserFacade.swift */,
+				3886CDA325095A0700916876 /* LinkViewDataStorage.swift */,
 			);
 			path = Facades;
 			sourceTree = "<group>";
@@ -265,6 +274,7 @@
 		38475C0C24E6ECE00003E536 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				3886CDA725098EE000916876 /* NewTweet */,
 				38301009250365D2007DA26C /* Components */,
 				38475C3224E716940003E536 /* NavigationBar */,
 				38475C2D24E712530003E536 /* Tweet */,
@@ -328,6 +338,7 @@
 				38475C2B24E70A9E0003E536 /* UIImageView.swift */,
 				383010072503607A007DA26C /* UIColor.swift */,
 				38301026250369CA007DA26C /* UIFont.swift */,
+				3886CDA12509552800916876 /* DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -347,6 +358,15 @@
 				38475C3324E716A60003E536 /* CustomNavigationBar.swift */,
 			);
 			path = NavigationBar;
+			sourceTree = "<group>";
+		};
+		3886CDA725098EE000916876 /* NewTweet */ = {
+			isa = PBXGroup;
+			children = (
+				3886CDA825098F5A00916876 /* NewTweetViewController.swift */,
+				3886CDAA25098F6400916876 /* NewTweetPresenter.swift */,
+			);
+			path = NewTweet;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -468,11 +488,13 @@
 				38475C0B24E6EC570003E536 /* DomainFacade.swift in Sources */,
 				38475C1524E6F2F60003E536 /* ProfileViewController.swift in Sources */,
 				38475C2124E6F9300003E536 /* LabelViewModel.swift in Sources */,
+				3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */,
 				38475C0524E6EC240003E536 /* HTTPClient.swift in Sources */,
 				38301027250369CA007DA26C /* UIFont.swift in Sources */,
 				38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */,
 				38475C0024E6EBEB0003E536 /* MVP.swift in Sources */,
 				38475C1024E6EFAF0003E536 /* UserFacade.swift in Sources */,
+				3886CDA425095A0700916876 /* LinkViewDataStorage.swift in Sources */,
 				38475C1824E6F3320003E536 /* ProfilePresenter.swift in Sources */,
 				38475C1B24E6F6A70003E536 /* ProfileTableViewCell.swift in Sources */,
 				38475BFC24E6EBBE0003E536 /* PresenterCoordinator.swift in Sources */,
@@ -480,8 +502,10 @@
 				38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */,
 				38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */,
 				38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */,
+				3886CDAB25098F6400916876 /* NewTweetPresenter.swift in Sources */,
 				38475BFA24E6EBA70003E536 /* ViewCoordinator.swift in Sources */,
 				38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */,
+				3886CDA22509552800916876 /* DateFormatter.swift in Sources */,
 				3830100B250365E1007DA26C /* TitleSubtitleStack.swift in Sources */,
 				38475C2924E6FFAD0003E536 /* TimeLineTableViewCell.swift in Sources */,
 				38475C2C24E70A9E0003E536 /* UIImageView.swift in Sources */,
