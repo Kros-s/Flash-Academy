@@ -24,6 +24,10 @@ extension SceneObserver {
     func sceneDidDisappear() {}
 }
 
+protocol LoaderView {
+    func showLoader()
+    func hideLoader()
+}
 
 protocol SceneController {
     var observer: SceneObserver? { get }
@@ -31,7 +35,8 @@ protocol SceneController {
 
 class BaseViewController: UIViewController {
     var navigationBar: CustomNavigationBarProtocol = CustomNavigationBar()
-    
+    var loaderView: ScreenLoaderProtocol = ScreenLoader()
+
     private var sceneObserver: SceneObserver? {
         return (self as? SceneController)?.observer
     }
@@ -75,4 +80,13 @@ private extension BaseViewController {
     }
 }
 
+extension BaseViewController: LoaderView {
+    func showLoader() {
+        loaderView.addLoader(view: self.view)
+    }
+    
+    func hideLoader() {
+        loaderView.removeLoader()
+    }
+}
 

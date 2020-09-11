@@ -133,8 +133,8 @@ private extension TweetViewController {
             self.metadata = metadata
             linkView = LPLinkView(metadata: metadata)
             mainStackView.addArrangedSubview(linkView)
+            mainStackView.addArrangedSubview(optionsHolder)
         }
-        mainStackView.addArrangedSubview(optionsHolder)
         
         if let url = model.profileURL {
             profileImage.downloadImage(from: url)

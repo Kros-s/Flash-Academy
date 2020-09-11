@@ -8,7 +8,6 @@
 
 import Foundation
 
-// Protocolo padre para representar todas las fachadas.
 protocol DomainFacade {
 }
 

@@ -11,6 +11,8 @@ import UIKit
 protocol ProfileView: class {
     func configure(with model: ProfileViewModel)
     func update(model: ProfileViewModel)
+    func showLoader()
+    func hideLoader()
 }
 
 final class ProfileViewController: BaseViewController, MVPView {

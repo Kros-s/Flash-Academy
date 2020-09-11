@@ -9,15 +9,6 @@
 import Foundation
 import LinkPresentation
 
-extension MVPView where Self: ProfileView {
-    func inyect() -> ProfilePresenterProtocol {
-        let presenter = ProfilePresenter()
-        presenter.view = self
-        return presenter
-    }
-    
-}
-
 protocol ProfilePresenterProtocol {
     
 }
@@ -48,7 +39,7 @@ final class ProfilePresenter: MVPPresenter {
 
 extension ProfilePresenter: ProfilePresenterProtocol {
     func sceneDidLoad() {
-        //FIXME: Add a loader before screen shows up
+        view?.showLoader()
         let group = DispatchGroup()
         group.enter()
         userFacade.retrieveUserInfo { [weak self] profile in
@@ -66,6 +57,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         group.notify(queue: .main) { [weak self] in
             guard let self = self else { return }
             self.loadView()
+            self.view?.hideLoader()
         }
     }
 }

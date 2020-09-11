@@ -35,14 +35,12 @@ final class ServerFacade: NSObject, DomainFacade {
         return httpClient
     }()
     
-    private init(ambiente: Environment = .default) {
-        self.environment = ambiente
+    private init(environment: Environment = .default) {
+        self.environment = environment
     }
 }
 
 extension DomainFacade {
-    /// HTTPCliente solo debe ser usado por Fachadas del Dominio. Usar esta funcion en el inicializador de las fachadas,
-    /// para asignar un valor por defecto.
     static func inyect() -> HTTPClient {
         return ServerFacade.shared.httpClient
     }

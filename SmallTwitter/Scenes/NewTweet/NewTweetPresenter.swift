@@ -8,14 +8,6 @@
 
 import Foundation
 
-extension MVPView where Self == NewTweetViewController {
-    func inyect() -> NewTweetPresenterProtocol {
-        let presenter = NewTweetPresenter()
-        presenter.view = self
-        return presenter
-    }
-}
-
 protocol NewTweetPresenterProtocol {
     
 }

@@ -22,6 +22,8 @@
 		38301024250369B0007DA26C /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38301019250369B0007DA26C /* OpenSans-Regular.ttf */; };
 		38301025250369B0007DA26C /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3830101A250369B0007DA26C /* OpenSans-BoldItalic.ttf */; };
 		38301027250369CA007DA26C /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38301026250369CA007DA26C /* UIFont.swift */; };
+		383FE3EE250BF8AF0022CE65 /* ScreenLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */; };
+		383FE3F0250BFD780022CE65 /* DependencyInjectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */; };
 		38475BD824E6EB6C0003E536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BD724E6EB6C0003E536 /* AppDelegate.swift */; };
 		38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BD924E6EB6C0003E536 /* SceneDelegate.swift */; };
 		38475BDC24E6EB6C0003E536 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BDB24E6EB6C0003E536 /* ViewController.swift */; };
@@ -84,6 +86,8 @@
 		38301019250369B0007DA26C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		3830101A250369B0007DA26C /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		38301026250369CA007DA26C /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
+		383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLoader.swift; sourceTree = "<group>"; };
+		383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectionManager.swift; sourceTree = "<group>"; };
 		38475BD424E6EB6C0003E536 /* SmallTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38475BD724E6EB6C0003E536 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38475BD924E6EB6C0003E536 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 			children = (
 				3830100A250365E1007DA26C /* TitleSubtitleStack.swift */,
 				3830100C250368C8007DA26C /* FactoryApperance.swift */,
+				383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */,
+				383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -486,6 +492,7 @@
 				3830100D250368C8007DA26C /* FactoryApperance.swift in Sources */,
 				38475BD824E6EB6C0003E536 /* AppDelegate.swift in Sources */,
 				38475C0B24E6EC570003E536 /* DomainFacade.swift in Sources */,
+				383FE3EE250BF8AF0022CE65 /* ScreenLoader.swift in Sources */,
 				38475C1524E6F2F60003E536 /* ProfileViewController.swift in Sources */,
 				38475C2124E6F9300003E536 /* LabelViewModel.swift in Sources */,
 				3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */,
@@ -504,6 +511,7 @@
 				38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */,
 				3886CDAB25098F6400916876 /* NewTweetPresenter.swift in Sources */,
 				38475BFA24E6EBA70003E536 /* ViewCoordinator.swift in Sources */,
+				383FE3F0250BFD780022CE65 /* DependencyInjectionManager.swift in Sources */,
 				38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */,
 				3886CDA22509552800916876 /* DateFormatter.swift in Sources */,
 				3830100B250365E1007DA26C /* TitleSubtitleStack.swift in Sources */,

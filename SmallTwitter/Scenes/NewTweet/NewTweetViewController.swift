@@ -19,6 +19,6 @@ final class NewTweetViewController: BaseViewController, MVPView {
 
 extension NewTweetViewController: NewTweetView {
     func configure() {
-        <#code#>
+        
     }
 }

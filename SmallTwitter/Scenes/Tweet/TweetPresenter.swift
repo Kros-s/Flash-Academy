@@ -14,13 +14,7 @@ protocol TweetPresenterProtocol {
     func handleShare()
 }
 
-extension MVPView where Self: TweetView {
-    func inyect() -> TweetPresenterProtocol {
-        let presenter = TweetPresenter()
-        presenter.view = self
-        return presenter
-    }
-}
+
 
 final class TweetPresenter: MVPPresenter {
     weak var view: TweetView?

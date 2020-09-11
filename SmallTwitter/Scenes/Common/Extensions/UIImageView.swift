@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImageView {
+    //FIXME: This should be moved into a Presneter Layer since presenter should perform this not view itself
     func downloadImage(from url: URL) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }

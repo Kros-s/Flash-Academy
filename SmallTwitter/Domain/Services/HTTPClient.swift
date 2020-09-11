@@ -171,7 +171,7 @@ private extension URLSessionHTTPClient {
         case (error: .none, data: .some(let responseData)):
             do {
                 let decodedResponse = try responseDecoder.decode(Solicitud.Response.self, from: responseData)
-                return factoryResponse.createSuccessfulResponse(respuesta: decodedResponse)
+                return factoryResponse.createSuccessfulResponse(response: decodedResponse)
             } catch let error {
                 let json = (try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]) ?? [:]
                 print("[DEBUG] ERROR RECEIVED: \n \(error) \n [DEBUG] WHILE PARSING: \n \(json)")
@@ -190,10 +190,10 @@ private final class HTTPFactoryResponse<Solicitud: HTTPRequest> {
     init() {
     }
     
-    func createSuccessfulResponse(respuesta: Solicitud.Response) -> HTTPResponse<Solicitud.Response> {
+    func createSuccessfulResponse(response: Solicitud.Response) -> HTTPResponse<Solicitud.Response> {
         return .init(urlRequest: urlRequest,
                      httpResponse: httpResponse,
-                     result: .success(respuesta))
+                     result: .success(response))
     }
     
     func createFailureResponse(error: HTTPResponse<Solicitud.Response>.Error) -> HTTPResponse<Solicitud.Response> {

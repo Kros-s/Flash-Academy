@@ -28,7 +28,6 @@ final class TitleSubtitleStack: UIStackView {
     lazy var titleLabel: UILabel = {
         let labelMode = UILabel()
         labelMode.translatesAutoresizingMaskIntoConstraints = false
-        labelMode.text = "DUMMY TEXT"
         labelMode.textColor = .black
         return labelMode
     }()
@@ -36,7 +35,6 @@ final class TitleSubtitleStack: UIStackView {
     lazy var subtitleLabel: UILabel = {
         let commentMode = UILabel()
         commentMode.translatesAutoresizingMaskIntoConstraints = false
-        commentMode.text = "DUMMY TEXT"
         commentMode.textColor = .black
         return commentMode
     }()
