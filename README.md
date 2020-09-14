@@ -1,4 +1,7 @@
 # flash-academy-ios
+IOS candidates who already had a recruiting process and the mobile team is willing to reconnect, these candidates lack specific technical skills that we seek to help with through the Academy.
+
+# flash-academy-ios
 This is a small Twitter Viewer
 It has an architecture based on MVP and a Coordinator 
 
