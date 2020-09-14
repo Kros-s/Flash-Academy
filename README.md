@@ -26,8 +26,12 @@ SceneObserver will work together to enforce the `MVP Architecture` using this we
 Project is divided into 2 Views, a profile view and a tweet view which will show a tweet, it will also load the content mendia present on it 
 and display over a LinkedView 
 
+# Notes
 For the dependency i'm not using a strategics like Service Locator, Factory or Interactor, this is considering that the way that i'm implementing allow me 
 this:
 
 * Allow me to avoid inyect a dependency over a layer where is not valid to use it 
+* It also works as a Interactor but without making this one an extra dependency
+* Signature method allows to move all logic related to how to create dependencies into an isolated item
+* Allows me to have some private dependencies to be completly hidden from outside, it also allows to any object handle its own `inyect` logic 
 
