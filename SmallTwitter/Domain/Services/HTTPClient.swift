@@ -182,9 +182,6 @@ private final class HTTPFactoryResponse<NetworkRequest: HTTPRequest> {
     var urlRequest: URLRequest?
     var httpResponse: HTTPURLResponse?
     
-    init() {
-    }
-    
     func createSuccessfulResponse(response: NetworkRequest.Response) -> HTTPResponse<NetworkRequest.Response> {
         return .init(urlRequest: urlRequest,
                      httpResponse: httpResponse,

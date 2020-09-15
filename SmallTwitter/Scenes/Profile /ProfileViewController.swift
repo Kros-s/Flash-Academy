@@ -21,7 +21,7 @@ final class ProfileViewController: BaseViewController, BaseView {
     
     lazy var router: Router = inyect()
     
-    var elements: [ProfileTableCellElement] = [] {
+    private var elements: [ProfileTableCellElement] = [] {
         didSet {
             profileTable.reloadData()
         }

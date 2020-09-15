@@ -9,8 +9,8 @@
 import UIKit
 
 final class ProfileVisitor {
-    let tableView: UITableView
-    let indexPath: IndexPath
+    private let tableView: UITableView
+    private let indexPath: IndexPath
     
     init(tableView: UITableView, indexPath: IndexPath) {
         self.tableView = tableView

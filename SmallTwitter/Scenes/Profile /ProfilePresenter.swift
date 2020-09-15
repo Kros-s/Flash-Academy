@@ -15,9 +15,9 @@ protocol ProfilePresenterProtocol {
 
 final class ProfilePresenter: BasePresenter {
     weak var view: ProfileView?
-    var userFacade: UserFacadeProtocol
-    var apperance = FactoryApperance()
-    var metadata: MetaDataStorage
+    private var userFacade: UserFacadeProtocol
+    private var apperance = FactoryApperance()
+    private var metadata: MetaDataStorage
     
     private var metadataURL: [URL: LPLinkMetadata?] = [:]
     

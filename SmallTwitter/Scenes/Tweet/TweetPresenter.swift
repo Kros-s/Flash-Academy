@@ -14,8 +14,6 @@ protocol TweetPresenterProtocol {
     func handleShare()
 }
 
-
-
 final class TweetPresenter: BasePresenter {
     weak var view: TweetView?
     var userFacade: UserFacadeProtocol
