@@ -8,34 +8,7 @@
 
 import UIKit
 
-protocol SceneObserver {
-    func sceneDidLoad()
-    func sceneWillAppear()
-    func sceneDidAppear()
-    func sceneWillDisappear()
-    func sceneDidDisappear()
-}
-
-extension SceneObserver {
-    func sceneDidLoad() {}
-    func sceneWillAppear() {}
-    func sceneDidAppear() {}
-    func sceneWillDisappear() {}
-    func sceneDidDisappear() {}
-}
-
-protocol LoaderView {
-    func showLoader()
-    func hideLoader()
-}
-
-protocol SceneController {
-    var observer: SceneObserver? { get }
-}
-
 class BaseViewController: UIViewController {
-    var navigationBar: CustomNavigationBarProtocol = CustomNavigationBar()
-    var loaderView: ScreenLoaderProtocol = ScreenLoader()
 
     private var sceneObserver: SceneObserver? {
         return (self as? SceneController)?.observer
@@ -43,7 +16,7 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         self.view.backgroundColor = .white
-        self.configureCustomBar()
+        setupNavigationBar()
         self.sceneObserver?.sceneDidLoad()
         super.viewDidLoad()
     }
@@ -68,25 +41,6 @@ class BaseViewController: UIViewController {
         super.viewDidDisappear(animated)
     }
     
-    deinit {
-        navigationBar.delegate = nil
-    }
 }
 
-
-private extension BaseViewController {
-    func configureCustomBar() {
-        navigationBar.addCustomNavBar(container: self.view, height: 55.0)
-    }
-}
-
-extension BaseViewController: LoaderView {
-    func showLoader() {
-        loaderView.addLoader(view: self.view)
-    }
-    
-    func hideLoader() {
-        loaderView.removeLoader()
-    }
-}
-
+extension BaseViewController: NavigationBarPresentable, LoaderViewPresentable { }

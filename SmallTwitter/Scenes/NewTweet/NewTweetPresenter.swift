@@ -12,7 +12,7 @@ protocol NewTweetPresenterProtocol {
     
 }
 
-final class NewTweetPresenter: MVPPresenter {
+final class NewTweetPresenter: BasePresenter {
     weak var view: NewTweetView?
 }
 

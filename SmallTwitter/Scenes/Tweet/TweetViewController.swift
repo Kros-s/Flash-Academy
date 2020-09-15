@@ -14,7 +14,7 @@ protocol TweetView: class {
     func showShareSheet(metadata: LPLinkMetadata)
 }
 
-final class TweetViewController: BaseViewController, MVPView {
+final class TweetViewController: BaseViewController, BaseView {
     lazy var presenter: TweetPresenterProtocol = inyect()
     lazy var router: Router = inyect()
     
@@ -111,7 +111,7 @@ extension TweetViewController: TweetView {
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.padding),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.padding),
-            mainStackView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor),
+            mainStackView.topAnchor.constraint(equalTo: navigationBarBottomAnchor),
             
             profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: 1.0),
             profileImage.widthAnchor.constraint(equalToConstant: Metrics.imageSize),
@@ -124,8 +124,8 @@ extension TweetViewController: TweetView {
 
 private extension TweetViewController {
     func setup(model: TweetViewModel) {
-        navigationBar.delegate = self
-        navigationBar.configureNavBar(viewModel: .TweetView)
+        setNavBar(delegate: self)
+        configureNavBar(viewModel: .TweetView)
         tweet.configure(model: model.tweetText)
         profileDataStack.configure(title: model.displayName, subtitle: model.name)
         
@@ -142,8 +142,8 @@ private extension TweetViewController {
             profileImage.backgroundColor = .black
         }
         
-        navigationBar.isVisible = true
-        navigationBar.showLeftButton(true)
+        isNavBarVisible(true)
+        showLeftButton(true)
     }
     
     @objc func handleShare() {

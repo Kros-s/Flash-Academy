@@ -9,6 +9,26 @@
 import Foundation
 import UIKit
 
+protocol LoaderViewPresentable {
+    func showLoader()
+    func hideLoader()
+}
+
+extension LoaderViewPresentable where Self: UIViewController {
+    func findLoader() -> ScreenLoaderProtocol? {
+        return view.subviews.compactMap { $0 as? ScreenLoaderProtocol }.first
+    }
+    
+    func hideLoader() {
+        findLoader()?.removeLoader()
+    }
+    
+    func showLoader() {
+        let loaderView: ScreenLoaderProtocol = ScreenLoader()
+        loaderView.addLoader(view: self.view)
+    }
+}
+
 protocol ScreenLoaderProtocol {
     func addLoader(view: UIView)
     func removeLoader()
@@ -69,16 +89,10 @@ extension ScreenLoader: ScreenLoaderProtocol {
         frame = view.frame
         center = view.center
         container.center = center
-
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            view.addSubview(self)
-        }
+        view.addSubview(self)
     }
     
     func removeLoader() {
-        DispatchQueue.main.async { [weak self] in
-            self?.removeFromSuperview()
-        }
+        self.removeFromSuperview()
     }
 }

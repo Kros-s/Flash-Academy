@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension MVPPresenter {
+extension BasePresenter {
     static func inyect() -> UserFacadeProtocol {
         return UserFacade.shared
     }
@@ -42,7 +42,7 @@ extension UserFacade: UserFacadeProtocol {
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         //Need to load other data
         
-        httpclient.execute(solicitud: request) { [weak self] response in
+        httpclient.execute(request: request) { [weak self] response in
             switch response.result {
             case .success(let timeline):
                 self?.lastTimeLine = timeline
@@ -60,7 +60,7 @@ extension UserFacade: UserFacadeProtocol {
         
         //Need to load other data
         
-        httpclient.execute(solicitud: request) { response in
+        httpclient.execute(request: request) { response in
             switch response.result {
             case .success(let user):
                 finishOnMainThread(user)

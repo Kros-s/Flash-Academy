@@ -16,7 +16,7 @@ import Foundation
 
 // Locator hides the implementation and start becoming a GOD object since it handles more than one dependency.
 
-extension MVPView where Self == NewTweetViewController {
+extension BaseView where Self == NewTweetViewController {
     func inyect() -> NewTweetPresenterProtocol {
         let presenter = NewTweetPresenter()
         presenter.view = self
@@ -24,7 +24,7 @@ extension MVPView where Self == NewTweetViewController {
     }
 }
 
-extension MVPView where Self: TweetView {
+extension BaseView where Self: TweetView {
     func inyect() -> TweetPresenterProtocol {
         let presenter = TweetPresenter()
         presenter.view = self
@@ -32,7 +32,7 @@ extension MVPView where Self: TweetView {
     }
 }
 
-extension MVPView where Self: ProfileView {
+extension BaseView where Self: ProfileView {
     func inyect() -> ProfilePresenterProtocol {
         let presenter = ProfilePresenter()
         presenter.view = self

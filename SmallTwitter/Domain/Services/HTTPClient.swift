@@ -11,11 +11,6 @@ import Foundation
 enum HTTPMethod: String, CaseIterable {
     case post = "POST"
     case get = "GET"
-    case put = "PUT"
-    case patch = "PATCH"
-    case delete = "DELETE"
-    case head = "HEAD"
-    case trace = "TRACE"
 }
 
 protocol HTTPRequest {
@@ -23,8 +18,8 @@ protocol HTTPRequest {
     associatedtype Response: Codable
     
     var urlPath: String { get }
-    var metodo: HTTPMethod { get }
-    var cuerpo: Body? { get }
+    var method: HTTPMethod { get }
+    var body: Body? { get }
     var headers: [String: String] { get }
 }
 
@@ -53,8 +48,8 @@ protocol HTTPClient: class {
     var baseURL: String { get set }
     var headersProvider: HeadersProvider? { get set }
     
-    func execute<Solicitud: HTTPRequest>(solicitud: Solicitud,
-                                            completion: @escaping (HTTPResponse<Solicitud.Response>) -> Void)
+    func execute<NetworkRequest: HTTPRequest>(request: NetworkRequest,
+                                            completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
 }
 
 protocol HeadersProvider: class {
@@ -85,14 +80,14 @@ extension URLSessionHTTPClient: HTTPClient {
         static let httpSuccesfulRange = 200...299
     }
     
-    func execute<Solicitud: HTTPRequest>(
-        solicitud: Solicitud,
-        completion: @escaping (HTTPResponse<Solicitud.Response>) -> Void
+    func execute<NetworkRequest: HTTPRequest>(
+        request: NetworkRequest,
+        completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void
     ) {
-        let factoryResponse = HTTPFactoryResponse<Solicitud>()
+        let factoryResponse = HTTPFactoryResponse<NetworkRequest>()
         
         do {
-            let urlRequest = try createURLRequest(for: solicitud)
+            let urlRequest = try createURLRequest(for: request)
             let task = self.urlSession.dataTask(with: urlRequest) { [weak self] (data, urlResponse, error) in
                 factoryResponse.urlRequest = urlRequest
                 guard
@@ -115,14 +110,14 @@ extension URLSessionHTTPClient: HTTPClient {
                     return
                 }
                 
-                completion(self.decodeResponse(solicitud: solicitud,
+                completion(self.decodeResponse(request: request,
                                                         urlRequest: urlRequest,
                                                         httpResponse: httpResponse,
                                                         data: data, error: error))
             }
             task.resume()
         } catch {
-            guard let errorDetected = error as? HTTPResponse<Solicitud.Response>.Error else {
+            guard let errorDetected = error as? HTTPResponse<NetworkRequest.Response>.Error else {
                 completion(factoryResponse.createFailureResponse(error: .unknown))
                 return
             }
@@ -132,36 +127,36 @@ extension URLSessionHTTPClient: HTTPClient {
 }
 
 private extension URLSessionHTTPClient {
-    func createURLRequest<Solicitud: HTTPRequest>(for solicitud: Solicitud) throws -> URLRequest {
-        guard let url = URL(string: baseURL + solicitud.urlPath) else {
-            throw HTTPResponse<Solicitud.Response>.Error.urlBadFormed
+    func createURLRequest<NetworkRequest: HTTPRequest>(for request: NetworkRequest) throws -> URLRequest {
+        guard let url = URL(string: baseURL + request.urlPath) else {
+            throw HTTPResponse<NetworkRequest.Response>.Error.urlBadFormed
         }
         var urlRequest = URLRequest(url: url)
-        urlRequest.httpMethod = solicitud.metodo.rawValue
+        urlRequest.httpMethod = request.method.rawValue
         urlRequest.cachePolicy = .reloadIgnoringCacheData
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let headers = (self.headersProvider?.getHeaders() ?? [:]).merging(solicitud.headers) { $1 }
+        let headers = (self.headersProvider?.getHeaders() ?? [:]).merging(request.headers) { $1 }
         headers.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0) }
         
-        if let body = solicitud.cuerpo {
+        if let body = request.body {
             do {
                 urlRequest.httpBody = try bodyEncoder.encode(body)
             } catch let error {
-                throw HTTPResponse<Solicitud.Response>.Error.badCodificationBody(error: error)
+                throw HTTPResponse<NetworkRequest.Response>.Error.badCodificationBody(error: error)
             }
         }
         
         return urlRequest
     }
     
-    func decodeResponse<Solicitud: HTTPRequest>(
-        solicitud: Solicitud,
+    func decodeResponse<NetworkRequest: HTTPRequest>(
+        request: NetworkRequest,
         urlRequest: URLRequest,
         httpResponse: HTTPURLResponse?,
         data: Data?,
-        error: Error?) -> HTTPResponse<Solicitud.Response>
+        error: Error?) -> HTTPResponse<NetworkRequest.Response>
     {
-        let factoryResponse = HTTPFactoryResponse<Solicitud>()
+        let factoryResponse = HTTPFactoryResponse<NetworkRequest>()
         factoryResponse.urlRequest = urlRequest
         factoryResponse.httpResponse = httpResponse
         
@@ -170,7 +165,7 @@ private extension URLSessionHTTPClient {
             return factoryResponse.createFailureResponse(error: .httpError(error: requestError))
         case (error: .none, data: .some(let responseData)):
             do {
-                let decodedResponse = try responseDecoder.decode(Solicitud.Response.self, from: responseData)
+                let decodedResponse = try responseDecoder.decode(NetworkRequest.Response.self, from: responseData)
                 return factoryResponse.createSuccessfulResponse(response: decodedResponse)
             } catch let error {
                 let json = (try? JSONSerialization.jsonObject(with: responseData, options: []) as? [String: Any]) ?? [:]
@@ -183,20 +178,20 @@ private extension URLSessionHTTPClient {
     }
 }
 
-private final class HTTPFactoryResponse<Solicitud: HTTPRequest> {
+private final class HTTPFactoryResponse<NetworkRequest: HTTPRequest> {
     var urlRequest: URLRequest?
     var httpResponse: HTTPURLResponse?
     
     init() {
     }
     
-    func createSuccessfulResponse(response: Solicitud.Response) -> HTTPResponse<Solicitud.Response> {
+    func createSuccessfulResponse(response: NetworkRequest.Response) -> HTTPResponse<NetworkRequest.Response> {
         return .init(urlRequest: urlRequest,
                      httpResponse: httpResponse,
                      result: .success(response))
     }
     
-    func createFailureResponse(error: HTTPResponse<Solicitud.Response>.Error) -> HTTPResponse<Solicitud.Response> {
+    func createFailureResponse(error: HTTPResponse<NetworkRequest.Response>.Error) -> HTTPResponse<NetworkRequest.Response> {
         return .init(urlRequest: urlRequest,
                      httpResponse: httpResponse,
                      result: .failure(error))

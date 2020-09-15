@@ -13,7 +13,7 @@ protocol ProfilePresenterProtocol {
     
 }
 
-final class ProfilePresenter: MVPPresenter {
+final class ProfilePresenter: BasePresenter {
     weak var view: ProfileView?
     var userFacade: UserFacadeProtocol
     var apperance = FactoryApperance()

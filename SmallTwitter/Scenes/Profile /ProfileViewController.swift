@@ -15,7 +15,7 @@ protocol ProfileView: class {
     func hideLoader()
 }
 
-final class ProfileViewController: BaseViewController, MVPView {
+final class ProfileViewController: BaseViewController, BaseView {
     
     lazy var presenter: ProfilePresenterProtocol = inyect()
     

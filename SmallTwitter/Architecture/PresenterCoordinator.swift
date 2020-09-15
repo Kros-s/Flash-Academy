@@ -13,7 +13,7 @@ protocol PresenterCoordinatorProtocol {
     func handleTapOnTweet(id: String)
 }
 
-final class PresenterCoordinator: MVPPresenter {
+final class PresenterCoordinator: BasePresenter {
     weak var view: ViewCordinatorProtocol?
     
     private let userDefaults: UserDefaults

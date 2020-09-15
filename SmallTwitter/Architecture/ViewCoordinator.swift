@@ -18,7 +18,7 @@ protocol Router {
     func tapOnTweet(id: String)
 }
 
-final class ViewCoordinator: MVPView {
+final class ViewCoordinator: BaseView {
     typealias Presenter = PresenterCoordinatorProtocol
     static let shared: ViewCoordinator = {
         let presenter = PresenterCoordinator()
@@ -84,7 +84,7 @@ private extension ViewCoordinator {
 
 // MARK: MVPVista
 
-extension MVPView {
+extension BaseView {
     func inyect() -> Router {
         return ViewCoordinator.shared
     }

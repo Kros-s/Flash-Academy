@@ -13,6 +13,6 @@ struct UserTimeline: HTTPRequest {
     struct Body: Codable { }
     
     var urlPath: String = "/api/statuses/user_timeline"
-    var metodo: HTTPMethod = .get
-    var cuerpo: Body?
+    var method: HTTPMethod = .get
+    var body: Body?
 }

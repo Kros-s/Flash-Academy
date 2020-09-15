@@ -9,7 +9,7 @@
 import Foundation
 import LinkPresentation
 
-extension MVPPresenter {
+extension BasePresenter {
     static func inyect() -> MetaDataStorage {
         return LinkViewDataStorage.shared
     }

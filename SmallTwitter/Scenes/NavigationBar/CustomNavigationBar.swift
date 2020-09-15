@@ -8,6 +8,51 @@
 
 import UIKit
 
+protocol NavigationBarPresentable {
+    var navigationBarBottomAnchor: NSLayoutYAxisAnchor { get }
+    func setupNavigationBar()
+    func configureNavBar(viewModel: NavigationBarViewModel)
+    func setNavBar(delegate: DelegateCustomNavigationBar?)
+    func isNavBarVisible(_ show: Bool)
+}
+
+extension NavigationBarPresentable where Self: UIViewController {
+    var navigationBarBottomAnchor: NSLayoutYAxisAnchor {
+        return findNavigation()?.bottomAnchor ?? view.bottomAnchor
+    }
+    
+    func setupNavigationBar() {
+        guard findNavigation() == nil else {
+            return
+        }
+        let navigationBar = CustomNavigationBar()
+        navigationBar.addCustomNavBar(container: self.view, height: 55.0)
+    }
+    
+    func findNavigation() -> CustomNavigationBarProtocol? {
+        return view.subviews.compactMap { $0 as? CustomNavigationBarProtocol }.first
+    }
+    
+    func configureNavBar(viewModel: NavigationBarViewModel) {
+        findNavigation()?.configureNavBar(viewModel: viewModel)
+    }
+    
+    func setNavBar(delegate: DelegateCustomNavigationBar?) {
+        var navigationBar = findNavigation()
+        navigationBar?.delegate = delegate
+    }
+    
+    func isNavBarVisible(_ show: Bool) {
+        var navigationBar = findNavigation()
+        navigationBar?.isVisible = show
+    }
+    
+    func showLeftButton(_ show: Bool) {
+        let navigationBar = findNavigation()
+        navigationBar?.showLeftButton(show)
+    }
+}
+
 struct NavigationBarViewModel {
     var isVisible: Bool = true
     var headerText: LabelViewModel

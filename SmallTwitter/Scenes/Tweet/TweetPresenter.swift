@@ -16,7 +16,7 @@ protocol TweetPresenterProtocol {
 
 
 
-final class TweetPresenter: MVPPresenter {
+final class TweetPresenter: BasePresenter {
     weak var view: TweetView?
     var userFacade: UserFacadeProtocol
     var identifier: String?

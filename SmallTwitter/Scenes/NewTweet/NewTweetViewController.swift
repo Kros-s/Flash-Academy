@@ -12,7 +12,7 @@ protocol NewTweetView: class {
     func configure()
 }
 
-final class NewTweetViewController: BaseViewController, MVPView {
+final class NewTweetViewController: BaseViewController, BaseView {
     lazy var presenter: NewTweetPresenterProtocol = inyect()
     lazy var router: Router = inyect()
 }
