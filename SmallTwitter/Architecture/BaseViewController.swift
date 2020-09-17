@@ -14,29 +14,29 @@ class BaseViewController: UIViewController {
         return (self as? SceneController)?.observer
     }
     
-    override func viewDidLoad() {
+    final override func viewDidLoad() {
         self.view.backgroundColor = .white
         setupNavigationBar()
         self.sceneObserver?.sceneDidLoad()
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    final override func viewWillAppear(_ animated: Bool) {
         self.sceneObserver?.sceneWillAppear()
         super.viewWillAppear(animated)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    final override func viewDidAppear(_ animated: Bool) {
         self.sceneObserver?.sceneDidAppear()
         super.viewDidAppear(animated)
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
+    final override func viewWillDisappear(_ animated: Bool) {
         self.sceneObserver?.sceneWillDisappear()
         super.viewWillDisappear(animated)
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
+    final override func viewDidDisappear(_ animated: Bool) {
         self.sceneObserver?.sceneDidDisappear()
         super.viewDidDisappear(animated)
     }

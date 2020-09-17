@@ -12,6 +12,7 @@ protocol NavigationBarPresentable {
     var navigationBarBottomAnchor: NSLayoutYAxisAnchor { get }
     func setupNavigationBar()
     func configureNavBar(viewModel: NavigationBarViewModel)
+    func configureRightItem(model: ButtonViewModel)
     func setNavBar(delegate: DelegateCustomNavigationBar?)
     func isNavBarVisible(_ show: Bool)
 }
@@ -19,6 +20,10 @@ protocol NavigationBarPresentable {
 extension NavigationBarPresentable where Self: UIViewController {
     var navigationBarBottomAnchor: NSLayoutYAxisAnchor {
         return findNavigation()?.bottomAnchor ?? view.bottomAnchor
+    }
+    
+    func configureRightItem(model: ButtonViewModel) {
+        findNavigation()?.configureRightItem(model: model)
     }
     
     func setupNavigationBar() {
@@ -57,15 +62,22 @@ struct NavigationBarViewModel {
     var isVisible: Bool = true
     var headerText: LabelViewModel
     var showBackButton: Bool
+    var backgroundColor: UIColor
 }
 
 extension NavigationBarViewModel {
-    static let TweetView = NavigationBarViewModel(headerText: .init(text: "Tweet", appearance: FactoryApperance().makeApperance()), showBackButton: true)
-    static let GeneralView = NavigationBarViewModel(headerText: .init(text: "", appearance: FactoryApperance().makeApperance()), showBackButton: false)
+    static let TweetView = NavigationBarViewModel(headerText: .init(text: "Tweet", appearance: FactoryApperance().makeApperance(size: 16, color: .mainBlue)), showBackButton: true, backgroundColor: .white)
+    static let GeneralView = NavigationBarViewModel(headerText: .init(text: "PROFILE", appearance: FactoryApperance().makeApperance(weight: .bold, size: 16)), showBackButton: false, backgroundColor: .white)
 }
 
 protocol DelegateCustomNavigationBar: class {
     func leftButtonSelected()
+    func rightButtonSelected()
+}
+
+extension DelegateCustomNavigationBar {
+    func leftButtonSelected() { }
+    func rightButtonSelected() { }
 }
 
 protocol CustomNavigationBarProtocol {
@@ -75,6 +87,7 @@ protocol CustomNavigationBarProtocol {
     func addCustomNavBar(container: UIView, height: CGFloat)
     func showLeftButton(_ show: Bool)
     func configureNavBar(viewModel: NavigationBarViewModel)
+    func configureRightItem(model: ButtonViewModel)
 }
 
 final class CustomNavigationBar: UIView {
@@ -91,10 +104,12 @@ final class CustomNavigationBar: UIView {
     
     private var title: UILabel = {
         let title = UILabel()
+        title.textAlignment = .center
         title.translatesAutoresizingMaskIntoConstraints = false
-        title.text = "NO TITLE"
         return title
     }()
+    
+    private var rightButton = UIButton()
 
     weak var delegate: DelegateCustomNavigationBar?
     
@@ -119,25 +134,48 @@ final class CustomNavigationBar: UIView {
         super.init(coder: coder)
         setupView()
     }
+    
+    func configureRightItem(model: ButtonViewModel) {
+        rightButton.configure(model: model)
+    }
 }
 
-extension CustomNavigationBar: CustomNavigationBarProtocol {
+private extension CustomNavigationBar {
+    func configureRightButton() {
+        rightButton.translatesAutoresizingMaskIntoConstraints = false
+        rightButton.isHidden = true
+        rightButton.addTarget(self, action: #selector(rightButtonActivated), for: .touchUpInside)
+    }
     
     func setupView() {
+        configureRightButton()
+        
+        addSubview(rightButton)
         addSubview(leftButton)
         addSubview(title)
         
         NSLayoutConstraint.activate([
             leftButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20.0),
-            leftButton.topAnchor.constraint(equalTo: topAnchor),
+            leftButton.centerYAnchor.constraint(equalTo: centerYAnchor),
             leftButton.heightAnchor.constraint(equalToConstant: 40),
             leftButton.widthAnchor.constraint(equalToConstant: 40),
             
             title.centerXAnchor.constraint(equalTo: centerXAnchor),
-            title.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 5),
-            title.heightAnchor.constraint(equalToConstant: bounds.height * 0.8),
-            title.widthAnchor.constraint(equalToConstant: 150.0)
+            title.centerYAnchor.constraint(equalTo: centerYAnchor),
+            title.heightAnchor.constraint(equalToConstant: 32),
+            title.widthAnchor.constraint(equalToConstant: 150.0),
+            
+            rightButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20.0),
+            rightButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            rightButton.heightAnchor.constraint(equalToConstant: 40),
+            rightButton.widthAnchor.constraint(equalToConstant: 40),
         ])
+    }
+}
+extension CustomNavigationBar: CustomNavigationBarProtocol {
+   
+    @objc func rightButtonActivated() {
+        delegate?.rightButtonSelected()
     }
     
     @objc func leftButtonActivated() {
@@ -160,8 +198,8 @@ extension CustomNavigationBar: CustomNavigationBarProtocol {
     }
     
     func configureNavBar(viewModel: NavigationBarViewModel) {
-           showLeftButton(viewModel.showBackButton)
-           title.configure(model: viewModel.headerText)
-       }
-    
+        showLeftButton(viewModel.showBackButton)
+        title.configure(model: viewModel.headerText)
+        backgroundColor = viewModel.backgroundColor
+    }
 }

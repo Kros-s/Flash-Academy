@@ -13,6 +13,7 @@ protocol ProfileView: class {
     func update(model: ProfileViewModel)
     func showLoader()
     func hideLoader()
+    func goToNewTweet()
 }
 
 final class ProfileViewController: BaseViewController, BaseView {
@@ -43,12 +44,20 @@ final class ProfileViewController: BaseViewController, BaseView {
 }
 
 extension ProfileViewController: ProfileView {
+    func goToNewTweet() {
+        router.tapOnNewTweet()
+    }
+    
     func update(model: ProfileViewModel) {
         elements = model.element
     }
     
     func configure(with model: ProfileViewModel) {
         view.backgroundColor = .softBlue
+        setNavBar(delegate: self)
+        configureNavBar(viewModel: .GeneralView)
+        configureRightItem(model: model.navBarRightItem)
+        isNavBarVisible(true)
         profileTable.delegate = self
         profileTable.dataSource = self
         elements = model.element
@@ -56,7 +65,7 @@ extension ProfileViewController: ProfileView {
         view.addSubview(profileTable)
         
         NSLayoutConstraint.activate([
-            profileTable.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8.0),
+            profileTable.topAnchor.constraint(equalTo: navigationBarBottomAnchor, constant: 8.0),
             profileTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
             profileTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.0),
             profileTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -85,5 +94,11 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 extension ProfileViewController: ProfileElementVisitor {
     func visit(viewModel: ProfileTweetViewModel) {
         router.tapOnTweet(id: viewModel.id)
+    }
+}
+
+extension ProfileViewController: DelegateCustomNavigationBar {
+    func rightButtonSelected() {
+        presenter.handleTapNewTweet()
     }
 }

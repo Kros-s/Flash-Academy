@@ -61,6 +61,11 @@
 		38A738FB25103B9600ECE705 /* ProfileTableCellElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A738FA25103B9600ECE705 /* ProfileTableCellElement.swift */; };
 		38A738FD25103BAB00ECE705 /* ProfileElementVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A738FC25103BAB00ECE705 /* ProfileElementVisitor.swift */; };
 		38A738FF25103BF200ECE705 /* SceneObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A738FE25103BF200ECE705 /* SceneObserver.swift */; };
+		38EA4FEB2513E0470053C466 /* TweetFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEA2513E0470053C466 /* TweetFacade.swift */; };
+		38EA4FEF2513E1AD0053C466 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEE2513E1AD0053C466 /* Update.swift */; };
+		38F848CD251383D400A3EBBB /* ModalNewTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CC251383D400A3EBBB /* ModalNewTweet.swift */; };
+		38F848D02513841000A3EBBB /* ModalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CF2513841000A3EBBB /* ModalHeader.swift */; };
+		38F848D22513851500A3EBBB /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848D12513851500A3EBBB /* ButtonViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +137,11 @@
 		38A738FA25103B9600ECE705 /* ProfileTableCellElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableCellElement.swift; sourceTree = "<group>"; };
 		38A738FC25103BAB00ECE705 /* ProfileElementVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileElementVisitor.swift; sourceTree = "<group>"; };
 		38A738FE25103BF200ECE705 /* SceneObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObserver.swift; sourceTree = "<group>"; };
+		38EA4FEA2513E0470053C466 /* TweetFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetFacade.swift; sourceTree = "<group>"; };
+		38EA4FEE2513E1AD0053C466 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		38F848CC251383D400A3EBBB /* ModalNewTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalNewTweet.swift; sourceTree = "<group>"; };
+		38F848CF2513841000A3EBBB /* ModalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeader.swift; sourceTree = "<group>"; };
+		38F848D12513851500A3EBBB /* ButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,6 +265,7 @@
 			children = (
 				38475C0D24E6ED5A0003E536 /* GetUser.swift */,
 				38475C2424E6FE5E0003E536 /* UserTimeline.swift */,
+				38EA4FEE2513E1AD0053C466 /* Update.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -266,6 +277,7 @@
 				38475C0A24E6EC570003E536 /* DomainFacade.swift */,
 				38475C0F24E6EFAF0003E536 /* UserFacade.swift */,
 				3886CDA325095A0700916876 /* LinkViewDataStorage.swift */,
+				38EA4FEA2513E0470053C466 /* TweetFacade.swift */,
 			);
 			path = Facades;
 			sourceTree = "<group>";
@@ -336,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				38475C2024E6F9300003E536 /* LabelViewModel.swift */,
+				38F848D12513851500A3EBBB /* ButtonViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -371,6 +384,7 @@
 		3886CDA725098EE000916876 /* NewTweet */ = {
 			isa = PBXGroup;
 			children = (
+				38F848CE2513840000A3EBBB /* Components */,
 				3886CDA825098F5A00916876 /* NewTweetViewController.swift */,
 				3886CDAA25098F6400916876 /* NewTweetPresenter.swift */,
 			);
@@ -406,6 +420,15 @@
 				38A738FE25103BF200ECE705 /* SceneObserver.swift */,
 			);
 			path = Architecture;
+			sourceTree = "<group>";
+		};
+		38F848CE2513840000A3EBBB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				38F848CC251383D400A3EBBB /* ModalNewTweet.swift */,
+				38F848CF2513841000A3EBBB /* ModalHeader.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -520,6 +543,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				38A738FF25103BF200ECE705 /* SceneObserver.swift in Sources */,
+				38EA4FEB2513E0470053C466 /* TweetFacade.swift in Sources */,
 				38475C0924E6EC460003E536 /* ServerFacade.swift in Sources */,
 				38A738F825103B5500ECE705 /* ProfileTweetViewModel.swift in Sources */,
 				3830100D250368C8007DA26C /* FactoryApperance.swift in Sources */,
@@ -533,13 +557,16 @@
 				38475C0524E6EC240003E536 /* HTTPClient.swift in Sources */,
 				38301027250369CA007DA26C /* UIFont.swift in Sources */,
 				38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */,
+				38F848CD251383D400A3EBBB /* ModalNewTweet.swift in Sources */,
 				38475C0024E6EBEB0003E536 /* MVP.swift in Sources */,
+				38EA4FEF2513E1AD0053C466 /* Update.swift in Sources */,
 				38475C1024E6EFAF0003E536 /* UserFacade.swift in Sources */,
 				3886CDA425095A0700916876 /* LinkViewDataStorage.swift in Sources */,
 				38A738FD25103BAB00ECE705 /* ProfileElementVisitor.swift in Sources */,
 				38475C1824E6F3320003E536 /* ProfilePresenter.swift in Sources */,
 				38475C1B24E6F6A70003E536 /* ProfileTableViewCell.swift in Sources */,
 				38475BFC24E6EBBE0003E536 /* PresenterCoordinator.swift in Sources */,
+				38F848D22513851500A3EBBB /* ButtonViewModel.swift in Sources */,
 				38475C1324E6F03D0003E536 /* User.swift in Sources */,
 				38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */,
 				38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */,
@@ -550,6 +577,7 @@
 				38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */,
 				3886CDA22509552800916876 /* DateFormatter.swift in Sources */,
 				3830100B250365E1007DA26C /* TitleSubtitleStack.swift in Sources */,
+				38F848D02513841000A3EBBB /* ModalHeader.swift in Sources */,
 				38A738F625103B3500ECE705 /* ProfileInfoViewModel.swift in Sources */,
 				38475C2924E6FFAD0003E536 /* TimeLineTableViewCell.swift in Sources */,
 				38475C2C24E70A9E0003E536 /* UIImageView.swift in Sources */,

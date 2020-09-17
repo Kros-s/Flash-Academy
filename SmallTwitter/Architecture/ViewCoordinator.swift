@@ -12,10 +12,12 @@ import UIKit
 protocol ViewCordinatorProtocol: class {
     func goToProfile()
     func goToSingleTweet(id: String)
+    func goToNewTweet()
 }
 
 protocol Router {
     func tapOnTweet(id: String)
+    func tapOnNewTweet()
 }
 
 final class ViewCoordinator: BaseView {
@@ -35,7 +37,7 @@ final class ViewCoordinator: BaseView {
     }
 }
 
-// MARK: Metodos Publicos
+// MARK: Public Methods
 
 extension ViewCoordinator {
     var rootViewController: UIViewController {
@@ -48,41 +50,50 @@ extension ViewCoordinator {
 }
 
 extension ViewCoordinator: Router {
+    func tapOnNewTweet() {
+        presenter.handleNewTweet()
+    }
+    
     func tapOnTweet(id: String) {
         presenter.handleTapOnTweet(id: id)
     }
 }
 
-// MARK: Conformacia de CoordinadorDeVistaProtocolo
-
 extension ViewCoordinator: ViewCordinatorProtocol {
+    func goToNewTweet() {
+        let viewController = NewTweetViewController()
+        viewController.modalPresentationStyle = .overCurrentContext
+        viewController.modalTransitionStyle = .crossDissolve
+        present(controller: viewController)
+    }
+    
     func goToSingleTweet(id: String) {
         let view = TweetViewController()
         view.presenter.identifier = id
-        irA(controlador: view)
+        goTo(controller: view)
     }
     
     func goToProfile() {
-        irA(controlador: ProfileViewController())
+        goTo(controller: ProfileViewController())
     }
 }
 
-// MARK: Metods Privados
+// MARK: Private Methods
 
 private extension ViewCoordinator {
-    func irA(controlador: UIViewController) {
-        rootNavigationController.pushViewController(controlador, animated: rootNavigationController.topViewController != nil)
+    func goTo(controller: UIViewController) {
+        rootNavigationController.pushViewController(controller, animated: rootNavigationController.topViewController != nil)
     }
     
-    func presentar(controlador: UIViewController) {
+    func present(controller: UIViewController) {
         rootNavigationController.topViewController?.present(
-            controlador,
+            controller,
             animated: true,
             completion: nil)
     }
 }
 
-// MARK: MVPVista
+// MARK: Inyect for BaseView
 
 extension BaseView {
     func inyect() -> Router {

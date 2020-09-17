@@ -10,7 +10,7 @@ import Foundation
 import LinkPresentation
 
 protocol ProfilePresenterProtocol {
-    
+    func handleTapNewTweet()
 }
 
 final class ProfilePresenter: BasePresenter {
@@ -38,7 +38,19 @@ final class ProfilePresenter: BasePresenter {
 }
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func handleTapNewTweet() {
+        view?.goToNewTweet()
+    }
+    
     func sceneDidLoad() {
+        reloadView()
+    }
+    
+    func sceneWillAppear() {
+        reloadView()
+    }
+    
+    func reloadView() {
         view?.showLoader()
         let group = DispatchGroup()
         group.enter()
@@ -50,7 +62,6 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         group.enter()
         userFacade.retrieveUserTimeLine { [weak self] timeline in
             self?.timeLineInfo = timeline
-            print(timeline)
             group.leave()
         }
         
@@ -127,8 +138,20 @@ private extension ProfilePresenter {
                                     followingTitle: Constants.followingTitle)
     }
     
+    func newTweetViewModel() -> ButtonViewModel {
+        let style = StyleButton(fontTitle: .openSansBold(size: 20),
+                                titleColor: [.normal(value: .white),],
+                                             backgroundColor: .mainBlack,
+                                             roundedBorder: 20)
+        return .init(titles: [.normal(value: "+")],
+                            style: style)
+    }
+    
     func createViewModel() -> ProfileViewModel {
-        var viewModel = ProfileViewModel(element: [])
+        var viewModel = ProfileViewModel(navBarRightItem: newTweetViewModel(),
+                                         element: [])
+        
+        //FIXME: Check for this validation seems redundant
         if let profile = createProfileViewModel() {
             viewModel.element.append(profile)
         }

@@ -10,5 +10,6 @@ import Foundation
 import LinkPresentation
 
 struct ProfileViewModel {
+    var navBarRightItem: ButtonViewModel
     var element: [ProfileTableCellElement]
 }
