@@ -15,7 +15,6 @@ protocol UserFacadeProtocol {
 }
 
 final class UserFacade: DomainFacade {
-    static let shared = UserFacade()
     private let httpclient: HTTPClient
     
     private var lastTimeLine: [TimeLine] = []
