@@ -8,25 +8,19 @@
 
 import Foundation
 
-extension BasePresenter {
-    static func inyect() -> UserFacadeProtocol {
-        return UserFacade.shared
-    }
-}
-
 protocol UserFacadeProtocol {
     func retrieveUserInfo(completion: @escaping (User?) -> Void)
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void)
     func retrieveTweet(id: String) -> TimeLine?
 }
 
-private final class UserFacade: DomainFacade {
+final class UserFacade: DomainFacade {
     static let shared = UserFacade()
     private let httpclient: HTTPClient
     
     private var lastTimeLine: [TimeLine] = []
     
-    private init(httpclient: HTTPClient = inyect()) {
+    init(httpclient: HTTPClient = inject()) {
         self.httpclient = httpclient
     }
 }

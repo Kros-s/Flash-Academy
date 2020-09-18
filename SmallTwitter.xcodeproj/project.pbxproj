@@ -63,6 +63,7 @@
 		38A738FF25103BF200ECE705 /* SceneObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A738FE25103BF200ECE705 /* SceneObserver.swift */; };
 		38EA4FEB2513E0470053C466 /* TweetFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEA2513E0470053C466 /* TweetFacade.swift */; };
 		38EA4FEF2513E1AD0053C466 /* Update.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEE2513E1AD0053C466 /* Update.swift */; };
+		38EA4FF1251507240053C466 /* Show.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FF0251507240053C466 /* Show.swift */; };
 		38F848CD251383D400A3EBBB /* ModalNewTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CC251383D400A3EBBB /* ModalNewTweet.swift */; };
 		38F848D02513841000A3EBBB /* ModalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CF2513841000A3EBBB /* ModalHeader.swift */; };
 		38F848D22513851500A3EBBB /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848D12513851500A3EBBB /* ButtonViewModel.swift */; };
@@ -139,6 +140,7 @@
 		38A738FE25103BF200ECE705 /* SceneObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneObserver.swift; sourceTree = "<group>"; };
 		38EA4FEA2513E0470053C466 /* TweetFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetFacade.swift; sourceTree = "<group>"; };
 		38EA4FEE2513E1AD0053C466 /* Update.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Update.swift; sourceTree = "<group>"; };
+		38EA4FF0251507240053C466 /* Show.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show.swift; sourceTree = "<group>"; };
 		38F848CC251383D400A3EBBB /* ModalNewTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalNewTweet.swift; sourceTree = "<group>"; };
 		38F848CF2513841000A3EBBB /* ModalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeader.swift; sourceTree = "<group>"; };
 		38F848D12513851500A3EBBB /* ButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModel.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				38475C0D24E6ED5A0003E536 /* GetUser.swift */,
 				38475C2424E6FE5E0003E536 /* UserTimeline.swift */,
 				38EA4FEE2513E1AD0053C466 /* Update.swift */,
+				38EA4FF0251507240053C466 /* Show.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 				38EA4FEB2513E0470053C466 /* TweetFacade.swift in Sources */,
 				38475C0924E6EC460003E536 /* ServerFacade.swift in Sources */,
 				38A738F825103B5500ECE705 /* ProfileTweetViewModel.swift in Sources */,
+				38EA4FF1251507240053C466 /* Show.swift in Sources */,
 				3830100D250368C8007DA26C /* FactoryApperance.swift in Sources */,
 				38475BD824E6EB6C0003E536 /* AppDelegate.swift in Sources */,
 				38475C0B24E6EC570003E536 /* DomainFacade.swift in Sources */,

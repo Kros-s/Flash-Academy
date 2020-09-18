@@ -18,9 +18,9 @@ protocol ProfileView: class {
 
 final class ProfileViewController: BaseViewController, BaseView {
     
-    lazy var presenter: ProfilePresenterProtocol = inyect()
+    lazy var presenter: ProfilePresenterProtocol = inject()
     
-    lazy var router: Router = inyect()
+    lazy var router: Router = inject()
     
     private var elements: [ProfileTableCellElement] = [] {
         didSet {

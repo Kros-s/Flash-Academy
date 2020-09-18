@@ -16,52 +16,51 @@ protocol TweetPresenterProtocol {
 
 final class TweetPresenter: BasePresenter {
     weak var view: TweetView?
-    var userFacade: UserFacadeProtocol
+    var tweetInfo: TweetFacadeProtocol
     var identifier: String?
     var apperance: FactoryApperance
     var metadata: MetaDataStorage
-    //TODO: Wrap this two into a single class and inyect as dependancy
+    var shareURL: String?
+    
+    //TODO: Wrap this two into a single class and inject as dependancy
     private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
-    init(userFacade: UserFacadeProtocol = inyect(),
+    init(tweetInfo: TweetFacadeProtocol = TweetFacade(),
          apperance: FactoryApperance = .init(),
-         metadata: MetaDataStorage = inyect()) {
+         metadata: MetaDataStorage = inject()) {
+        
+        self.tweetInfo = tweetInfo
         self.metadata = metadata
-        self.userFacade = userFacade
         self.apperance = apperance
     }
 }
 
 extension TweetPresenter: TweetPresenterProtocol {
     func sceneDidLoad() {
-        view?.configure(model: loadTweetData())
+        view?.showLoader()
+        tweetInfo.getTweetInfo(id: identifier ?? "") { [weak self] info in
+            guard let self = self else { return }
+            self.shareURL = info.entities.urls?.first?.url
+            let model = self.loadTweetData(info: info)
+            self.view?.configure(model: model)
+            self.view?.hideLoader()
+        }
     }
     
     func handleShare() {
-        guard let id = identifier,
-            let info = userFacade.retrieveTweet(id: id),
-            let metadataInfo = metadata.retrieveMediaIfNeed(for: info.entities.urls?.first?.url ?? "") else { return }
+        guard let url = shareURL,
+            let metadataInfo = metadata.retrieveMediaIfNeed(for: url) else { return }
         view?.showShareSheet(metadata: metadataInfo)
     }
 }
 
 private extension TweetPresenter {
-    func loadTweetData() -> TweetViewModel {
+    func loadTweetData(info: TimeLine) -> TweetViewModel {
         let regularApperance = apperance.makeApperance(size: 24)
         let timeApperance = apperance.makeApperance(weight: .light, size: 12, color: .gray)
         let usernameApperance = apperance.makeApperance(weight: .bold, size: 22, color: .mainBlue)
         let displayNameApperance = apperance.makeApperance(weight: .bold, size: 22, color: .mainBlack)
-        
-        guard let id = identifier,
-            let info = userFacade.retrieveTweet(id: id)
-            else {
-                assertionFailure("Should not reach this point, something wrong came by")
-                let error = LabelViewModel(text: "", appearance: regularApperance)
-                return TweetViewModel(name: error, displayName: error,
-                                      tweetText: error,
-                                      tweetTime: error)
-        }
         
         let metadataInfo = metadata.retrieveMediaIfNeed(for: info.entities.urls?.first?.url ?? "")
         

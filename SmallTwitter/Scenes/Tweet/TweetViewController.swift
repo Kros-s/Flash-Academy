@@ -10,13 +10,15 @@ import UIKit
 import LinkPresentation
 
 protocol TweetView: class {
+    func showLoader()
+    func hideLoader()
     func configure(model: TweetViewModel)
     func showShareSheet(metadata: LPLinkMetadata)
 }
 
 final class TweetViewController: BaseViewController, BaseView {
-    lazy var presenter: TweetPresenterProtocol = inyect()
-    lazy var router: Router = inyect()
+    lazy var presenter: TweetPresenterProtocol = inject()
+    lazy var router: Router = inject()
     
     var metadata: LPLinkMetadata?
     

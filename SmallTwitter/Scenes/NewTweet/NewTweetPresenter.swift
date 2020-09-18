@@ -15,9 +15,9 @@ protocol NewTweetPresenterProtocol {
 
 final class NewTweetPresenter: BasePresenter {
     weak var view: NewTweetView?
-    private var newTweet: TweetFacadeProtocol
+    private var newTweet: SendTweetFacadeProtocol
     
-    init(newTweet: TweetFacadeProtocol = TweetFacade()) {
+    init(newTweet: SendTweetFacadeProtocol = TweetFacade()) {
         self.newTweet = newTweet
     }
 }

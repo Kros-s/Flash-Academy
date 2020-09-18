@@ -46,14 +46,9 @@ extension HTTPRequest {
 
 protocol HTTPClient: class {
     var baseURL: String { get set }
-    var headersProvider: HeadersProvider? { get set }
     
     func execute<NetworkRequest: HTTPRequest>(request: NetworkRequest,
                                             completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
-}
-
-protocol HeadersProvider: class {
-    func getHeaders() -> [String: String]
 }
 
 final class URLSessionHTTPClient {
@@ -62,7 +57,6 @@ final class URLSessionHTTPClient {
     private let urlSession: URLSession
     
     var baseURL: String
-    weak var headersProvider: HeadersProvider?
     
     init(baseURL: String,
          urlSession: URLSession,
@@ -135,7 +129,7 @@ private extension URLSessionHTTPClient {
         urlRequest.httpMethod = request.method.rawValue
         urlRequest.cachePolicy = .reloadIgnoringCacheData
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        let headers = (self.headersProvider?.getHeaders() ?? [:]).merging(request.headers) { $1 }
+        let headers = request.headers
         headers.forEach { urlRequest.setValue($1, forHTTPHeaderField: $0) }
         
         if let body = request.body {

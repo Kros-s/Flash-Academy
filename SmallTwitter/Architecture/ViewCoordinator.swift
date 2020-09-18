@@ -22,13 +22,14 @@ protocol Router {
 
 final class ViewCoordinator: BaseView {
     typealias Presenter = PresenterCoordinatorProtocol
+    
     static let shared: ViewCoordinator = {
         let presenter = PresenterCoordinator()
-        let coordinador = ViewCoordinator(presenter: presenter)
-        
-        presenter.view = coordinador
-        return coordinador
+        let coordinator = ViewCoordinator(presenter: presenter)
+        presenter.view = coordinator
+        return coordinator
     }()
+    
     let presenter: PresenterCoordinatorProtocol
     let rootNavigationController: UINavigationController = .init()
     
@@ -93,10 +94,10 @@ private extension ViewCoordinator {
     }
 }
 
-// MARK: Inyect for BaseView
+// MARK: inject for BaseView
 
 extension BaseView {
-    func inyect() -> Router {
+    func inject() -> Router {
         return ViewCoordinator.shared
     }
 }

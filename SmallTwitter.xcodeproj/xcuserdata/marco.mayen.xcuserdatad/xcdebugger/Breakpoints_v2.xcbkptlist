@@ -14,8 +14,8 @@
             filePath = "SmallTwitter/Scenes/Tweet/TweetViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "156"
-            endingLineNumber = "156"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "leftButtonSelected()"
             landmarkType = "7">
          </BreakpointContent>
@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B78D9918-73B8-4D0E-A1E5-57AAF2EFA0C5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SmallTwitter/Scenes/NavigationBar/CustomNavigationBar.swift"
@@ -33,22 +33,6 @@
             startingLineNumber = "182"
             endingLineNumber = "182"
             landmarkName = "leftButtonActivated()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E36B8308-BEB7-432E-BEA5-B37A5B417A34"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SmallTwitter/Architecture/ViewCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
-            landmarkName = "goToNewTweet()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

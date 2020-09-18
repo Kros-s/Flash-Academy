@@ -15,24 +15,23 @@ protocol ProfilePresenterProtocol {
 
 final class ProfilePresenter: BasePresenter {
     weak var view: ProfileView?
-    private var userFacade: UserFacadeProtocol
+    private var timeLineProvider: UserFacadeProtocol
     private var apperance = FactoryApperance()
     private var metadata: MetaDataStorage
     
     private var metadataURL: [URL: LPLinkMetadata?] = [:]
     
-    //TODO: Wrap this two into a single class and inyect as dependancy
+    //TODO: Wrap this two into a single class and inject as dependancy
     private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
     private var userInfo: User?
     
-    //TODO: Move into a DataStorage in order to retrieve data from it
     private var timeLineInfo: [TimeLine] = []
     
-    init(userFacade: UserFacadeProtocol = inyect(),
-         metadata: MetaDataStorage = inyect()) {
-        self.userFacade = userFacade
+    init(timeLineProvider: UserFacadeProtocol = UserFacade(),
+         metadata: MetaDataStorage = inject()) {
+        self.timeLineProvider = timeLineProvider
         self.metadata = metadata
     }
 }
@@ -54,13 +53,13 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         view?.showLoader()
         let group = DispatchGroup()
         group.enter()
-        userFacade.retrieveUserInfo { [weak self] profile in
+        timeLineProvider.retrieveUserInfo { [weak self] profile in
             self?.userInfo = profile
             group.leave()
         }
         
         group.enter()
-        userFacade.retrieveUserTimeLine { [weak self] timeline in
+        timeLineProvider.retrieveUserTimeLine { [weak self] timeline in
             self?.timeLineInfo = timeline
             group.leave()
         }

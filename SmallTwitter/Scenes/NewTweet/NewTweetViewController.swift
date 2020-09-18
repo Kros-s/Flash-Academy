@@ -14,8 +14,8 @@ protocol NewTweetView: class {
 }
 
 final class NewTweetViewController: BaseViewController, BaseView {
-    lazy var presenter: NewTweetPresenterProtocol = inyect()
-    lazy var router: Router = inyect()
+    lazy var presenter: NewTweetPresenterProtocol = inject()
+    lazy var router: Router = inject()
     var modalContainer = ModalNewTweet()
 }
 

@@ -8,19 +8,23 @@
 
 import Foundation
 
-protocol TweetFacadeProtocol {
+protocol SendTweetFacadeProtocol {
     func sendTweet(_ tweet: String, completion: @escaping () -> Void)
+}
+
+protocol TweetFacadeProtocol {
+    func getTweetInfo(id: String, completion: @escaping (TimeLine) -> Void)
 }
 
 final class TweetFacade: DomainFacade {
     private let httpClient: HTTPClient
     
-    init(httpClient: HTTPClient = inyect()) {
+    init(httpClient: HTTPClient = inject()) {
         self.httpClient = httpClient
     }
 }
 
-extension TweetFacade: TweetFacadeProtocol {
+extension TweetFacade: SendTweetFacadeProtocol {
     func sendTweet(_ tweet: String, completion: @escaping () -> Void) {
         let request = Update(body: Tweet(status: tweet))
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
@@ -31,6 +35,21 @@ extension TweetFacade: TweetFacadeProtocol {
                 finishOnMainThread(())
             case .failure:
                 finishOnMainThread(())
+            }
+        }
+    }
+}
+
+extension TweetFacade: TweetFacadeProtocol {
+    func getTweetInfo(id: String, completion: @escaping (TimeLine) -> Void) {
+        let request = Show(status: id)
+        let finishOnMainThread = self.finishOnMainThread(completion: completion)
+        httpClient.execute(request: request) { response in
+            switch response.result {
+            case .success(let tweetInfo):
+                finishOnMainThread(tweetInfo)
+            case .failure:
+                break
             }
         }
     }

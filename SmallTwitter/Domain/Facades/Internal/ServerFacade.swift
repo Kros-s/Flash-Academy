@@ -9,59 +9,29 @@
 import Foundation
 
 final class ServerFacade: NSObject, DomainFacade {
-    struct Environment {
-        static let `default` = Environment.dev
-        static let dev = Environment(baseURL: "https://twitter-proxy.wize.mx/")
-        
-        fileprivate var baseURL: String
-        
-        fileprivate init(baseURL: String) {
-            self.baseURL = baseURL
-        }
-    }
+    
     static let shared = ServerFacade()
     
-    var environment: Environment {
+    var baseURL: String {
         didSet {
-            httpClient.baseURL = environment.baseURL
+            httpClient.baseURL = baseURL
         }
     }
     fileprivate lazy var httpClient: HTTPClient = {
         let urlSession = URLSession(configuration: .default,
-                                    delegate: self,
+                                    delegate: nil,
                                     delegateQueue: nil)
-        let httpClient = URLSessionHTTPClient(baseURL: self.environment.baseURL, urlSession: urlSession)
-        httpClient.headersProvider = self
+        let httpClient = URLSessionHTTPClient(baseURL: self.baseURL, urlSession: urlSession)
         return httpClient
     }()
     
-    private init(environment: Environment = .default) {
-        self.environment = environment
+    private init(baseURL: String = "https://twitter-proxy.wize.mx/") {
+        self.baseURL = baseURL
     }
 }
 
 extension DomainFacade {
-    static func inyect() -> HTTPClient {
+    static func inject() -> HTTPClient {
         return ServerFacade.shared.httpClient
-    }
-}
-
-extension ServerFacade: HeadersProvider {
-    func getHeaders() -> [String : String] {
-        let headers = [
-            "X-App-Platform": "ios",
-            "X-App-Version": Bundle.main.appVersion
-        ]
-        return headers
-    }
-}
-
-extension ServerFacade: URLSessionDelegate {
-
-}
-
-extension Bundle {
-    var appVersion: String {
-        return (infoDictionary?["CFBundleShortVersionString"] as? String) ?? ""
     }
 }
