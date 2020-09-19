@@ -15,8 +15,6 @@ class BaseViewController: UIViewController {
     }
     
     final override func viewDidLoad() {
-        self.view.backgroundColor = .white
-        setupNavigationBar()
         self.sceneObserver?.sceneDidLoad()
         super.viewDidLoad()
     }
@@ -40,7 +38,4 @@ class BaseViewController: UIViewController {
         self.sceneObserver?.sceneDidDisappear()
         super.viewDidDisappear(animated)
     }
-    
 }
-
-extension BaseViewController: NavigationBarPresentable, LoaderViewPresentable { }

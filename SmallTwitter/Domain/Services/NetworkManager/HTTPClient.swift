@@ -23,6 +23,12 @@ protocol HTTPRequest {
     var headers: [String: String] { get }
 }
 
+extension HTTPRequest {
+    var headers: [String: String] {
+        return [:]
+    }
+}
+
 struct HTTPResponse<Model> {
     enum Error: Swift.Error {
         case unknown
@@ -33,20 +39,12 @@ struct HTTPResponse<Model> {
         case serverError
         case httpError(error: Swift.Error?)
     }
-    let urlRequest: URLRequest?
     let httpResponse: HTTPURLResponse?
     let result: Result<Model, Error>
 }
 
-extension HTTPRequest {
-    var headers: [String: String] {
-        return [:]
-    }
-}
-
 protocol HTTPClient: class {
     var baseURL: String { get set }
-    
     func execute<NetworkRequest: HTTPRequest>(request: NetworkRequest,
                                             completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
 }
@@ -83,7 +81,6 @@ extension URLSessionHTTPClient: HTTPClient {
         do {
             let urlRequest = try createURLRequest(for: request)
             let task = self.urlSession.dataTask(with: urlRequest) { [weak self] (data, urlResponse, error) in
-                factoryResponse.urlRequest = urlRequest
                 guard
                     let self = self,
                     let httpResponse = urlResponse as? HTTPURLResponse
@@ -151,7 +148,6 @@ private extension URLSessionHTTPClient {
         error: Error?) -> HTTPResponse<NetworkRequest.Response>
     {
         let factoryResponse = HTTPFactoryResponse<NetworkRequest>()
-        factoryResponse.urlRequest = urlRequest
         factoryResponse.httpResponse = httpResponse
         
         switch (error: error, data: data) {
@@ -169,23 +165,6 @@ private extension URLSessionHTTPClient {
         case (error: .none, data: .none):
             return factoryResponse.createFailureResponse(error: .serverError)
         }
-    }
-}
-
-private final class HTTPFactoryResponse<NetworkRequest: HTTPRequest> {
-    var urlRequest: URLRequest?
-    var httpResponse: HTTPURLResponse?
-    
-    func createSuccessfulResponse(response: NetworkRequest.Response) -> HTTPResponse<NetworkRequest.Response> {
-        return .init(urlRequest: urlRequest,
-                     httpResponse: httpResponse,
-                     result: .success(response))
-    }
-    
-    func createFailureResponse(error: HTTPResponse<NetworkRequest.Response>.Error) -> HTTPResponse<NetworkRequest.Response> {
-        return .init(urlRequest: urlRequest,
-                     httpResponse: httpResponse,
-                     result: .failure(error))
     }
 }
 

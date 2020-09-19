@@ -126,6 +126,8 @@ extension TweetViewController: TweetView {
 
 private extension TweetViewController {
     func setup(model: TweetViewModel) {
+        view.backgroundColor = .white
+        setupNavigationBar()
         setNavBar(delegate: self)
         configureNavBar(viewModel: .TweetView)
         tweet.configure(model: model.tweetText)
@@ -173,3 +175,5 @@ extension TweetViewController: UIActivityItemSource {
     }
     
 }
+
+extension TweetViewController: NavigationBarPresentable, LoaderViewPresentable { }

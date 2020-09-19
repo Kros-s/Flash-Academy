@@ -54,6 +54,7 @@ extension ProfileViewController: ProfileView {
     
     func configure(with model: ProfileViewModel) {
         view.backgroundColor = .softBlue
+        setupNavigationBar()
         setNavBar(delegate: self)
         configureNavBar(viewModel: .GeneralView)
         configureRightItem(model: model.navBarRightItem)
@@ -102,3 +103,5 @@ extension ProfileViewController: DelegateCustomNavigationBar {
         presenter.handleTapNewTweet()
     }
 }
+
+extension ProfileViewController: NavigationBarPresentable, LoaderViewPresentable { }
