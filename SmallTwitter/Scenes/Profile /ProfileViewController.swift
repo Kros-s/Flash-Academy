@@ -19,33 +19,55 @@ protocol ProfileView: class {
 final class ProfileViewController: BaseViewController, BaseView {
     
     lazy var presenter: ProfilePresenterProtocol = inject()
-    
     lazy var router: Router = inject()
+    private lazy var dismissAction: () -> Void = { [weak self] in
+        self?.presenter.handleNewTweetAdded()
+    }
+    
+    private var profileTable = UITableView()
     
     private var elements: [ProfileTableCellElement] = [] {
         didSet {
             profileTable.reloadData()
         }
     }
+}
+
+private extension ProfileViewController {
     
-    lazy var profileTable: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = .softBlue
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.layoutMargins = .zero
-        table.separatorInset = .zero
-        table.separatorStyle = .none
-        table.rowHeight = UITableView.automaticDimension
-        table.indicatorStyle = .white
-        table.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
-        table.register(TimeLineTableViewCell.self, forCellReuseIdentifier: "TimeLineTableViewCell")
-        return table
-    }()
+    func configureProfileTable() {
+        profileTable.backgroundColor = .softBlue
+        profileTable.translatesAutoresizingMaskIntoConstraints = false
+        profileTable.layoutMargins = .zero
+        profileTable.separatorInset = .zero
+        profileTable.separatorStyle = .none
+        profileTable.rowHeight = UITableView.automaticDimension
+        profileTable.indicatorStyle = .white
+        profileTable.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
+        profileTable.register(TimeLineTableViewCell.self, forCellReuseIdentifier: "TimeLineTableViewCell")
+        profileTable.delegate = self
+        profileTable.dataSource = self
+        view.addSubview(profileTable)
+        NSLayoutConstraint.activate([
+            profileTable.topAnchor.constraint(equalTo: navigationBarBottomAnchor, constant: 8.0),
+            profileTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
+            profileTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.0),
+            profileTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+        ])
+    }
+    
+    func configureNavigationBar(button: ButtonViewModel) {
+        setupNavigationBar()
+        setNavBar(delegate: self)
+        configureNavBar(viewModel: .GeneralView)
+        configureRightItem(model: button)
+        isNavBarVisible(true)
+    }
 }
 
 extension ProfileViewController: ProfileView {
     func goToNewTweet() {
-        router.tapOnNewTweet()
+        router.tapOnNewTweet(action: dismissAction)
     }
     
     func update(model: ProfileViewModel) {
@@ -54,23 +76,9 @@ extension ProfileViewController: ProfileView {
     
     func configure(with model: ProfileViewModel) {
         view.backgroundColor = .softBlue
-        setupNavigationBar()
-        setNavBar(delegate: self)
-        configureNavBar(viewModel: .GeneralView)
-        configureRightItem(model: model.navBarRightItem)
-        isNavBarVisible(true)
-        profileTable.delegate = self
-        profileTable.dataSource = self
+        configureProfileTable()
+        configureNavigationBar(button: model.navBarRightItem)
         elements = model.element
-        
-        view.addSubview(profileTable)
-        
-        NSLayoutConstraint.activate([
-            profileTable.topAnchor.constraint(equalTo: navigationBarBottomAnchor, constant: 8.0),
-            profileTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
-            profileTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.0),
-            profileTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-        ])
     }
 }
 
@@ -80,7 +88,6 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let factory = ProfileVisitor(tableView: tableView, indexPath: indexPath)
         let cell = factory.createCell(element: elements[indexPath.row])
         cell.selectionStyle = .none

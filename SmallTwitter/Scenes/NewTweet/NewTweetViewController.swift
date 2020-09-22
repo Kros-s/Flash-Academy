@@ -22,6 +22,7 @@ final class NewTweetViewController: BaseViewController, BaseView {
 extension NewTweetViewController: NewTweetView {
     func dismissView() {
         dismiss(animated: true)
+        presenter.dismissAction?()
     }
     
     func configure(model: NewTweetViewModel) {

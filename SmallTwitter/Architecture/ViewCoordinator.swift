@@ -9,15 +9,17 @@
 import Foundation
 import UIKit
 
+typealias TriggerAction = (() -> Void)?
+
 protocol ViewCordinatorProtocol: class {
     func goToProfile()
     func goToSingleTweet(id: String)
-    func goToNewTweet()
+    func goToNewTweet(action: TriggerAction)
 }
 
 protocol Router {
     func tapOnTweet(id: String)
-    func tapOnNewTweet()
+    func tapOnNewTweet(action: TriggerAction)
 }
 
 final class ViewCoordinator: BaseView {
@@ -51,8 +53,8 @@ extension ViewCoordinator {
 }
 
 extension ViewCoordinator: Router {
-    func tapOnNewTweet() {
-        presenter.handleNewTweet()
+    func tapOnNewTweet(action: TriggerAction) {
+        presenter.handleNewTweet(action: action)
     }
     
     func tapOnTweet(id: String) {
@@ -61,8 +63,9 @@ extension ViewCoordinator: Router {
 }
 
 extension ViewCoordinator: ViewCordinatorProtocol {
-    func goToNewTweet() {
+    func goToNewTweet(action: TriggerAction) {
         let viewController = NewTweetViewController()
+        viewController.presenter.dismissAction = action
         viewController.modalPresentationStyle = .overCurrentContext
         viewController.modalTransitionStyle = .crossDissolve
         present(controller: viewController)

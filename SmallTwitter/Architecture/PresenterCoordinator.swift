@@ -11,7 +11,7 @@ import Foundation
 protocol PresenterCoordinatorProtocol {
     func handleAppBegin()
     func handleTapOnTweet(id: String)
-    func handleNewTweet()
+    func handleNewTweet(action: TriggerAction)
 }
 
 final class PresenterCoordinator: BasePresenter {
@@ -34,7 +34,7 @@ extension PresenterCoordinator: PresenterCoordinatorProtocol {
         view?.goToProfile()
     }
     
-    func handleNewTweet() {
-        view?.goToNewTweet()
+    func handleNewTweet(action: TriggerAction) {
+        view?.goToNewTweet(action: action)
     }
 }

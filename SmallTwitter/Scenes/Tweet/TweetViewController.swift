@@ -20,69 +20,19 @@ final class TweetViewController: BaseViewController, BaseView {
     lazy var presenter: TweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     
-    var metadata: LPLinkMetadata?
+    private var metadata: LPLinkMetadata?
     
-    //TODO: Compress into a view
-    lazy var mainStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 20
-        stack.addArrangedSubview(profileItemsStack)
-        stack.addArrangedSubview(tweet)
-        return stack
-    }()
-    
-    lazy var profileItemsStack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .horizontal
-        stack.spacing = 20
-        stack.addArrangedSubview(profileImage)
-        stack.addArrangedSubview(profileDataStack)
-        return stack
-    }()
-    
-    lazy var profileDataStack: TitleSubtitleStack = {
-        let stack = TitleSubtitleStack()
-        stack.distribution = .fillEqually
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+    private var mainStackView = UIStackView()
+    private var profileItemsStack = UIStackView()
+    private var profileDataStack =  TitleSubtitleStack()
+    private var tweet = UILabel()
+    private var profileImage = UIImageView()
+    private var optionsHolder = UIStackView()
     
     lazy var linkView: LPLinkView = {
         let viewer = LPLinkView()
         viewer.translatesAutoresizingMaskIntoConstraints = false
         return viewer
-    }()
-    
-    lazy var profileImage: UIImageView = {
-        let image = UIImage()
-        let imageView = UIImageView(image: image)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.cornerRadius = Metrics.imageSize / 2
-        imageView.layer.borderWidth = 2
-        imageView.layer.borderColor = UIColor.mainBlue.cgColor
-        imageView.layer.masksToBounds = false
-        imageView.clipsToBounds = true
-        imageView.contentMode = .scaleAspectFit
-        return imageView
-    }()
-    
-    lazy var tweet: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    lazy var optionsHolder: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .trailing
-        stack.addArrangedSubview(shareButton)
-        return stack
     }()
     
     lazy var shareButton: UIButton = {
@@ -108,15 +58,17 @@ extension TweetViewController: TweetView {
     }
     
     func configure(model: TweetViewModel) {
-        view.addSubview(mainStackView)
+        
         setup(model: model)
+        configureMainStack()
+        configureProfileItems()
+        configureProfileImage()
+        configureOptionsHolder()
+        
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.padding),
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.padding),
             mainStackView.topAnchor.constraint(equalTo: navigationBarBottomAnchor),
-            
-            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: 1.0),
-            profileImage.widthAnchor.constraint(equalToConstant: Metrics.imageSize),
             
             shareButton.heightAnchor.constraint(equalToConstant: 50),
             shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor, multiplier: 1)
@@ -125,6 +77,60 @@ extension TweetViewController: TweetView {
 }
 
 private extension TweetViewController {
+    func configureOptionsHolder() {
+        optionsHolder.translatesAutoresizingMaskIntoConstraints = false
+        optionsHolder.axis = .vertical
+        optionsHolder.alignment = .trailing
+        optionsHolder.addArrangedSubview(shareButton)
+    }
+    
+    func configureTweetLabel(){
+        tweet.translatesAutoresizingMaskIntoConstraints = false
+        tweet.numberOfLines = 0
+    }
+    
+    func configureProfileImage() {
+        profileImage.translatesAutoresizingMaskIntoConstraints = false
+        profileImage.layer.cornerRadius = Metrics.imageSize / 2
+        profileImage.layer.borderWidth = 2
+        profileImage.layer.borderColor = UIColor.mainBlue.cgColor
+        profileImage.layer.masksToBounds = false
+        profileImage.clipsToBounds = true
+        profileImage.contentMode = .scaleAspectFit
+    }
+    
+    func configureProfileData() {
+        profileDataStack.distribution = .fillEqually
+        profileDataStack.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func configureProfileItems() {
+        profileItemsStack.translatesAutoresizingMaskIntoConstraints = false
+        profileItemsStack.axis = .horizontal
+        profileItemsStack.spacing = 20
+        profileItemsStack.addArrangedSubview(profileImage)
+        profileItemsStack.addArrangedSubview(profileDataStack)
+        NSLayoutConstraint.activate([
+            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: 1.0),
+            profileImage.widthAnchor.constraint(equalToConstant: Metrics.imageSize),
+        ])
+    }
+    
+    func configureMainStack() {
+        mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        mainStackView.axis = .vertical
+        mainStackView.spacing = 20
+        mainStackView.addArrangedSubview(profileItemsStack)
+        mainStackView.addArrangedSubview(tweet)
+        view.addSubview(mainStackView)
+        
+        NSLayoutConstraint.activate([
+            mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.padding),
+            mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.padding),
+            mainStackView.topAnchor.constraint(equalTo: navigationBarBottomAnchor),
+        ])
+    }
+    
     func setup(model: TweetViewModel) {
         view.backgroundColor = .white
         setupNavigationBar()

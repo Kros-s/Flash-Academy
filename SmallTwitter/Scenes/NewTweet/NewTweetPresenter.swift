@@ -9,6 +9,7 @@
 import Foundation
 
 protocol NewTweetPresenterProtocol {
+    var dismissAction: TriggerAction { get set }
     func handleNewTweet(tweet: String)
     func handleCancel()
 }
@@ -16,6 +17,11 @@ protocol NewTweetPresenterProtocol {
 final class NewTweetPresenter: BasePresenter {
     weak var view: NewTweetView?
     private var newTweet: SendTweetFacadeProtocol
+    var dismissAction: TriggerAction = nil
+    
+    deinit {
+        dismissAction = nil
+    }
     
     init(newTweet: SendTweetFacadeProtocol = TweetFacade()) {
         self.newTweet = newTweet

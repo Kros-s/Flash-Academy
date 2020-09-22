@@ -11,6 +11,7 @@ import LinkPresentation
 
 protocol ProfilePresenterProtocol {
     func handleTapNewTweet()
+    func handleNewTweetAdded()
 }
 
 final class ProfilePresenter: BasePresenter {
@@ -37,6 +38,10 @@ final class ProfilePresenter: BasePresenter {
 }
 
 extension ProfilePresenter: ProfilePresenterProtocol {
+    func handleNewTweetAdded() {
+        reloadView()
+    }
+    
     func handleTapNewTweet() {
         view?.goToNewTweet()
     }
