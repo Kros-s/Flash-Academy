@@ -60,6 +60,7 @@ private extension ModalNewTweet {
     
     func configureTextView() {
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.addDoneButtonOnKeyboard()
         textView.text = "What's Going on?"
         layer.cornerRadius = Metrics.cornerRadious
         NSLayoutConstraint.activate([

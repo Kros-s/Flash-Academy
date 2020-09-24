@@ -54,7 +54,7 @@ private extension NewTweetPresenter {
     func createHeaderViewModel() -> ModalHeaderViewModel {
         let apperanceHeader = LabelAppearance(font: .openSansBold(size: 18), textColor: .mainBlue)
         
-        let headerTitle = LabelViewModel(text:"Escribe tu tweet", appearance: apperanceHeader)
+        let headerTitle = LabelViewModel(text:"What are you thinking?", appearance: apperanceHeader)
         var buttonHeader: ButtonViewModel = .init(titles: [.normal(value: "X")],
                                                   style: .init(fontTitle: .openSansBold(size: 16),
                                                                titleColor: [.normal(value: .darkGray)],
@@ -65,7 +65,7 @@ private extension NewTweetPresenter {
     }
     
     func createButtonViewModel() -> ButtonViewModel {
-        .createRoundedBlueButton(title: "Enviar")
+        .createRoundedBlueButton(title: "Send")
     }
 }
 

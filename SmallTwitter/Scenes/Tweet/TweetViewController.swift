@@ -68,6 +68,7 @@ extension TweetViewController: TweetView {
         configureMainStack()
         configureProfileItems()
         configureProfileImage()
+        configureTweetLabel()
         configureOptionsHolder()
         configureLinkView(model: model)
         
