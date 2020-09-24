@@ -50,10 +50,6 @@ extension ProfilePresenter: ProfilePresenterProtocol {
         reloadView()
     }
     
-    func sceneWillAppear() {
-        reloadView()
-    }
-    
     func reloadView() {
         view?.showLoader()
         let group = DispatchGroup()

@@ -46,7 +46,7 @@ struct HTTPResponse<Model> {
 protocol HTTPClient: class {
     var baseURL: String { get set }
     func execute<NetworkRequest: HTTPRequest>(request: NetworkRequest,
-                                            completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
+                                              completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
 }
 
 final class URLSessionHTTPClient {
@@ -84,27 +84,27 @@ extension URLSessionHTTPClient: HTTPClient {
                 guard
                     let self = self,
                     let httpResponse = urlResponse as? HTTPURLResponse
-                else {
-                    let noInternetConnection = (error as NSError?)?.code == NSURLErrorNotConnectedToInternet
-                    completion(factoryResponse.createFailureResponse(error: noInternetConnection ? .noInternetConnection : .unknown))
-                    return
+                    else {
+                        let noInternetConnection = (error as NSError?)?.code == NSURLErrorNotConnectedToInternet
+                        completion(factoryResponse.createFailureResponse(error: noInternetConnection ? .noInternetConnection : .unknown))
+                        return
                 }
                 factoryResponse.httpResponse = httpResponse
                 
                 guard Constants.httpSuccesfulRange.contains(httpResponse.statusCode) else {
                     if let data = data,
                         let json = try? JSONSerialization.jsonObject(with: data, options: []) {
-                         print("[DEBUG] Error Response: \(json)")
+                        print("[DEBUG] Error Response: \(json)")
                     }
-                   
+                    
                     completion(factoryResponse.createFailureResponse(error: .httpError(error: error)))
                     return
                 }
                 
                 completion(self.decodeResponse(request: request,
-                                                        urlRequest: urlRequest,
-                                                        httpResponse: httpResponse,
-                                                        data: data, error: error))
+                                               urlRequest: urlRequest,
+                                               httpResponse: httpResponse,
+                                               data: data, error: error))
             }
             task.resume()
         } catch {

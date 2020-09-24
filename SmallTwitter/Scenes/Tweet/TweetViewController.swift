@@ -64,6 +64,7 @@ extension TweetViewController: TweetView {
         configureProfileItems()
         configureProfileImage()
         configureOptionsHolder()
+        configureLinkView(model: model)
         
         NSLayoutConstraint.activate([
             mainStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.padding),
@@ -77,6 +78,21 @@ extension TweetViewController: TweetView {
 }
 
 private extension TweetViewController {
+    func configureLinkView(model: TweetViewModel) {
+        if let metadata = model.linkData {
+            self.metadata = metadata
+            linkView = LPLinkView(metadata: metadata)
+            mainStackView.addArrangedSubview(linkView)
+            mainStackView.addArrangedSubview(optionsHolder)
+        }
+        
+        if let url = model.profileURL {
+            profileImage.downloadImage(from: url)
+        } else {
+            profileImage.backgroundColor = .black
+        }
+    }
+    
     func configureOptionsHolder() {
         optionsHolder.translatesAutoresizingMaskIntoConstraints = false
         optionsHolder.axis = .vertical
@@ -138,20 +154,6 @@ private extension TweetViewController {
         configureNavBar(viewModel: .TweetView)
         tweet.configure(model: model.tweetText)
         profileDataStack.configure(title: model.displayName, subtitle: model.name)
-        
-        if let metadata = model.linkData {
-            self.metadata = metadata
-            linkView = LPLinkView(metadata: metadata)
-            mainStackView.addArrangedSubview(linkView)
-            mainStackView.addArrangedSubview(optionsHolder)
-        }
-        
-        if let url = model.profileURL {
-            profileImage.downloadImage(from: url)
-        } else {
-            profileImage.backgroundColor = .black
-        }
-        
         isNavBarVisible(true)
         showLeftButton(true)
     }
