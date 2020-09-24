@@ -13,7 +13,7 @@ protocol BasePresenter: class, SceneObserver {
 }
 
 //MARK: Base View definition for MVP
-protocol BaseView: SceneController {
+protocol BaseView {
     associatedtype Presenter
     var presenter: Presenter { get }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Update: HTTPRequest {
+struct NewTweetRequest: HTTPRequest {
     typealias Response = ResponseNull
     
     var urlPath: String = "/api/statuses/update"

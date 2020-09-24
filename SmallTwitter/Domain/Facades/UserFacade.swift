@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol UserFacadeProtocol {
+protocol UserService {
     func retrieveUserInfo(completion: @escaping (User?) -> Void)
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void)
     func retrieveTweet(id: String) -> TimeLine?
@@ -24,14 +24,14 @@ final class UserFacade: DomainFacade {
     }
 }
 
-extension UserFacade: UserFacadeProtocol {
+extension UserFacade: UserService {
     
     func retrieveTweet(id: String) -> TimeLine? {
         return lastTimeLine.first { $0.id_str == id }
     }
     
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void) {
-        let request = UserTimeline()
+        let request = UserTimelineRequest()
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         //Need to load other data
         
@@ -48,7 +48,7 @@ extension UserFacade: UserFacadeProtocol {
     }
     
     func retrieveUserInfo(completion: @escaping (User?) -> Void) {
-        let request = GetUser()
+        let request = GetUserRequest()
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         
         //Need to load other data

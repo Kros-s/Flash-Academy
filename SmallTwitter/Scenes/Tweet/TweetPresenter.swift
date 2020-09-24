@@ -16,7 +16,7 @@ protocol TweetPresenterProtocol {
 
 final class TweetPresenter: BasePresenter {
     weak var view: TweetView?
-    var tweetInfo: TweetFacadeProtocol
+    var tweetInfo: GetInfoService
     var identifier: String?
     var apperance: FactoryApperance
     var metadata: MetaDataStorage
@@ -26,7 +26,7 @@ final class TweetPresenter: BasePresenter {
     private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
-    init(tweetInfo: TweetFacadeProtocol = TweetFacade(),
+    init(tweetInfo: GetInfoService = TweetService(),
          apperance: FactoryApperance = .init(),
          metadata: MetaDataStorage = inject()) {
         

@@ -16,7 +16,7 @@ protocol ProfileView: class {
     func goToNewTweet()
 }
 
-final class ProfileViewController: BaseViewController, BaseView {
+final class ProfileViewController: UIViewController, BaseView {
     
     lazy var presenter: ProfilePresenterProtocol = inject()
     lazy var router: Router = inject()
@@ -30,6 +30,11 @@ final class ProfileViewController: BaseViewController, BaseView {
         didSet {
             profileTable.reloadData()
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        observer?.sceneDidLoad()
     }
 }
 

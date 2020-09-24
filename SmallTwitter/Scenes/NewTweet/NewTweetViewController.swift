@@ -13,10 +13,15 @@ protocol NewTweetView: class {
     func dismissView()
 }
 
-final class NewTweetViewController: BaseViewController, BaseView {
+final class NewTweetViewController: UIViewController, BaseView {
     lazy var presenter: NewTweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     var modalContainer = ModalNewTweet()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        observer?.sceneDidLoad()
+    }
 }
 
 extension NewTweetViewController: NewTweetView {

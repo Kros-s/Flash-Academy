@@ -27,14 +27,14 @@ final class PresenterCoordinator: BasePresenter {
 
 extension PresenterCoordinator: PresenterCoordinatorProtocol {
     func handleTapOnTweet(id: String) {
-        view?.goToSingleTweet(id: id)
+        view?.showDetailTweet(id: id)
     }
     
     func handleAppBegin() {
-        view?.goToProfile()
+        view?.showProfileView()
     }
     
     func handleNewTweet(action: TriggerAction) {
-        view?.goToNewTweet(action: action)
+        view?.showNewTweetView(action: action)
     }
 }

@@ -16,7 +16,7 @@ protocol ProfilePresenterProtocol {
 
 final class ProfilePresenter: BasePresenter {
     weak var view: ProfileView?
-    private var timeLineProvider: UserFacadeProtocol
+    private var timeLineProvider: UserService
     private var apperance = FactoryApperance()
     private var metadata: MetaDataStorage
     
@@ -30,7 +30,7 @@ final class ProfilePresenter: BasePresenter {
     
     private var timeLineInfo: [TimeLine] = []
     
-    init(timeLineProvider: UserFacadeProtocol = UserFacade(),
+    init(timeLineProvider: UserService = UserFacade(),
          metadata: MetaDataStorage = inject()) {
         self.timeLineProvider = timeLineProvider
         self.metadata = metadata

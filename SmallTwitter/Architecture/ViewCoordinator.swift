@@ -12,9 +12,9 @@ import UIKit
 typealias TriggerAction = (() -> Void)?
 
 protocol ViewCordinatorProtocol: class {
-    func goToProfile()
-    func goToSingleTweet(id: String)
-    func goToNewTweet(action: TriggerAction)
+    func showProfileView()
+    func showDetailTweet(id: String)
+    func showNewTweetView(action: TriggerAction)
 }
 
 protocol Router {
@@ -63,7 +63,7 @@ extension ViewCoordinator: Router {
 }
 
 extension ViewCoordinator: ViewCordinatorProtocol {
-    func goToNewTweet(action: TriggerAction) {
+    func showNewTweetView(action: TriggerAction) {
         let viewController = NewTweetViewController()
         viewController.presenter.dismissAction = action
         viewController.modalPresentationStyle = .overCurrentContext
@@ -71,13 +71,13 @@ extension ViewCoordinator: ViewCordinatorProtocol {
         present(controller: viewController)
     }
     
-    func goToSingleTweet(id: String) {
+    func showDetailTweet(id: String) {
         let view = TweetViewController()
         view.presenter.identifier = id
         goTo(controller: view)
     }
     
-    func goToProfile() {
+    func showProfileView() {
         goTo(controller: ProfileViewController())
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Show: HTTPRequest {
+struct DetailTweetRequest: HTTPRequest {
     typealias Body = Request
     typealias Response = TimeLine
 

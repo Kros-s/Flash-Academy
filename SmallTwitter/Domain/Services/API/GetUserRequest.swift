@@ -1,5 +1,5 @@
 //
-//  UserTimeline.swift
+//  User.swift
 //  SmallTwitter
 //
 //  Created by Marco Antonio Mayen Hernandez on 14/08/20.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct UserTimeline: HTTPRequest {
-    typealias Response = [TimeLine]
+struct GetUserRequest: HTTPRequest {
+    typealias Response = User
     struct Body: Codable { }
     
-    var urlPath: String = "/api/statuses/user_timeline"
+    var urlPath: String = "/api/user"
     var method: HTTPMethod = .get
     var body: Body?
 }

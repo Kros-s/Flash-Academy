@@ -16,7 +16,7 @@ protocol TweetView: class {
     func showShareSheet(metadata: LPLinkMetadata)
 }
 
-final class TweetViewController: BaseViewController, BaseView {
+final class TweetViewController: UIViewController, BaseView {
     lazy var presenter: TweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     
@@ -44,6 +44,11 @@ final class TweetViewController: BaseViewController, BaseView {
         button.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
         return button
     }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        observer?.sceneDidLoad()
+    }
 }
 
 extension TweetViewController: TweetView {

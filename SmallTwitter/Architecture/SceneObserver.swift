@@ -8,23 +8,10 @@
 
 import Foundation
 
-//MARK: This one works as a Decorator for SceneObserver
-protocol SceneController {
-    var observer: SceneObserver? { get }
-}
-
 protocol SceneObserver {
     func sceneDidLoad()
-    func sceneWillAppear()
-    func sceneDidAppear()
-    func sceneWillDisappear()
-    func sceneDidDisappear()
 }
 
 extension SceneObserver {
     func sceneDidLoad() {}
-    func sceneWillAppear() {}
-    func sceneDidAppear() {}
-    func sceneWillDisappear() {}
-    func sceneDidDisappear() {}
 }

@@ -16,14 +16,14 @@ protocol NewTweetPresenterProtocol {
 
 final class NewTweetPresenter: BasePresenter {
     weak var view: NewTweetView?
-    private var newTweet: SendTweetFacadeProtocol
+    private var newTweet: SendService
     var dismissAction: TriggerAction = nil
     
     deinit {
         dismissAction = nil
     }
     
-    init(newTweet: SendTweetFacadeProtocol = TweetFacade()) {
+    init(newTweet: SendService = TweetService()) {
         self.newTweet = newTweet
     }
 }
