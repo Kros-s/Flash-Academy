@@ -37,7 +37,7 @@ final class ProfileViewController: UIViewController, BaseView {
         observer?.sceneDidLoad()
     }
 }
-
+ 
 private extension ProfileViewController {
     
     func configureProfileTable() {

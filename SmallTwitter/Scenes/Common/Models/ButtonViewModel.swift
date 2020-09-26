@@ -67,8 +67,7 @@ struct StyleButton {
          borderColor: UIColor? = nil,
          borderWidth: CGFloat? = nil,
          roundedBorder: CGFloat? = nil,
-         underline: Bool = false
-    ) {
+         underline: Bool = false) {
         self.fontTitle = fontTitle
         self.titleColor = titleColor
         self.backgroundColor = backgroundColor
@@ -83,14 +82,14 @@ struct StyleButton {
 extension UIButton {
     func configure(model: ButtonViewModel) {
         model.titles.forEach { self.setTitle($0.value, for: $0.state) }
-        self.isEnabled = model.isEnabled
-        self.isSelected = model.isSelected
-        self.isHidden = model.isHidden
-        self.configure(style: model.style)
+        isEnabled = model.isEnabled
+        isSelected = model.isSelected
+        isHidden = model.isHidden
+        configure(style: model.style)
     }
     
     func configure(style: StyleButton) {
-        self.titleLabel?.font = style.fontTitle
+        titleLabel?.font = style.fontTitle
         style.titleColor.forEach { self.setTitleColor($0.value, for: $0.state) }
         backgroundColor = style.backgroundColor
         layer.borderColor = style.borderColor?.cgColor
@@ -106,9 +105,13 @@ extension UIButton {
 }
 
 extension ButtonViewModel {
-    static func createRoundedBlueButton(title: String, isEnabled: Bool = true) -> ButtonViewModel {
-        let titles:[ValueState<String>] = [.normal(value: title), .disabled(value: title)]
-        let colorStates: [ValueState<UIColor>] =  [.normal(value: .softBlue), .disabled(value: .gray)]
+    static func createRoundedBlueButton(title: String,
+                                        isEnabled: Bool = true) -> ButtonViewModel {
+        
+        let titles:[ValueState<String>] = [.normal(value: title),
+                                           .disabled(value: title)]
+        let colorStates: [ValueState<UIColor>] =  [.normal(value: .softBlue),
+                                                   .disabled(value: .gray)]
         
         let style = StyleButton(fontTitle: .systemFont(ofSize: 17),
                                       titleColor: colorStates,
