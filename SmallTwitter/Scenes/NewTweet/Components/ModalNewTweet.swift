@@ -62,9 +62,12 @@ private extension ModalNewTweet {
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.addDoneButtonOnKeyboard()
         textView.text = "What's Going on?"
-        layer.cornerRadius = Metrics.cornerRadious
+        textView.layer.cornerRadius = 8
+        textView.layer.borderWidth = 0.5
+        textView.layer.borderColor = UIColor.lightGray.cgColor
+        
         NSLayoutConstraint.activate([
-            textView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Metrics.topMargin),
+            textView.topAnchor.constraint(equalTo: header.bottomAnchor, constant: Metrics.halfTopMargin),
             textView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Metrics.lateralMargin),
             textView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Metrics.lateralMargin),
             textView.bottomAnchor.constraint(equalTo: footerButton.topAnchor, constant: -Metrics.halfTopMargin),
@@ -72,6 +75,8 @@ private extension ModalNewTweet {
     }
     
     func commonInit() {
+        layer.cornerRadius = Metrics.cornerRadious
+        
         addSubview(header)
         addSubview(textView)
         addSubview(footerButton)

@@ -24,6 +24,7 @@
 		38301027250369CA007DA26C /* UIFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38301026250369CA007DA26C /* UIFont.swift */; };
 		383FE3EE250BF8AF0022CE65 /* ScreenLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */; };
 		383FE3F0250BFD780022CE65 /* DependencyInjectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */; };
+		38455A51251EE6340085D259 /* KeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38455A50251EE6340085D259 /* KeyboardHandler.swift */; };
 		38475BD824E6EB6C0003E536 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BD724E6EB6C0003E536 /* AppDelegate.swift */; };
 		38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BD924E6EB6C0003E536 /* SceneDelegate.swift */; };
 		38475BE124E6EB6F0003E536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38475BE024E6EB6F0003E536 /* Assets.xcassets */; };
@@ -98,6 +99,7 @@
 		38301026250369CA007DA26C /* UIFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFont.swift; sourceTree = "<group>"; };
 		383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenLoader.swift; sourceTree = "<group>"; };
 		383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjectionManager.swift; sourceTree = "<group>"; };
+		38455A50251EE6340085D259 /* KeyboardHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandler.swift; sourceTree = "<group>"; };
 		38475BD424E6EB6C0003E536 /* SmallTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmallTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38475BD724E6EB6C0003E536 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38475BD924E6EB6C0003E536 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -366,6 +368,7 @@
 				38301026250369CA007DA26C /* UIFont.swift */,
 				3886CDA12509552800916876 /* DateFormatter.swift */,
 				3856184F251CCF7E00A20BA9 /* UITextView.swift */,
+				38455A50251EE6340085D259 /* KeyboardHandler.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -571,6 +574,7 @@
 				3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */,
 				38A738FB25103B9600ECE705 /* ProfileTableCellElement.swift in Sources */,
 				38475C0524E6EC240003E536 /* HTTPClient.swift in Sources */,
+				38455A51251EE6340085D259 /* KeyboardHandler.swift in Sources */,
 				38301027250369CA007DA26C /* UIFont.swift in Sources */,
 				38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */,
 				38F848CD251383D400A3EBBB /* ModalNewTweet.swift in Sources */,

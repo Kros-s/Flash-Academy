@@ -22,6 +22,10 @@ final class NewTweetViewController: UIViewController, BaseView {
         super.viewDidLoad()
         observer?.sceneDidLoad()
     }
+    
+    deinit {
+        removeKeyboardHandler()
+    }
 }
 
 extension NewTweetViewController: NewTweetView {
@@ -31,11 +35,15 @@ extension NewTweetViewController: NewTweetView {
     }
     
     func configure(model: NewTweetViewModel) {
+        setKeyboardHandler()
+        
         view.backgroundColor = .modalBackground
         view.addSubview(modalContainer)
         configureModalContainer(model: model)
     }
 }
+
+extension NewTweetViewController: KeyboardHandler { }
 
 private extension NewTweetViewController {
     func configureModalContainer(model: NewTweetViewModel) {
@@ -54,5 +62,13 @@ private extension NewTweetViewController {
     
     @objc func handleContinue() {
         presenter.handleNewTweet(tweet: modalContainer.textView.text)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -150
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0
     }
 }
