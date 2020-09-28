@@ -16,7 +16,7 @@ protocol GetInfoService {
     func getTweetInfo(id: String, completion: @escaping (TimeLine) -> Void)
 }
 
-final class TweetService: DomainFacade {
+final class TweetService: Domain {
     private let httpClient: Service
     
     init(httpClient: Service = HTTPProvider()) {

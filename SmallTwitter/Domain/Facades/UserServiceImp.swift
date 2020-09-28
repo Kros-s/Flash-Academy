@@ -1,5 +1,5 @@
 //
-//  UserFacade.swift
+//  UserServiceImp.swift
 //  SmallTwitter
 //
 //  Created by Marco Antonio Mayen Hernandez on 14/08/20.
@@ -14,7 +14,7 @@ protocol UserService {
     func retrieveTweet(id: String) -> TimeLine?
 }
 
-final class UserFacade: DomainFacade {
+final class UserServiceImp: Domain {
     private let httpclient: Service
     
     private var lastTimeLine: [TimeLine] = []
@@ -24,7 +24,7 @@ final class UserFacade: DomainFacade {
     }
 }
 
-extension UserFacade: UserService {
+extension UserServiceImp: UserService {
     
     func retrieveTweet(id: String) -> TimeLine? {
         return lastTimeLine.first { $0.id_str == id }

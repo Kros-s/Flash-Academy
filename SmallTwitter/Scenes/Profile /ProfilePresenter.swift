@@ -30,7 +30,7 @@ final class ProfilePresenter: Presenter {
     
     private var timeLineInfo: [TimeLine] = []
     
-    init(timeLineProvider: UserService = UserFacade(),
+    init(timeLineProvider: UserService = UserServiceImp(),
          metadata: MetaDataStorage = inject()) {
         self.timeLineProvider = timeLineProvider
         self.metadata = metadata
