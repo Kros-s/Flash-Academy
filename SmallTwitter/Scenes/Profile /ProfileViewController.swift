@@ -33,8 +33,8 @@ final class ProfileViewController: UIViewController, PresentationView {
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         observer?.sceneDidLoad()
+        super.viewDidLoad()
     }
 }
  
@@ -81,8 +81,8 @@ extension ProfileViewController: ProfileView {
     
     func configure(with model: ProfileViewModel) {
         view.backgroundColor = .softBlue
-        configureProfileTable()
         configureNavigationBar(button: model.navBarRightItem)
+        configureProfileTable()
         elements = model.element
     }
 }

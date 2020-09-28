@@ -83,6 +83,10 @@ private extension ProfilePresenter {
     func loadView() {
         let model = createViewModel()
         view?.configure(with: model)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.metadata.loadMediaIfNeed(completion: self.loadView)
+        }
     }
     
     func createTimeLineViewModel() -> [ProfileTweetViewModel] {
@@ -110,7 +114,7 @@ private extension ProfilePresenter {
                                             profilePic: URL(string: $0.user.profile_image_url_https))
             
         }
-        metadata.loadMediaIfNeed(completion: loadView)
+        
         return timeline
     }
     
