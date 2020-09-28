@@ -9,11 +9,12 @@
 import UIKit
 
 extension UITableView {
-    func register<T: Reusable>(_ cellType: T.Type) {
+    typealias ReusableCell = UITableViewCell & Reusable
+    func register<T: ReusableCell>(_ cellType: T.Type) {
         register(cellType.self, forCellReuseIdentifier: T.reusableIdentifier)
     }
     
-    func dequeueReusableCell<T: Reusable>() -> T {
+    func dequeueReusableCell<T: ReusableCell>() -> T {
         guard let cell = dequeueReusableCell(withIdentifier: T.reusableIdentifier) as? T else {
             fatalError("Should implement Reusable protocol on the Cell")
         }

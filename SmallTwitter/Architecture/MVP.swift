@@ -23,4 +23,3 @@ extension PresentationView  {
         return presenter as? SceneObserver
     }
 }
-
