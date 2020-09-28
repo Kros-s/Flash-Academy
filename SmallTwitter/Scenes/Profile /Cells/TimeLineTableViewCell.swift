@@ -10,7 +10,7 @@ import UIKit
 import LinkPresentation
 
 
-final class TimeLineTableViewCell: UITableViewCell {
+final class TimeLineTableViewCell: UITableViewCell, Reusable {
     var cornerRadius: CGFloat = 6
     var shadowOffsetWidth = 0
     var shadowOffsetHeight = 3

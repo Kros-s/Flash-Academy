@@ -25,7 +25,7 @@ final class ProfileViewController: UIViewController, BaseView {
     }
     
     private var profileTable = UITableView()
-    
+    private lazy var visitorCellConfigurator = ProfileCellConfiguratorVisitor(tableView: self.profileTable)
     private var elements: [ProfileTableCellElement] = [] {
         didSet {
             profileTable.reloadData()
@@ -48,8 +48,8 @@ private extension ProfileViewController {
         profileTable.separatorStyle = .none
         profileTable.rowHeight = UITableView.automaticDimension
         profileTable.indicatorStyle = .white
-        profileTable.register(ProfileTableViewCell.self, forCellReuseIdentifier: "ProfileTableViewCell")
-        profileTable.register(TimeLineTableViewCell.self, forCellReuseIdentifier: "TimeLineTableViewCell")
+        profileTable.register(ProfileTableViewCell.self)
+        profileTable.register(TimeLineTableViewCell.self)
         profileTable.delegate = self
         profileTable.dataSource = self
         view.addSubview(profileTable)
@@ -93,8 +93,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let factory = ProfileVisitor(tableView: tableView, indexPath: indexPath)
-        let cell = factory.createCell(element: elements[indexPath.row])
+        let cell = visitorCellConfigurator.configureCell(element: elements[indexPath.row])
         cell.selectionStyle = .none
         return cell
     }

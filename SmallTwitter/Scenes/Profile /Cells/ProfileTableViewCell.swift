@@ -10,7 +10,7 @@ import UIKit
 
 //TODO: almost sure this will be moved into a single view in order to add an efect about strechy header.
 
-final class ProfileTableViewCell: UITableViewCell {
+final class ProfileTableViewCell: UITableViewCell, Reusable {
     
     lazy var containerView: UIView = {
         let view = UIView()

@@ -10,11 +10,9 @@ import UIKit
 
 final class ProfileCellConfiguratorVisitor {
     private let tableView: UITableView
-    private let indexPath: IndexPath
     
-    init(tableView: UITableView, indexPath: IndexPath) {
+    init(tableView: UITableView) {
         self.tableView = tableView
-        self.indexPath = indexPath
     }
     
     func configureCell(element: ProfileTableCellElement) -> UITableViewCell {

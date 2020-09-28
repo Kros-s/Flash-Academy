@@ -44,7 +44,7 @@
 		38475C1B24E6F6A70003E536 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C1A24E6F6A70003E536 /* ProfileTableViewCell.swift */; };
 		38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */; };
 		38475C2124E6F9300003E536 /* LabelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2024E6F9300003E536 /* LabelViewModel.swift */; };
-		38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2224E6F99B0003E536 /* ProfileVisitor.swift */; };
+		38475C2324E6F99B0003E536 /* ProfileCellConfiguratorVisitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2224E6F99B0003E536 /* ProfileCellConfiguratorVisitor.swift */; };
 		38475C2524E6FE5E0003E536 /* UserTimelineRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2424E6FE5E0003E536 /* UserTimelineRequest.swift */; };
 		38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2624E6FEB00003E536 /* TimeLine.swift */; };
 		38475C2924E6FFAD0003E536 /* TimeLineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C2824E6FFAD0003E536 /* TimeLineTableViewCell.swift */; };
@@ -66,6 +66,8 @@
 		38EA4FEB2513E0470053C466 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEA2513E0470053C466 /* TweetService.swift */; };
 		38EA4FEF2513E1AD0053C466 /* NewTweetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEE2513E1AD0053C466 /* NewTweetRequest.swift */; };
 		38EA4FF1251507240053C466 /* DetailTweetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FF0251507240053C466 /* DetailTweetRequest.swift */; };
+		38F0D0A52521957B0042D62A /* Reusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0D0A42521957B0042D62A /* Reusable.swift */; };
+		38F0D0A72521960D0042D62A /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F0D0A62521960D0042D62A /* UITableView.swift */; };
 		38F848CD251383D400A3EBBB /* ModalNewTweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CC251383D400A3EBBB /* ModalNewTweet.swift */; };
 		38F848D02513841000A3EBBB /* ModalHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848CF2513841000A3EBBB /* ModalHeader.swift */; };
 		38F848D22513851500A3EBBB /* ButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F848D12513851500A3EBBB /* ButtonViewModel.swift */; };
@@ -123,7 +125,7 @@
 		38475C1A24E6F6A70003E536 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		38475C2024E6F9300003E536 /* LabelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewModel.swift; sourceTree = "<group>"; };
-		38475C2224E6F99B0003E536 /* ProfileVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVisitor.swift; sourceTree = "<group>"; };
+		38475C2224E6F99B0003E536 /* ProfileCellConfiguratorVisitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCellConfiguratorVisitor.swift; sourceTree = "<group>"; };
 		38475C2424E6FE5E0003E536 /* UserTimelineRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTimelineRequest.swift; sourceTree = "<group>"; };
 		38475C2624E6FEB00003E536 /* TimeLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLine.swift; sourceTree = "<group>"; };
 		38475C2824E6FFAD0003E536 /* TimeLineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineTableViewCell.swift; sourceTree = "<group>"; };
@@ -145,6 +147,8 @@
 		38EA4FEA2513E0470053C466 /* TweetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		38EA4FEE2513E1AD0053C466 /* NewTweetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetRequest.swift; sourceTree = "<group>"; };
 		38EA4FF0251507240053C466 /* DetailTweetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTweetRequest.swift; sourceTree = "<group>"; };
+		38F0D0A42521957B0042D62A /* Reusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reusable.swift; sourceTree = "<group>"; };
+		38F0D0A62521960D0042D62A /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
 		38F848CC251383D400A3EBBB /* ModalNewTweet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalNewTweet.swift; sourceTree = "<group>"; };
 		38F848CF2513841000A3EBBB /* ModalHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalHeader.swift; sourceTree = "<group>"; };
 		38F848D12513851500A3EBBB /* ButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonViewModel.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				3830100C250368C8007DA26C /* FactoryApperance.swift */,
 				383FE3ED250BF8AF0022CE65 /* ScreenLoader.swift */,
 				383FE3EF250BFD780022CE65 /* DependencyInjectionManager.swift */,
+				38F0D0A42521957B0042D62A /* Reusable.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -301,7 +306,6 @@
 			isa = PBXGroup;
 			children = (
 				3886CDA725098EE000916876 /* NewTweet */,
-				38301009250365D2007DA26C /* Components */,
 				38475C3224E716940003E536 /* NavigationBar */,
 				38475C2D24E712530003E536 /* Tweet */,
 				38475C1E24E6F9140003E536 /* Common */,
@@ -327,7 +331,7 @@
 				38475C1424E6F2F60003E536 /* ProfileViewController.swift */,
 				38475C1724E6F3320003E536 /* ProfilePresenter.swift */,
 				38475C1C24E6F85B0003E536 /* ProfileViewModel.swift */,
-				38475C2224E6F99B0003E536 /* ProfileVisitor.swift */,
+				38475C2224E6F99B0003E536 /* ProfileCellConfiguratorVisitor.swift */,
 			);
 			path = "Profile ";
 			sourceTree = "<group>";
@@ -344,6 +348,7 @@
 		38475C1E24E6F9140003E536 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				38301009250365D2007DA26C /* Components */,
 				3830100E250369A7007DA26C /* Fonts */,
 				38475C2A24E70A8E0003E536 /* Extensions */,
 				38475C1F24E6F91A0003E536 /* Models */,
@@ -369,6 +374,7 @@
 				3886CDA12509552800916876 /* DateFormatter.swift */,
 				3856184F251CCF7E00A20BA9 /* UITextView.swift */,
 				38455A50251EE6340085D259 /* KeyboardHandler.swift */,
+				38F0D0A62521960D0042D62A /* UITableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -589,11 +595,12 @@
 				38F848D22513851500A3EBBB /* ButtonViewModel.swift in Sources */,
 				38475C1324E6F03D0003E536 /* User.swift in Sources */,
 				38475BDA24E6EB6C0003E536 /* SceneDelegate.swift in Sources */,
-				38475C2324E6F99B0003E536 /* ProfileVisitor.swift in Sources */,
+				38475C2324E6F99B0003E536 /* ProfileCellConfiguratorVisitor.swift in Sources */,
 				38475C1D24E6F85B0003E536 /* ProfileViewModel.swift in Sources */,
 				3886CDAB25098F6400916876 /* NewTweetPresenter.swift in Sources */,
 				38475BFA24E6EBA70003E536 /* ViewCoordinator.swift in Sources */,
 				383FE3F0250BFD780022CE65 /* DependencyInjectionManager.swift in Sources */,
+				38F0D0A72521960D0042D62A /* UITableView.swift in Sources */,
 				38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */,
 				3886CDA22509552800916876 /* DateFormatter.swift in Sources */,
 				3830100B250365E1007DA26C /* TitleSubtitleStack.swift in Sources */,
@@ -607,6 +614,7 @@
 				38475C0E24E6ED5A0003E536 /* GetUserRequest.swift in Sources */,
 				38475C3124E7126E0003E536 /* TweetPresenter.swift in Sources */,
 				38475C2524E6FE5E0003E536 /* UserTimelineRequest.swift in Sources */,
+				38F0D0A52521957B0042D62A /* Reusable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
