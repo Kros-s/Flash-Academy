@@ -37,23 +37,16 @@ final class ProfilePresenterTests: XCTestCase {
         let profileExpectation = expectation(description: "Expectation for ProfileView")
         
         mockUserService.mock_getUserInfo = { handler in
-            
             handler(self.getMockUser())
         }
         
         mockUserService.mock_getTimeLine = { handler in
-//            let timeLine = TimeLine(id_str: "1",
-//                                    text: "TweetData",
-//                                    user: self.getMockUser(),
-//                                    created_at: "",
-//                                    entities: .init())
-//
             handler([])
         }
         
-        mockMetadata.mock_load = {
+        mockMetadata.mock_load = { handler in
             profileExpectation.fulfill()
-            $0()
+            handler()
         }
         
         mockView.validate = { model in
@@ -82,25 +75,5 @@ final class ProfilePresenterTests: XCTestCase {
              followers_count: 10,
              friends_count: 0)
     }
-
 }
 
-final class MockProfileView: ProfileView {
-    
-    var validate: ((ProfileViewModel) -> Void)!
-    var isConfigureBeingCalled = false
-    var isUpdateBeinCalled = false
-    
-    func configure(with model: ProfileViewModel) {
-        validate(model)
-        isConfigureBeingCalled = true
-    }
-    
-    func update(model: ProfileViewModel) {
-        isUpdateBeinCalled = true
-    }
-    
-    func showLoader() { }
-    func hideLoader() { }
-    func goToNewTweet() { }
-}

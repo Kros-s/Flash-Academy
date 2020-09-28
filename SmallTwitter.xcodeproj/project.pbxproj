@@ -63,6 +63,7 @@
 		38BA14A02522740F00F1EB43 /* MockUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA149F2522740F00F1EB43 /* MockUserService.swift */; };
 		38BA14A22522779300F1EB43 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C1724E6F3320003E536 /* ProfilePresenter.swift */; };
 		38BA14A42522786700F1EB43 /* MockMetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA14A32522786700F1EB43 /* MockMetadataStorage.swift */; };
+		38BA14A6252285A500F1EB43 /* MockProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA14A5252285A400F1EB43 /* MockProfileView.swift */; };
 		38EA4FEB2513E0470053C466 /* TweetService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEA2513E0470053C466 /* TweetService.swift */; };
 		38EA4FEF2513E1AD0053C466 /* NewTweetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FEE2513E1AD0053C466 /* NewTweetRequest.swift */; };
 		38EA4FF1251507240053C466 /* DetailTweetRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38EA4FF0251507240053C466 /* DetailTweetRequest.swift */; };
@@ -144,6 +145,7 @@
 		38BA149C252273C200F1EB43 /* ProfilePresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenterTests.swift; sourceTree = "<group>"; };
 		38BA149F2522740F00F1EB43 /* MockUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserService.swift; sourceTree = "<group>"; };
 		38BA14A32522786700F1EB43 /* MockMetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMetadataStorage.swift; sourceTree = "<group>"; };
+		38BA14A5252285A400F1EB43 /* MockProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockProfileView.swift; sourceTree = "<group>"; };
 		38EA4FEA2513E0470053C466 /* TweetService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetService.swift; sourceTree = "<group>"; };
 		38EA4FEE2513E1AD0053C466 /* NewTweetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetRequest.swift; sourceTree = "<group>"; };
 		38EA4FF0251507240053C466 /* DetailTweetRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailTweetRequest.swift; sourceTree = "<group>"; };
@@ -441,6 +443,7 @@
 			children = (
 				38BA149F2522740F00F1EB43 /* MockUserService.swift */,
 				38BA14A32522786700F1EB43 /* MockMetadataStorage.swift */,
+				38BA14A5252285A400F1EB43 /* MockProfileView.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 			files = (
 				38BA14A42522786700F1EB43 /* MockMetadataStorage.swift in Sources */,
 				38BA14A02522740F00F1EB43 /* MockUserService.swift in Sources */,
+				38BA14A6252285A500F1EB43 /* MockProfileView.swift in Sources */,
 				38BA149D252273C200F1EB43 /* ProfilePresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
