@@ -22,7 +22,7 @@ protocol Router {
     func tapOnNewTweet(action: TriggerAction)
 }
 
-final class ViewCoordinator: BaseView {
+final class ViewCoordinator: PresentationView {
     typealias Presenter = PresenterCoordinatorProtocol
     
     static let shared: ViewCoordinator = {
@@ -97,9 +97,9 @@ private extension ViewCoordinator {
     }
 }
 
-// MARK: inject for BaseView
+// MARK: inject for PresentationView
 
-extension BaseView {
+extension PresentationView {
     func inject() -> Router {
         return ViewCoordinator.shared
     }

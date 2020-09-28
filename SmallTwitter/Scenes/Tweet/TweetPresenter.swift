@@ -14,7 +14,7 @@ protocol TweetPresenterProtocol {
     func handleShare()
 }
 
-final class TweetPresenter: BasePresenter {
+final class TweetPresenter: Presenter {
     weak var view: TweetView?
     var tweetInfo: GetInfoService
     var identifier: String?

@@ -16,7 +16,7 @@ protocol ProfileView: class {
     func goToNewTweet()
 }
 
-final class ProfileViewController: UIViewController, BaseView {
+final class ProfileViewController: UIViewController, PresentationView {
     
     lazy var presenter: ProfilePresenterProtocol = inject()
     lazy var router: Router = inject()

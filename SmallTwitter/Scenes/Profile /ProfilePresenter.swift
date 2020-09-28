@@ -14,7 +14,7 @@ protocol ProfilePresenterProtocol {
     func handleNewTweetAdded()
 }
 
-final class ProfilePresenter: BasePresenter {
+final class ProfilePresenter: Presenter {
     weak var view: ProfileView?
     private var timeLineProvider: UserService
     private var apperance = FactoryApperance()

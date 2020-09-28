@@ -13,7 +13,7 @@ protocol NewTweetView: class {
     func dismissView()
 }
 
-final class NewTweetViewController: UIViewController, BaseView {
+final class NewTweetViewController: UIViewController, PresentationView {
     lazy var presenter: NewTweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     var modalContainer = ModalNewTweet()

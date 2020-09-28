@@ -14,7 +14,7 @@ protocol PresenterCoordinatorProtocol {
     func handleNewTweet(action: TriggerAction)
 }
 
-final class PresenterCoordinator: BasePresenter {
+final class PresenterCoordinator: Presenter {
     weak var view: ViewCordinatorProtocol?
     
     private let userDefaults: UserDefaults

@@ -9,7 +9,7 @@
 import Foundation
 import LinkPresentation
 
-extension BasePresenter {
+extension Presenter {
     static func inject() -> MetaDataStorage {
         return LinkViewDataStorage.shared
     }

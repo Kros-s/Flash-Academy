@@ -14,7 +14,7 @@ protocol NewTweetPresenterProtocol {
     func handleCancel()
 }
 
-final class NewTweetPresenter: BasePresenter {
+final class NewTweetPresenter: Presenter {
     weak var view: NewTweetView?
     private var newTweet: SendService
     var dismissAction: TriggerAction = nil

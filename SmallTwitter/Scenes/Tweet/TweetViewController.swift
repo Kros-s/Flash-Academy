@@ -16,7 +16,7 @@ protocol TweetView: class {
     func showShareSheet(metadata: LPLinkMetadata)
 }
 
-final class TweetViewController: UIViewController, BaseView {
+final class TweetViewController: UIViewController, PresentationView {
     lazy var presenter: TweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     

@@ -7,18 +7,18 @@
 //
 
 // MARK: Base Presenter definition for MVP
-protocol BasePresenter: class, SceneObserver {
+protocol Presenter: class, SceneObserver {
     associatedtype View
     var view: View? { get }
 }
 
 //MARK: Base View definition for MVP
-protocol BaseView {
+protocol PresentationView {
     associatedtype Presenter
     var presenter: Presenter { get }
 }
 
-extension BaseView  {
+extension PresentationView  {
     var observer: SceneObserver? {
         return presenter as? SceneObserver
     }
