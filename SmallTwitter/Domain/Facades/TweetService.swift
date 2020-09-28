@@ -17,9 +17,9 @@ protocol GetInfoService {
 }
 
 final class TweetService: DomainFacade {
-    private let httpClient: HTTPClient
+    private let httpClient: Service
     
-    init(httpClient: HTTPClient = inject()) {
+    init(httpClient: Service = HTTPProvider()) {
         self.httpClient = httpClient
     }
 }
@@ -30,7 +30,8 @@ extension TweetService: SendService {
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         
         httpClient.execute(request: request) { response in
-            switch response.result {
+            
+            switch response {
             case .success:
                 finishOnMainThread(())
             case .failure:
@@ -45,7 +46,7 @@ extension TweetService: GetInfoService {
         let request = DetailTweetRequest(status: id)
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         httpClient.execute(request: request) { response in
-            switch response.result {
+            switch response {
             case .success(let tweetInfo):
                 finishOnMainThread(tweetInfo)
             case .failure:

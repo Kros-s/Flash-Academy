@@ -15,11 +15,11 @@ protocol UserService {
 }
 
 final class UserFacade: DomainFacade {
-    private let httpclient: HTTPClient
+    private let httpclient: Service
     
     private var lastTimeLine: [TimeLine] = []
     
-    init(httpclient: HTTPClient = inject()) {
+    init(httpclient: Service = HTTPProvider()) {
         self.httpclient = httpclient
     }
 }
@@ -36,7 +36,7 @@ extension UserFacade: UserService {
         //Need to load other data
         
         httpclient.execute(request: request) { [weak self] response in
-            switch response.result {
+            switch response {
             case .success(let timeline):
                 self?.lastTimeLine = timeline
                 finishOnMainThread(timeline)
@@ -54,7 +54,7 @@ extension UserFacade: UserService {
         //Need to load other data
         
         httpclient.execute(request: request) { response in
-            switch response.result {
+            switch response {
             case .success(let user):
                 finishOnMainThread(user)
             case .failure:

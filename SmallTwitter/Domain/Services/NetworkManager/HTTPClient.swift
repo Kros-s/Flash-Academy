@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum HTTPMethod: String, CaseIterable {
+enum HTTPMethod: String {
     case post = "POST"
     case get = "GET"
 }
@@ -20,36 +20,20 @@ protocol HTTPRequest {
     var urlPath: String { get }
     var method: HTTPMethod { get }
     var body: Body? { get }
-    var headers: [String: String] { get }
 }
 
-extension HTTPRequest {
-    var headers: [String: String] {
-        return [:]
-    }
+enum ServiceError: Swift.Error {
+    case badCodificationBody(error: Swift.Error)
+    case badResponseDecoding(error: Swift.Error)
 }
 
-struct HTTPResponse<Model> {
-    enum Error: Swift.Error {
-        case unknown
-        case noInternetConnection
-        case urlBadFormed
-        case badCodificationBody(error: Swift.Error)
-        case badResponseDecoding(error: Swift.Error)
-        case serverError
-        case httpError(error: Swift.Error?)
-    }
-    let httpResponse: HTTPURLResponse?
-    let result: Result<Model, Error>
-}
-
-protocol HTTPClient: class {
+protocol Service: class {
     var baseURL: String { get set }
-    func execute<NetworkRequest: HTTPRequest>(request: NetworkRequest,
-                                              completion: @escaping (HTTPResponse<NetworkRequest.Response>) -> Void)
+    func execute<Request: HTTPRequest>(request: Request,
+                                       completion: @escaping (Result<Request.Response, ServiceError>) -> Void)
 }
 
-final class URLSessionHTTPClient {
+final class HTTPProvider {
     private let bodyEncoder: JSONEncoder
     private let responseDecoder: JSONDecoder
     private let urlSession: URLSession
@@ -67,10 +51,12 @@ final class URLSessionHTTPClient {
     }
 }
 
-extension URLSessionHTTPClient: HTTPClient {
+extension HTTPProvider: Service {
     private struct Constants {
         static let httpSuccesfulRange = 200...299
     }
+    
+    
     
     func execute<NetworkRequest: HTTPRequest>(
         request: NetworkRequest,
@@ -117,7 +103,7 @@ extension URLSessionHTTPClient: HTTPClient {
     }
 }
 
-private extension URLSessionHTTPClient {
+private extension HTTPProvider {
     func createURLRequest<NetworkRequest: HTTPRequest>(for request: NetworkRequest) throws -> URLRequest {
         guard let url = URL(string: baseURL + request.urlPath) else {
             throw HTTPResponse<NetworkRequest.Response>.Error.urlBadFormed

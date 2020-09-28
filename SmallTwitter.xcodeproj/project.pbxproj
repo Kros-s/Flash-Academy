@@ -33,7 +33,7 @@
 		38475BFA24E6EBA70003E536 /* ViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BF924E6EBA70003E536 /* ViewCoordinator.swift */; };
 		38475BFC24E6EBBE0003E536 /* PresenterCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BFB24E6EBBE0003E536 /* PresenterCoordinator.swift */; };
 		38475C0024E6EBEB0003E536 /* MVP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475BFF24E6EBEB0003E536 /* MVP.swift */; };
-		38475C0524E6EC240003E536 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C0424E6EC240003E536 /* HTTPClient.swift */; };
+		38475C0524E6EC240003E536 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C0424E6EC240003E536 /* Service.swift */; };
 		38475C0924E6EC460003E536 /* ServerFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C0824E6EC460003E536 /* ServerFacade.swift */; };
 		38475C0B24E6EC570003E536 /* DomainFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C0A24E6EC570003E536 /* DomainFacade.swift */; };
 		38475C0E24E6ED5A0003E536 /* GetUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C0D24E6ED5A0003E536 /* GetUserRequest.swift */; };
@@ -114,7 +114,7 @@
 		38475BF924E6EBA70003E536 /* ViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewCoordinator.swift; sourceTree = "<group>"; };
 		38475BFB24E6EBBE0003E536 /* PresenterCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterCoordinator.swift; sourceTree = "<group>"; };
 		38475BFF24E6EBEB0003E536 /* MVP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVP.swift; sourceTree = "<group>"; };
-		38475C0424E6EC240003E536 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		38475C0424E6EC240003E536 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		38475C0824E6EC460003E536 /* ServerFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerFacade.swift; sourceTree = "<group>"; };
 		38475C0A24E6EC570003E536 /* DomainFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainFacade.swift; sourceTree = "<group>"; };
 		38475C0D24E6ED5A0003E536 /* GetUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserRequest.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 		38BCACF4251525AE000B486A /* NetworkManager */ = {
 			isa = PBXGroup;
 			children = (
-				38475C0424E6EC240003E536 /* HTTPClient.swift */,
+				38475C0424E6EC240003E536 /* Service.swift */,
 				38BCACF225152504000B486A /* HTTPFactoryResponse.swift */,
 			);
 			path = NetworkManager;
@@ -579,7 +579,7 @@
 				38475C2124E6F9300003E536 /* LabelViewModel.swift in Sources */,
 				3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */,
 				38A738FB25103B9600ECE705 /* ProfileTableCellElement.swift in Sources */,
-				38475C0524E6EC240003E536 /* HTTPClient.swift in Sources */,
+				38475C0524E6EC240003E536 /* Service.swift in Sources */,
 				38455A51251EE6340085D259 /* KeyboardHandler.swift in Sources */,
 				38301027250369CA007DA26C /* UIFont.swift in Sources */,
 				38475C2724E6FEB00003E536 /* TimeLine.swift in Sources */,

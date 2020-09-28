@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ProfileInfoViewModel: ProfileTableCellElement {
+struct ProfileInfoViewModel {
     var profileName: LabelViewModel
     var profileUser: LabelViewModel
     var aboutMe: LabelViewModel
@@ -17,7 +17,9 @@ struct ProfileInfoViewModel: ProfileTableCellElement {
     var following: LabelViewModel
     var followersTitle: LabelViewModel
     var followingTitle: LabelViewModel
-    
+}
+
+extension ProfileInfoViewModel: ProfileTableCellElement {
     func accept<V>(visitor: V) -> V.Result where V : ProfileElementVisitor {
         visitor.visit(viewModel: self)
     }
