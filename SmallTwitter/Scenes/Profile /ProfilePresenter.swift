@@ -20,8 +20,6 @@ final class ProfilePresenter: Presenter {
     private var apperance = FactoryApperance()
     private var metadata: MetaDataStorage
     
-    private var metadataURL: [URL: LPLinkMetadata?] = [:]
-    
     //TODO: Wrap this two into a single class and inject as dependancy
     private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
@@ -85,8 +83,13 @@ private extension ProfilePresenter {
         view?.configure(with: model)
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
-            self.metadata.loadMediaIfNeed(completion: self.loadView)
+            self.metadata.loadMediaIfNeed(completion: self.updateView)
         }
+    }
+    
+    func updateView() {
+        let model = createViewModel()
+        view?.update(model: model)
     }
     
     func createTimeLineViewModel() -> [ProfileTweetViewModel] {
