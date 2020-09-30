@@ -9,10 +9,19 @@
 import Foundation
 
 struct User: Codable {
-    var name: String
-    var screen_name: String
+    var displayName: String
+    var username: String
     var description: String
-    var profile_image_url_https: String
-    var followers_count: Int
-    var friends_count: Int
+    var profileImage: String
+    var followers: Int
+    var following: Int
+    
+    enum CodingKeys: String, CodingKey {
+        case displayName = "name"
+        case username = "screen_name"
+        case description
+        case profileImage = "profile_image_url_https"
+        case followers = "followers_count"
+        case following = "friends_count"
+    }
 }

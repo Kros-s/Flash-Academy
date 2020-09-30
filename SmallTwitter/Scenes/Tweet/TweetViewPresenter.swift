@@ -69,15 +69,15 @@ private extension TweetViewPresenter {
         let humanDate =  relativeFormatter.localizedString(for: date, relativeTo: Date())
         let tweetInfo = LabelViewModel(text: humanDate, appearance: timeApperance)
         
-        let nameText = LabelViewModel(text: info.user.screen_name, appearance: displayNameApperance)
+        let nameText = LabelViewModel(text: info.user.username, appearance: displayNameApperance)
         let text = LabelViewModel(text: info.text, appearance: regularApperance)
-        let userName = LabelViewModel(text: "@\(info.user.name)", appearance: usernameApperance)
+        let userName = LabelViewModel(text: "@\(info.user.displayName)", appearance: usernameApperance)
         return TweetViewModel(name: userName,
                               displayName: nameText,
                               tweetText: text,
                               tweetTime: tweetInfo,
                               linkData: metadataInfo,
-                              profileURL: URL(string: info.user.profile_image_url_https))
+                              profileURL: URL(string: info.user.profileImage))
     }
 }
 

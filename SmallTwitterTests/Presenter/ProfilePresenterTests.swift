@@ -54,10 +54,10 @@ final class ProfilePresenterTests: XCTestCase {
                 $0 as? ProfileInfoViewModel
             }.first
             let user = self.getMockUser()
-            XCTAssertEqual(profileModel?.followers.text, user.followers_count.description)
-            XCTAssertEqual(profileModel?.following.text, user.friends_count.description)
-            XCTAssertEqual(profileModel?.profileName.text, user.screen_name)
-            XCTAssertEqual(profileModel?.profileUser.text, user.name)
+            XCTAssertEqual(profileModel?.followers.text, user.followers.description)
+            XCTAssertEqual(profileModel?.following.text, user.following.description)
+            XCTAssertEqual(profileModel?.profileName.text, user.username)
+            XCTAssertEqual(profileModel?.profileUser.text, user.displayName)
             XCTAssertNil(profileModel?.profilePic)
             
         }
