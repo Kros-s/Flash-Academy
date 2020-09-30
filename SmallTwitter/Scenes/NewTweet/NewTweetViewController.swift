@@ -46,6 +46,11 @@ extension NewTweetViewController: NewTweetView {
 extension NewTweetViewController: KeyboardHandler { }
 
 private extension NewTweetViewController {
+    struct Metrics {
+        static let heightMultiplier:CGFloat = 0.5
+        static let widhtMultiplier: CGFloat = 0.9
+    }
+    
     func configureModalContainer(model: NewTweetViewModel) {
         modalContainer.translatesAutoresizingMaskIntoConstraints = false
         modalContainer.backgroundColor = .white
@@ -53,8 +58,8 @@ private extension NewTweetViewController {
         NSLayoutConstraint.activate([
             modalContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             modalContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            modalContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-            modalContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
+            modalContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Metrics.heightMultiplier),
+            modalContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Metrics.widhtMultiplier)
         ])
         modalContainer.header.setup(controlEvents: .touchUpInside, accion: presenter.handleCancel)
         modalContainer.footerButton.addTarget(self, action: #selector(handleContinue), for: .touchUpInside)

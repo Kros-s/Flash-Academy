@@ -30,8 +30,9 @@ extension NavigationBarPresentable where Self: UIViewController {
         guard findNavigation() == nil else {
             return
         }
+        let navigationBarHeight: CGFloat = 55.0
         let navigationBar = CustomNavigationBar()
-        navigationBar.addCustomNavBar(container: self.view, height: 55.0)
+        navigationBar.addCustomNavBar(container: self.view, height: navigationBarHeight)
     }
     
     func findNavigation() -> CustomNavigationBarProtocol? {
@@ -66,8 +67,14 @@ struct NavigationBarViewModel {
 }
 
 extension NavigationBarViewModel {
-    static let TweetView = NavigationBarViewModel(headerText: .init(text: "Tweet", appearance: FactoryApperance().makeApperance(size: 16, color: .mainBlue)), showBackButton: true, backgroundColor: .white)
-    static let GeneralView = NavigationBarViewModel(headerText: .init(text: "PROFILE", appearance: FactoryApperance().makeApperance(weight: .bold, size: 16)), showBackButton: false, backgroundColor: .white)
+    struct Constants {
+        static let TweetViewTitle = "Tweet"
+        static let ProfileViewTitle = "PROFILE"
+        static let titleFontSize: CGFloat = 16
+    }
+    
+    static let TweetView = NavigationBarViewModel(headerText: .init(text: Constants.TweetViewTitle, appearance: FactoryApperance().makeApperance(size: Constants.titleFontSize, color: .mainBlue)), showBackButton: true, backgroundColor: .white)
+    static let GeneralView = NavigationBarViewModel(headerText: .init(text: Constants.ProfileViewTitle, appearance: FactoryApperance().makeApperance(weight: .bold, size: Constants.titleFontSize)), showBackButton: false, backgroundColor: .white)
 }
 
 protocol DelegateCustomNavigationBar: class {
@@ -95,7 +102,8 @@ final class CustomNavigationBar: UIView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.black, for: .normal)
-        button.setImage(UIImage(named: "chevron.left"), for: .normal)
+        let imageButton = "chevron.left"
+        button.setImage(UIImage(named: imageButton), for: .normal)
         button.isHidden = true
         button.imageView?.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(leftButtonActivated), for: .touchUpInside)

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol NewTweetPresenterProtocol {
     var dismissAction: TriggerAction { get set }
@@ -34,7 +35,7 @@ extension NewTweetPresenter: NewTweetPresenterProtocol {
     }
     
     func handleNewTweet(tweet: String) {
-        guard !tweet.isEmpty, tweet.count < 140 else { return }
+        guard !tweet.isEmpty, tweet.count < Constants.maxCharactersOnTweet else { return }
         newTweet.sendTweet(tweet) { [weak self] in
             self?.view?.dismissView()
         }
@@ -46,26 +47,38 @@ extension NewTweetPresenter: NewTweetPresenterProtocol {
 }
 
 private extension NewTweetPresenter {
+    struct Constants {
+        static let modalTitle = "What are you thinking?"
+        static let closeButton = "X"
+        static let headerFontSize: CGFloat = 18
+        static let buttonFontSize: CGFloat = 16
+        static let buttonHeaderSize: CGFloat = 20
+        static let buttonSendText = "Send"
+        static let maxCharactersOnTweet = 140
+    }
+    
     func createViewModel() -> NewTweetViewModel {
         NewTweetViewModel(header: createHeaderViewModel(),
                           footerButton: createButtonViewModel())
     }
     
     func createHeaderViewModel() -> ModalHeaderViewModel {
-        let apperanceHeader = LabelAppearance(font: .openSansBold(size: 18), textColor: .mainBlue)
+        let apperanceHeader = LabelAppearance(font: .openSansBold(size: Constants.headerFontSize), textColor: .mainBlue)
         
-        let headerTitle = LabelViewModel(text:"What are you thinking?", appearance: apperanceHeader)
-        var buttonHeader: ButtonViewModel = .init(titles: [.normal(value: "X")],
-                                                  style: .init(fontTitle: .openSansBold(size: 16),
+        let headerTitle = LabelViewModel(text: Constants.modalTitle,
+                                         appearance: apperanceHeader)
+        
+        var buttonHeader: ButtonViewModel = .init(titles: [.normal(value: Constants.closeButton)],
+                                                  style: .init(fontTitle: .openSansBold(size: Constants.buttonFontSize),
                                                                titleColor: [.normal(value: .darkGray)],
                                                                backgroundColor: .white),
                                                   isEnabled: true)
-        buttonHeader.style.fontTitle = .openSansBold(size: 20)
+        buttonHeader.style.fontTitle = .openSansBold(size: Constants.buttonHeaderSize)
         return .init(headerTitle: headerTitle, closeButton: buttonHeader)
     }
     
     func createButtonViewModel() -> ButtonViewModel {
-        .createRoundedBlueButton(title: "Send")
+        .createRoundedBlueButton(title: Constants.buttonSendText)
     }
 }
 

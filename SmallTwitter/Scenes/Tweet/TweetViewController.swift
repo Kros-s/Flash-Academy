@@ -17,6 +17,11 @@ protocol TweetView: class {
 }
 
 final class TweetViewController: UIViewController, PresentationView {
+    struct Constants {
+        static let metadataIdentifier = "metadata.url"
+        static let shareButtonImage = "square.and.arrow.up"
+    }
+    
     lazy var presenter: TweetPresenterProtocol = inject()
     lazy var router: Router = inject()
     
@@ -36,8 +41,8 @@ final class TweetViewController: UIViewController, PresentationView {
     }()
     
     lazy var shareButton: UIButton = {
-        let iconConfig = UIImage.SymbolConfiguration(pointSize: 20, weight: .bold, scale: .large)
-        let shareImage = UIImage(systemName: "square.and.arrow.up", withConfiguration: iconConfig)
+        let iconConfig = UIImage.SymbolConfiguration(pointSize: Metrics.shareButtonSize, weight: .bold, scale: .large)
+        let shareImage = UIImage(systemName: Constants.shareButtonImage, withConfiguration: iconConfig)
         let button = UIButton()
         button.setImage(shareImage, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -58,8 +63,13 @@ extension TweetViewController: TweetView {
     }
     
     struct Metrics {
+        static let shareButtonSize: CGFloat = 20
         static let padding: CGFloat = 24
         static let imageSize: CGFloat = 70
+        static let shareButtonHeight: CGFloat = 50
+        static let aspectRatio: CGFloat = 1
+        static let profileImageBorder: CGFloat = 2
+        static let stackSpacing: CGFloat = 20
     }
     
     func configure(model: TweetViewModel) {
@@ -77,8 +87,8 @@ extension TweetViewController: TweetView {
             mainStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.padding),
             mainStackView.topAnchor.constraint(equalTo: navigationBarBottomAnchor),
             
-            shareButton.heightAnchor.constraint(equalToConstant: 50),
-            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor, multiplier: 1)
+            shareButton.heightAnchor.constraint(equalToConstant: Metrics.shareButtonHeight),
+            shareButton.widthAnchor.constraint(equalTo: shareButton.heightAnchor, multiplier: Metrics.aspectRatio)
         ])
     }
 }
@@ -113,8 +123,8 @@ private extension TweetViewController {
     
     func configureProfileImage() {
         profileImage.translatesAutoresizingMaskIntoConstraints = false
-        profileImage.layer.cornerRadius = Metrics.imageSize / 2
-        profileImage.layer.borderWidth = 2
+        profileImage.layer.cornerRadius = Metrics.imageSize / Metrics.profileImageBorder
+        profileImage.layer.borderWidth = Metrics.profileImageBorder
         profileImage.layer.borderColor = UIColor.mainBlue.cgColor
         profileImage.layer.masksToBounds = false
         profileImage.clipsToBounds = true
@@ -129,11 +139,11 @@ private extension TweetViewController {
     func configureProfileItems() {
         profileItemsStack.translatesAutoresizingMaskIntoConstraints = false
         profileItemsStack.axis = .horizontal
-        profileItemsStack.spacing = 20
+        profileItemsStack.spacing = Metrics.stackSpacing
         profileItemsStack.addArrangedSubview(profileImage)
         profileItemsStack.addArrangedSubview(profileDataStack)
         NSLayoutConstraint.activate([
-            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: 1.0),
+            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor, multiplier: Metrics.aspectRatio),
             profileImage.widthAnchor.constraint(equalToConstant: Metrics.imageSize),
         ])
     }
@@ -141,7 +151,7 @@ private extension TweetViewController {
     func configureMainStack() {
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.axis = .vertical
-        mainStackView.spacing = 20
+        mainStackView.spacing = Metrics.stackSpacing
         mainStackView.addArrangedSubview(profileItemsStack)
         mainStackView.addArrangedSubview(tweet)
         view.addSubview(mainStackView)
@@ -159,7 +169,7 @@ private extension TweetViewController {
         setNavBar(delegate: self)
         configureNavBar(viewModel: .TweetView)
         tweet.configure(model: model.tweetText)
-        profileDataStack.configure(title: model.displayName, subtitle: model.name)
+        profileDataStack.configure(titleModel: model.displayName, subtitleModel: model.name)
         isNavBarVisible(true)
         showLeftButton(true)
     }
@@ -177,7 +187,7 @@ extension TweetViewController: DelegateCustomNavigationBar {
 
 extension TweetViewController: UIActivityItemSource {
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-        return "metadata.url"
+        return Constants.metadataIdentifier
     }
     
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
@@ -187,7 +197,6 @@ extension TweetViewController: UIActivityItemSource {
     func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
         return metadata
     }
-    
 }
 
 extension TweetViewController: NavigationBarPresentable, LoaderViewPresentable { }

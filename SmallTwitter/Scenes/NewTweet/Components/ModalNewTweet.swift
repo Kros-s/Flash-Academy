@@ -25,7 +25,7 @@ final class ModalNewTweet: UIView {
     
     func configure(model: NewTweetViewModel) {
         footerButton.configure(model: model.footerButton)
-        header.configure(label: model.header.headerTitle, button: model.header.closeButton)
+        header.configure(labelModel: model.header.headerTitle, buttonModel: model.header.closeButton)
     }
 }
 
@@ -59,9 +59,10 @@ private extension ModalNewTweet {
     }
     
     func configureTextView() {
+        let placeHolderText = "Write your tweet"
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.addDoneButtonOnKeyboard()
-        textView.text = "What's Going on?"
+        textView.text = placeHolderText
         textView.layer.cornerRadius = 8
         textView.layer.borderWidth = 0.5
         textView.layer.borderColor = UIColor.lightGray.cgColor

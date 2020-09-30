@@ -24,9 +24,9 @@ final class ModalHeader: UIView {
         commonInit()
     }
     
-    func configure(label: LabelViewModel, button: ButtonViewModel) {
-        self.label.configure(model: label)
-        self.button.configure(model: button)
+    func configure(labelModel: LabelViewModel, buttonModel: ButtonViewModel) {
+        label.configure(model: labelModel)
+        button.configure(model: buttonModel)
     }
     
     func setup(controlEvents control: UIControl.Event, accion: @escaping () -> Void) {

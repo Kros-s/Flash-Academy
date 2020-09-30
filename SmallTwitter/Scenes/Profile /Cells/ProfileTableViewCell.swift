@@ -127,8 +127,8 @@ final class ProfileTableViewCell: UITableViewCell, Reusable {
         userName.configure(model: viewModel.profileUser)
         aboutMe.configure(model: viewModel.aboutMe)
         
-        followers.configure(title: viewModel.followersTitle, subtitle: viewModel.followers)
-        following.configure(title: viewModel.followingTitle, subtitle: viewModel.following)
+        followers.configure(titleModel: viewModel.followersTitle, subtitleModel: viewModel.followers)
+        following.configure(titleModel: viewModel.followingTitle, subtitleModel: viewModel.following)
         if let url = viewModel.profilePic {
             profileImage.downloadImage(from: url)
         }
