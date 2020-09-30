@@ -14,8 +14,8 @@ protocol NewTweetView: class {
 }
 
 final class NewTweetViewController: UIViewController, PresentationView {
-    lazy var presenter: NewTweetPresenterProtocol = inject()
-    lazy var router: Router = inject()
+    var presenter: NewTweetPresenterProtocol
+    var router: Router
     var modalContainer = ModalNewTweet()
     
     override func viewDidLoad() {
@@ -25,6 +25,16 @@ final class NewTweetViewController: UIViewController, PresentationView {
     
     deinit {
         removeKeyboardHandler()
+    }
+    
+    init(presenter: NewTweetPresenterProtocol, router: Router) {
+        self.presenter = presenter
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
 

@@ -18,8 +18,9 @@ protocol ProfileView: class {
 
 final class ProfileViewController: UIViewController, PresentationView {
     
-    lazy var presenter: ProfilePresenterProtocol = inject()
-    lazy var router: Router = inject()
+    var presenter: ProfilePresenterProtocol
+    var router: Router
+    
     private lazy var dismissAction: () -> Void = { [weak self] in
         self?.presenter.handleNewTweetAdded()
     }
@@ -30,6 +31,16 @@ final class ProfileViewController: UIViewController, PresentationView {
         didSet {
             profileTable.reloadData()
         }
+    }
+    
+    init(presenter: ProfilePresenterProtocol, router: Router) {
+        self.presenter = presenter
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

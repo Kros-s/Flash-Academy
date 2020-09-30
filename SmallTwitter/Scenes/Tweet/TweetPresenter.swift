@@ -10,14 +10,13 @@ import Foundation
 import LinkPresentation
 
 protocol TweetPresenterProtocol {
-    var identifier: String? { get set }
     func handleShare()
 }
 
 final class TweetPresenter: Presenter {
     weak var view: TweetView?
     var tweetInfo: GetInfoService
-    var identifier: String?
+    var identifier: String
     var apperance: FactoryApperance
     var metadata: MetaDataStorage
     var shareURL: String?
@@ -28,18 +27,20 @@ final class TweetPresenter: Presenter {
     
     init(tweetInfo: GetInfoService = TweetService(),
          apperance: FactoryApperance = .init(),
-         metadata: MetaDataStorage = inject()) {
+         metadata: MetaDataStorage = inject(),
+         identifier: String) {
         
         self.tweetInfo = tweetInfo
         self.metadata = metadata
         self.apperance = apperance
+        self.identifier = identifier
     }
 }
 
 extension TweetPresenter: TweetPresenterProtocol {
     func sceneDidLoad() {
         view?.showLoader()
-        tweetInfo.getTweetInfo(id: identifier ?? "") { [weak self] info in
+        tweetInfo.getTweetInfo(id: identifier) { [weak self] info in
             guard let self = self else { return }
             self.shareURL = info.entities.urls?.first?.url
             let model = self.loadTweetData(info: info)

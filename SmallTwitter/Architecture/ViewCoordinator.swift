@@ -33,7 +33,7 @@ final class ViewCoordinator: PresentationView {
     }()
     
     let presenter: PresenterCoordinatorProtocol
-    let rootNavigationController: UINavigationController = .init()
+    private let rootNavigationController: UINavigationController = .init()
     
     init(presenter: PresenterCoordinatorProtocol) {
         self.presenter = presenter
@@ -64,21 +64,18 @@ extension ViewCoordinator: Router {
 
 extension ViewCoordinator: ViewCordinatorProtocol {
     func showNewTweetView(action: TriggerAction) {
-        let viewController = NewTweetViewController()
-        viewController.presenter.dismissAction = action
-        viewController.modalPresentationStyle = .overCurrentContext
-        viewController.modalTransitionStyle = .crossDissolve
+        let viewController = ViewControllerFactory.makeNewTweetViewController(action: action)
         present(controller: viewController)
     }
     
     func showDetailTweet(id: String) {
-        let view = TweetViewController()
-        view.presenter.identifier = id
+        let view = ViewControllerFactory.makeTweetViewController(tweet: id)
         showController(view)
     }
     
     func showProfileView() {
-        showController(ProfileViewController())
+        let controller = ViewControllerFactory.makeProfileViewController()
+        showController(controller)
     }
 }
 

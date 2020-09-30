@@ -22,8 +22,8 @@ final class TweetViewController: UIViewController, PresentationView {
         static let shareButtonImage = "square.and.arrow.up"
     }
     
-    lazy var presenter: TweetPresenterProtocol = inject()
-    lazy var router: Router = inject()
+    var presenter: TweetPresenterProtocol
+    var router: Router
     
     private var metadata: LPLinkMetadata?
     
@@ -49,6 +49,16 @@ final class TweetViewController: UIViewController, PresentationView {
         button.addTarget(self, action: #selector(handleShare), for: .touchUpInside)
         return button
     }()
+    
+    init(presenter: TweetPresenterProtocol, router: Router) {
+        self.presenter = presenter
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
