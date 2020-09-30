@@ -51,6 +51,11 @@ private extension NewTweetViewController {
         static let widhtMultiplier: CGFloat = 0.9
     }
     
+    struct Constants {
+        static let keyboardHeight: CGFloat = 150
+        static let originKeyboard: CGFloat = 0
+    }
+    
     func configureModalContainer(model: NewTweetViewModel) {
         modalContainer.translatesAutoresizingMaskIntoConstraints = false
         modalContainer.backgroundColor = .white
@@ -70,10 +75,10 @@ private extension NewTweetViewController {
     }
     
     @objc func keyboardWillShow(sender: NSNotification) {
-         self.view.frame.origin.y = -150
+        view.frame.origin.y = -Constants.keyboardHeight
     }
 
     @objc func keyboardWillHide(sender: NSNotification) {
-         self.view.frame.origin.y = 0
+        view.frame.origin.y = Constants.originKeyboard
     }
 }

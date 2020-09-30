@@ -39,6 +39,10 @@ final class ProfileViewController: UIViewController, PresentationView {
 }
  
 private extension ProfileViewController {
+    struct Metrics {
+        static let topAnchorToNavBar: CGFloat = 8.0
+        static let lateralMargin: CGFloat = 20
+    }
     
     func configureProfileTable() {
         profileTable.backgroundColor = .softBlue
@@ -54,9 +58,9 @@ private extension ProfileViewController {
         profileTable.dataSource = self
         view.addSubview(profileTable)
         NSLayoutConstraint.activate([
-            profileTable.topAnchor.constraint(equalTo: navigationBarBottomAnchor, constant: 8.0),
-            profileTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20.0),
-            profileTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20.0),
+            profileTable.topAnchor.constraint(equalTo: navigationBarBottomAnchor, constant: Metrics.topAnchorToNavBar),
+            profileTable.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Metrics.lateralMargin),
+            profileTable.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Metrics.lateralMargin),
             profileTable.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }

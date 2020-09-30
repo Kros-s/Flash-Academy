@@ -74,18 +74,18 @@ extension ViewCoordinator: ViewCordinatorProtocol {
     func showDetailTweet(id: String) {
         let view = TweetViewController()
         view.presenter.identifier = id
-        goTo(controller: view)
+        showController(view)
     }
     
     func showProfileView() {
-        goTo(controller: ProfileViewController())
+        showController(ProfileViewController())
     }
 }
 
 // MARK: Private Methods
 
 private extension ViewCoordinator {
-    func goTo(controller: UIViewController) {
+    func showController(_ controller: UIViewController) {
         rootNavigationController.pushViewController(controller, animated: rootNavigationController.topViewController != nil)
     }
     
