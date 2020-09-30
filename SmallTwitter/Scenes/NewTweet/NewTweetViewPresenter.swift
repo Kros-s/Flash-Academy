@@ -1,5 +1,5 @@
 //
-//  NewTweetPresenter.swift
+//  NewTweetViewPresenter.swift
 //  SmallTwitter
 //
 //  Created by Marco Antonio Mayen Hernandez on 09/09/20.
@@ -15,7 +15,7 @@ protocol NewTweetPresenterProtocol {
     func handleCancel()
 }
 
-final class NewTweetPresenter: Presenter {
+final class NewTweetViewPresenter: Presenter {
     weak var view: NewTweetView?
     private var newTweet: SendService
     var dismissAction: TriggerAction = nil
@@ -29,7 +29,7 @@ final class NewTweetPresenter: Presenter {
     }
 }
 
-extension NewTweetPresenter: NewTweetPresenterProtocol {
+extension NewTweetViewPresenter: NewTweetPresenterProtocol {
     func handleCancel() {
         view?.dismissView()
     }
@@ -46,7 +46,7 @@ extension NewTweetPresenter: NewTweetPresenterProtocol {
     }
 }
 
-private extension NewTweetPresenter {
+private extension NewTweetViewPresenter {
     struct Constants {
         static let modalTitle = "What are you thinking?"
         static let closeButton = "X"

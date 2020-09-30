@@ -10,7 +10,7 @@ import UIKit
 
 struct ViewControllerFactory {
     static func makeProfileViewController() -> UIViewController {
-        let presenter = ProfilePresenter()
+        let presenter = ProfileViewPresenter()
         let router = ViewCoordinator.shared
         let viewController = ProfileViewController(presenter: presenter, router: router)
         presenter.view = viewController
@@ -18,7 +18,7 @@ struct ViewControllerFactory {
     }
     
     static func makeNewTweetViewController(action: TriggerAction) -> UIViewController {
-        let presenter = NewTweetPresenter()
+        let presenter = NewTweetViewPresenter()
         let router = ViewCoordinator.shared
         let viewController = NewTweetViewController(presenter: presenter, router: router)
         presenter.view = viewController
@@ -30,7 +30,7 @@ struct ViewControllerFactory {
     }
     
     static func makeTweetViewController(tweet id: String) -> UIViewController {
-        let presenter = TweetPresenter(identifier: id)
+        let presenter = TweetViewPresenter(identifier: id)
         let router = ViewCoordinator.shared
         let viewController = TweetViewController(presenter: presenter, router: router)
         presenter.view = viewController

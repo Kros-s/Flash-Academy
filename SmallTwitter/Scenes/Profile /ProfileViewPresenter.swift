@@ -1,5 +1,5 @@
 //
-//  ProfilePresenter.swift
+//  ProfileViewPresenter.swift
 //  SmallTwitter
 //
 //  Created by Marco Antonio Mayen Hernandez on 14/08/20.
@@ -14,7 +14,7 @@ protocol ProfilePresenterProtocol {
     func handleNewTweetAdded()
 }
 
-final class ProfilePresenter: Presenter {
+final class ProfileViewPresenter: Presenter {
     weak var view: ProfileView?
     private var timeLineProvider: UserService
     private var apperance = FactoryApperance()
@@ -35,7 +35,7 @@ final class ProfilePresenter: Presenter {
     }
 }
 
-extension ProfilePresenter: ProfilePresenterProtocol {
+extension ProfileViewPresenter: ProfilePresenterProtocol {
     func handleNewTweetAdded() {
         reloadView()
     }
@@ -71,7 +71,7 @@ extension ProfilePresenter: ProfilePresenterProtocol {
     }
 }
 
-private extension ProfilePresenter {
+private extension ProfileViewPresenter {
     struct Constants {
         static let followersApperance = FactoryApperance().makeApperance(weight: .bold, size: 20, color: .white)
         static let followersTitle = LabelViewModel(text: "Followers", appearance: followersApperance)

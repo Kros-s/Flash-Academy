@@ -10,7 +10,7 @@ import XCTest
 @testable import SmallTwitter
 
 final class ProfilePresenterTests: XCTestCase {
-    var presenter: ProfilePresenter!
+    var presenter: ProfileViewPresenter!
     var mockUserService: MockUserService!
     var mockMetadata: MockMetadataStorage!
     var mockView: MockProfileView!
@@ -21,7 +21,7 @@ final class ProfilePresenterTests: XCTestCase {
         mockMetadata = MockMetadataStorage()
         mockView = MockProfileView()
         
-        presenter = ProfilePresenter(timeLineProvider: mockUserService,
+        presenter = ProfileViewPresenter(timeLineProvider: mockUserService,
                                      metadata: mockMetadata)
         presenter.view = mockView
     }
