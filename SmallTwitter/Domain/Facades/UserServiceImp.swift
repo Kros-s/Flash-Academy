@@ -19,7 +19,7 @@ final class UserServiceImp: Domain {
     
     private var lastTimeLine: [TimeLine] = []
     
-    init(httpclient: Service = HTTPProvider()) {
+    init(httpclient: Service = HTTPProvider(responseDecoder: .DecoderWithStringFormat)) {
         self.httpclient = httpclient
     }
 }

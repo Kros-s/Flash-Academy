@@ -50,6 +50,7 @@
 		38475C3124E7126E0003E536 /* TweetViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C3024E7126E0003E536 /* TweetViewPresenter.swift */; };
 		38475C3424E716A60003E536 /* CustomNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38475C3324E716A60003E536 /* CustomNavigationBar.swift */; };
 		38561850251CCF7E00A20BA9 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3856184F251CCF7E00A20BA9 /* UITextView.swift */; };
+		3858EA16252509AF00071C70 /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3858EA15252509AF00071C70 /* JSONDecoder.swift */; };
 		3886CDA22509552800916876 /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA12509552800916876 /* DateFormatter.swift */; };
 		3886CDA425095A0700916876 /* LinkViewDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA325095A0700916876 /* LinkViewDataStorage.swift */; };
 		3886CDA925098F5A00916876 /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3886CDA825098F5A00916876 /* NewTweetViewController.swift */; };
@@ -133,6 +134,7 @@
 		38475C3024E7126E0003E536 /* TweetViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetViewPresenter.swift; sourceTree = "<group>"; };
 		38475C3324E716A60003E536 /* CustomNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBar.swift; sourceTree = "<group>"; };
 		3856184F251CCF7E00A20BA9 /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		3858EA15252509AF00071C70 /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		3886CDA12509552800916876 /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		3886CDA325095A0700916876 /* LinkViewDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkViewDataStorage.swift; sourceTree = "<group>"; };
 		3886CDA825098F5A00916876 /* NewTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 				3856184F251CCF7E00A20BA9 /* UITextView.swift */,
 				38455A50251EE6340085D259 /* KeyboardHandler.swift */,
 				38F0D0A62521960D0042D62A /* UITableView.swift */,
+				3858EA15252509AF00071C70 /* JSONDecoder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				38EA4FF1251507240053C466 /* DetailTweetRequest.swift in Sources */,
 				3830100D250368C8007DA26C /* FactoryApperance.swift in Sources */,
 				38475BD824E6EB6C0003E536 /* AppDelegate.swift in Sources */,
+				3858EA16252509AF00071C70 /* JSONDecoder.swift in Sources */,
 				38475C0B24E6EC570003E536 /* Domain.swift in Sources */,
 				383FE3EE250BF8AF0022CE65 /* ScreenLoader.swift in Sources */,
 				38475C1524E6F2F60003E536 /* ProfileViewController.swift in Sources */,

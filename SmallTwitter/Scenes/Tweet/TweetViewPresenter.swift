@@ -65,8 +65,7 @@ private extension TweetViewPresenter {
         
         let metadataInfo = metadata.retrieveMediaIfNeed(for: info.entities.urls?.first?.url ?? "")
         
-        let date = inputFormatter.date(from: info.created_at) ?? Date()
-        let humanDate =  relativeFormatter.localizedString(for: date, relativeTo: Date())
+        let humanDate =  relativeFormatter.localizedString(for: info.created_at, relativeTo: Date())
         let tweetInfo = LabelViewModel(text: humanDate, appearance: timeApperance)
         
         let nameText = LabelViewModel(text: info.user.username, appearance: displayNameApperance)

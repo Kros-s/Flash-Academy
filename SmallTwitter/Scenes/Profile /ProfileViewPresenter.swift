@@ -102,8 +102,7 @@ private extension ProfileViewPresenter {
             
             let name = LabelViewModel(text: "\($0.user.username) @\($0.user.displayName)", appearance: regularApperance)
             let tweet = LabelViewModel(text: $0.text, appearance: blackApperance)
-            let date = inputFormatter.date(from: $0.created_at) ?? Date()
-            let humanDate =  relativeFormatter.localizedString(for: date, relativeTo: Date())
+            let humanDate =  relativeFormatter.localizedString(for: $0.created_at, relativeTo: Date())
             let tweetInfo = LabelViewModel(text: humanDate, appearance: timeApperance)
             
             let url = $0.entities.urls?.first?.url ?? ""
