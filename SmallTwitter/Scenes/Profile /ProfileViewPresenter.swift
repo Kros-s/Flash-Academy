@@ -20,8 +20,6 @@ final class ProfileViewPresenter: Presenter {
     private var apperance = FactoryApperance()
     private var metadata: MetaDataStorage
     
-    //TODO: Wrap this two into a single class and inject as dependancy
-    private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
     private var userInfo: User?

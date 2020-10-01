@@ -19,7 +19,7 @@ protocol GetInfoService {
 final class TweetService: Domain {
     private let httpClient: Service
     
-    init(httpClient: Service = HTTPProvider()) {
+    init(httpClient: Service = HTTPProvider(responseDecoder: .DecoderWithStringFormat)) {
         self.httpClient = httpClient
     }
 }

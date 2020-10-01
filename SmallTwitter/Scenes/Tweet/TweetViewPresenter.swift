@@ -21,8 +21,6 @@ final class TweetViewPresenter: Presenter {
     var metadata: MetaDataStorage
     var shareURL: String?
     
-    //TODO: Wrap this two into a single class and inject as dependancy
-    private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
     init(tweetInfo: GetInfoService = TweetService(),
