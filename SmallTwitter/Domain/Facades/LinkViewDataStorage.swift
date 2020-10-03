@@ -9,8 +9,8 @@
 import Foundation
 import LinkPresentation
 
-extension MVPPresenter {
-    static func inyect() -> MetaDataStorage {
+extension Presenter {
+    static func inject() -> MetaDataStorage {
         return LinkViewDataStorage.shared
     }
 }
@@ -20,7 +20,7 @@ protocol MetaDataStorage {
     func retrieveMediaIfNeed(for url: String) -> LPLinkMetadata?
 }
 
-private final class LinkViewDataStorage: DomainFacade {
+private final class LinkViewDataStorage: Domain {
     
     //This will work as a data storage (singleton for now), should be changed to core data instead
     static let shared  = LinkViewDataStorage()

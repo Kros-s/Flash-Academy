@@ -1,5 +1,5 @@
 //
-//  UserFacade.swift
+//  UserServiceImp.swift
 //  SmallTwitter
 //
 //  Created by Marco Antonio Mayen Hernandez on 14/08/20.
@@ -8,42 +8,35 @@
 
 import Foundation
 
-extension MVPPresenter {
-    static func inyect() -> UserFacadeProtocol {
-        return UserFacade.shared
-    }
-}
-
-protocol UserFacadeProtocol {
+protocol UserService {
     func retrieveUserInfo(completion: @escaping (User?) -> Void)
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void)
     func retrieveTweet(id: String) -> TimeLine?
 }
 
-private final class UserFacade: DomainFacade {
-    static let shared = UserFacade()
-    private let httpclient: HTTPClient
+final class UserServiceImp: Domain {
+    private let httpclient: Service
     
     private var lastTimeLine: [TimeLine] = []
     
-    private init(httpclient: HTTPClient = inyect()) {
+    init(httpclient: Service = HTTPProvider(responseDecoder: .DecoderWithStringFormat)) {
         self.httpclient = httpclient
     }
 }
 
-extension UserFacade: UserFacadeProtocol {
+extension UserServiceImp: UserService {
     
     func retrieveTweet(id: String) -> TimeLine? {
         return lastTimeLine.first { $0.id_str == id }
     }
     
     func retrieveUserTimeLine(completion: @escaping ([TimeLine]) -> Void) {
-        let request = UserTimeline()
+        let request = UserTimelineRequest()
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         //Need to load other data
         
-        httpclient.execute(solicitud: request) { [weak self] response in
-            switch response.result {
+        httpclient.execute(request: request) { [weak self] response in
+            switch response {
             case .success(let timeline):
                 self?.lastTimeLine = timeline
                 finishOnMainThread(timeline)
@@ -55,13 +48,13 @@ extension UserFacade: UserFacadeProtocol {
     }
     
     func retrieveUserInfo(completion: @escaping (User?) -> Void) {
-        let request = GetUser()
+        let request = GetUserRequest()
         let finishOnMainThread = self.finishOnMainThread(completion: completion)
         
         //Need to load other data
         
-        httpclient.execute(solicitud: request) { response in
-            switch response.result {
+        httpclient.execute(request: request) { response in
+            switch response {
             case .success(let user):
                 finishOnMainThread(user)
             case .failure:

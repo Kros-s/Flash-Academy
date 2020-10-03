@@ -9,22 +9,6 @@
 import UIKit
 
 final class TitleSubtitleStack: UIStackView {
-    
-    var title: LabelViewModel? {
-        didSet {
-            if let title = title {
-                titleLabel.configure(model: title)
-            }
-        }
-    }
-    var subtitle: LabelViewModel? {
-        didSet {
-            if let subtitle = subtitle {
-                subtitleLabel.configure(model: subtitle)
-            }
-        }
-    }
-    
     lazy var titleLabel: UILabel = {
         let labelMode = UILabel()
         labelMode.translatesAutoresizingMaskIntoConstraints = false
@@ -49,9 +33,9 @@ final class TitleSubtitleStack: UIStackView {
         configure()
     }
     
-    func configure(title: LabelViewModel, subtitle: LabelViewModel, axis: NSLayoutConstraint.Axis = .vertical) {
-        self.title = title
-        self.subtitle = subtitle
+    func configure(titleModel: LabelViewModel, subtitleModel: LabelViewModel, axis: NSLayoutConstraint.Axis = .vertical) {
+        titleLabel.configure(model: titleModel)
+        subtitleLabel.configure(model: subtitleModel)
         self.axis = axis
     }
     

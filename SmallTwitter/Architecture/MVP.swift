@@ -6,22 +6,20 @@
 //  Copyright © 2020 Wizeline. All rights reserved.
 //
 
-
-protocol MVPPresenter: class, SceneObserver {
+// MARK: Base Presenter definition for MVP
+protocol Presenter: class, SceneObserver {
     associatedtype View
-    
     var view: View? { get }
 }
 
-protocol MVPView: SceneController {
+//MARK: Base View definition for MVP
+protocol PresentationView {
     associatedtype Presenter
-    
     var presenter: Presenter { get }
 }
 
-extension MVPView  {
+extension PresentationView  {
     var observer: SceneObserver? {
         return presenter as? SceneObserver
     }
 }
-

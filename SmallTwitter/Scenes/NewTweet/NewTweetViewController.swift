@@ -9,16 +9,86 @@
 import UIKit
 
 protocol NewTweetView: class {
-    func configure()
+    func configure(model: NewTweetViewModel)
+    func dismissView()
 }
 
-final class NewTweetViewController: BaseViewController, MVPView {
-    lazy var presenter: NewTweetPresenterProtocol = inyect()
-    lazy var router: Router = inyect()
+final class NewTweetViewController: UIViewController, PresentationView {
+    var presenter: NewTweetPresenterProtocol
+    var router: Router
+    var modalContainer = ModalNewTweet()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        observer?.sceneDidLoad()
+    }
+    
+    deinit {
+        removeKeyboardHandler()
+    }
+    
+    init(presenter: NewTweetPresenterProtocol, router: Router) {
+        self.presenter = presenter
+        self.router = router
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension NewTweetViewController: NewTweetView {
-    func configure() {
+    func dismissView() {
+        dismiss(animated: true)
+        presenter.dismissAction?()
+    }
+    
+    func configure(model: NewTweetViewModel) {
+        setKeyboardHandler()
         
+        view.backgroundColor = .modalBackground
+        view.addSubview(modalContainer)
+        configureModalContainer(model: model)
+    }
+}
+
+extension NewTweetViewController: KeyboardHandler { }
+
+private extension NewTweetViewController {
+    struct Metrics {
+        static let heightMultiplier:CGFloat = 0.5
+        static let widhtMultiplier: CGFloat = 0.9
+    }
+    
+    struct Constants {
+        static let keyboardHeight: CGFloat = 150
+        static let originKeyboard: CGFloat = 0
+    }
+    
+    func configureModalContainer(model: NewTweetViewModel) {
+        modalContainer.translatesAutoresizingMaskIntoConstraints = false
+        modalContainer.backgroundColor = .white
+        modalContainer.configure(model: model)
+        NSLayoutConstraint.activate([
+            modalContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            modalContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            modalContainer.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Metrics.heightMultiplier),
+            modalContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Metrics.widhtMultiplier)
+        ])
+        modalContainer.header.setup(controlEvents: .touchUpInside, accion: presenter.handleCancel)
+        modalContainer.footerButton.addTarget(self, action: #selector(handleContinue), for: .touchUpInside)
+    }
+    
+    @objc func handleContinue() {
+        presenter.handleNewTweet(tweet: modalContainer.textView.text)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+        view.frame.origin.y = -Constants.keyboardHeight
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+        view.frame.origin.y = Constants.originKeyboard
     }
 }

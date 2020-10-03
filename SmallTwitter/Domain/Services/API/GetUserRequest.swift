@@ -8,11 +8,11 @@
 
 import Foundation
 
-struct GetUser: HTTPRequest {
+struct GetUserRequest: HTTPRequest {
     typealias Response = User
     struct Body: Codable { }
     
     var urlPath: String = "/api/user"
-    var metodo: HTTPMethod = .get
-    var cuerpo: Body?
+    var method: HTTPMethod = .get
+    var body: Body?
 }

@@ -12,6 +12,7 @@ extension UIColor {
     static var mainBlack = from(hex: 0x202126)
     static var mainBlue = from(hex: 0x278ee3)
     static var softBlue = from(hex: 0xd5f2f7)
+    static var modalBackground = from(hex: 0x151515, alpha: 0.9)
 }
 
 private extension UIColor {

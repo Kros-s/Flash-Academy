@@ -11,9 +11,10 @@ import Foundation
 protocol PresenterCoordinatorProtocol {
     func handleAppBegin()
     func handleTapOnTweet(id: String)
+    func handleNewTweet(action: TriggerAction)
 }
 
-final class PresenterCoordinator: MVPPresenter {
+final class PresenterCoordinator: Presenter {
     weak var view: ViewCordinatorProtocol?
     
     private let userDefaults: UserDefaults
@@ -26,10 +27,14 @@ final class PresenterCoordinator: MVPPresenter {
 
 extension PresenterCoordinator: PresenterCoordinatorProtocol {
     func handleTapOnTweet(id: String) {
-        self.view?.goToSingleTweet(id: id)
+        view?.showDetailTweet(id: id)
     }
     
     func handleAppBegin() {
-        self.view?.goToProfile()
+        view?.showProfileView()
+    }
+    
+    func handleNewTweet(action: TriggerAction) {
+        view?.showNewTweetView(action: action)
     }
 }

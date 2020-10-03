@@ -21,8 +21,6 @@ final class TweetViewPresenter: Presenter {
     var metadata: MetaDataStorage
     var shareURL: String?
     
-    //TODO: Wrap this two into a single class and inject as dependancy
-    private var inputFormatter = DateFormatter.inputFormatter
     private var relativeFormatter = RelativeDateTimeFormatter.relativeFormatter
     
     init(tweetInfo: GetInfoService = TweetService(),
@@ -65,19 +63,18 @@ private extension TweetViewPresenter {
         
         let metadataInfo = metadata.retrieveMediaIfNeed(for: info.entities.urls?.first?.url ?? "")
         
-        let date = inputFormatter.date(from: info.created_at) ?? Date()
-        let humanDate =  relativeFormatter.localizedString(for: date, relativeTo: Date())
+        let humanDate =  relativeFormatter.localizedString(for: info.created_at, relativeTo: Date())
         let tweetInfo = LabelViewModel(text: humanDate, appearance: timeApperance)
         
-        let nameText = LabelViewModel(text: info.user.screen_name, appearance: displayNameApperance)
+        let nameText = LabelViewModel(text: info.user.username, appearance: displayNameApperance)
         let text = LabelViewModel(text: info.text, appearance: regularApperance)
-        let userName = LabelViewModel(text: "@\(info.user.name)", appearance: usernameApperance)
+        let userName = LabelViewModel(text: "@\(info.user.displayName)", appearance: usernameApperance)
         return TweetViewModel(name: userName,
                               displayName: nameText,
                               tweetText: text,
                               tweetTime: tweetInfo,
                               linkData: metadataInfo,
-                              profileURL: URL(string: info.user.profile_image_url_https))
+                              profileURL: URL(string: info.user.profileImage))
     }
 }
 

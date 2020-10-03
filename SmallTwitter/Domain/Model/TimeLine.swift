@@ -12,7 +12,7 @@ struct TimeLine: Codable {
     var id_str: String
     var text: String
     var user: User
-    var created_at: String
+    var created_at: Date
     var entities: Entities
 }
 
